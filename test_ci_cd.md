@@ -17,9 +17,10 @@ En el carpeta .github/workflow está el fichero .yml que configura el flujo de u
 * ### Hacer un commit con un nombre describiendo el cambio 
 * ### Hacer un push
 * ### Esperar a que el runner haga su trabajo (más o menos 1 minuto) y mientras tanto...
-* ### Ir a Actions en el menu superio del repo:
-    Debajo de **All Workflow** pinchar en el item con nombre del commit
-    Seguir pinchando hasta llegar a **build** y poder ver todo el proceso en tiempo real (merece la pena!* ### Refrescar varias veces hasta que el nave# Test de automatización: creación del build de create-react-app y despliegue en el servidor usando GitHub Actions
+    - Ir a Actions en el menu superio del repo:
+    - Debajo de **All Workflow** pinchar en el item con nombre del commit
+    - Pinchar en **job** o en un círculo que gira hasta llegar a **build** y poder ver todo el proceso en tiempo real (merece la pena!)
+* ### Refrescar varias veces el navegador hasta que la aplicación refleje el cambio 
 
 ## Nota:
 El Build se crea y se va machacando en el servidor, no en el repo. 
