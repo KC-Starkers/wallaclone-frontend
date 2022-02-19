@@ -26,18 +26,10 @@ El Build se crea y se va machacando en el servidor, no en el repo.
 
 ## Cosas que faltarían:
 
--Probar si funciona con pull requests
-
--¿Crear un contenedor de Docker en el servidor para que haga el build dentro del contenedor? (no sé hacerlo aún)
-
-gador refleje el cambio
-
-## Nota:
-El Build se crea y se va machacando en el servidor, no en el repo. 
-
-## Cosas que faltarían:
 
 -Probar que nos funciona a todos
+
 -Probar si funciona con pull requests 
+
 -¿Crear un contenedor de Docker en el servidor para que haga el build dentro del contenedor? 
 
