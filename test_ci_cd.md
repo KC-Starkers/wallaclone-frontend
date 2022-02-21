@@ -32,5 +32,13 @@ El Build se crea y se va machacando en el servidor, no en el repo.
 
 -Probar si funciona con pull requests 
 
--¿Crear un contenedor de Docker en el servidor para que haga el build dentro del contenedor? 
+-Decidir la mejor manera de hacer los merge:
+
+    (1) Push desde rama local de la funcionalidad X a la rama del repo de la funcionalidad X (sin tocar la rama principal), revisión y posterior aprobación del       push 
+    
+    (2) Pull request (revisión del código) o push (sin revisión) desde rama local de la funcionalidad X a rama única del repo
+    
+    (3) Otra opción
+    
+-¿Desarrollar en local dentro de un contenedor de Docker con linux y demás dependencias y hacer los push desde el contenedor y no desde máquina física?
 
