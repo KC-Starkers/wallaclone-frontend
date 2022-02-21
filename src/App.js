@@ -11,6 +11,7 @@ function App() {
         </p>
        <h2>Starkers Team</h2> 
        <h4>Push Alex</h4>
+       <h4>Push Ivan</h4>
         <a
           className="App-link"
           href="https://reactjs.org"
