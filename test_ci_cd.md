@@ -40,5 +40,5 @@ El Build se crea y se va machacando en el servidor, no en el repo.
     
     (3) Otra opción
     
--¿Crear un contenedor de Docker en el servidor para que haga el build dentro del contenedor? 
+-¿Desarrollar en local dentro de un contenedor de Docker con linux y demás dependencias y hacer los push desde el contenedor y no desde máquina física?
 
