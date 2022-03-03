@@ -13,6 +13,7 @@ function App() {
        <h2>Starkers Team</h2> 
        <h4>Push Alex</h4>
        <h4>Push Ivan M.</h4>
+       <h4>Push Bea</h4>
 
         <a
           className="App-link"
