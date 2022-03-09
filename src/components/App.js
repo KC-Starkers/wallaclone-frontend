@@ -1,13 +1,8 @@
-<<<<<<< HEAD:src/App.js
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 import Header from './components/layout/header';
 
-=======
-import logo from "../logo.svg";
-import "../App.css";
->>>>>>> a6242fff7bc2eaf57b86da8e333132cade0fb1d5:src/components/App.js
 
 function App() {
   
@@ -20,7 +15,6 @@ function App() {
         <p>
           <code>src/App.js</code> and save to reload.
         </p>
-<<<<<<< HEAD:src/App.js
                
        <div class="flex items-center justify-center ">
     <div class="flex border-2 border-gray-200 rounded">
@@ -30,12 +24,10 @@ function App() {
         </button>
     </div>
 </div>
-=======
 
         <h2>Starkers Team</h2>
         <h4>Push Alex</h4>
         <h4>Push Ivan M.</h4>
->>>>>>> a6242fff7bc2eaf57b86da8e333132cade0fb1d5:src/components/App.js
 
         <a
           className="App-link"
