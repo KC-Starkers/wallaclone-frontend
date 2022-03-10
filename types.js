@@ -26,3 +26,8 @@ export const UI_RESET_ERROR = "UI_RESET_ERROR";
 
 export const LOAD_TAGS_SUCCESS = "LOAD_TAGS_SUCCESS";
 export const LOAD_TAGS_FAILURE = "LOAD_TAGS_FAILUIRE";
+
+
+//action types adicionales para wallaclone
+export const LOAD_PAYMENT_METHODS_SUCCESS = "LOAD_PAYMENT_METHOD_SUCCESS";
+export const LOAD_PAYMENT_METHODS_FAILURE = "LOAD_PAYMENT_METHOD_FAILURE";

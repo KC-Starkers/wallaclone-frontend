@@ -25,6 +25,8 @@ import {
   DELETE_ADVERT_FAILURE,
   LOAD_TAGS_SUCCESS,
   LOAD_TAGS_FAILURE,
+  LOAD_PAYMENT_METHODS_SUCCESS,
+  LOAD_PAYMENT_METHODS_FAILURE,
   UI_RESET_ERROR,
 } from "./types";
 
@@ -272,6 +274,38 @@ export const loadTags = () => {
       dispatch(loadTagsSuccess(tags));
     } catch (error) {
       dispatch(loadTagsFailure(error));
+    }
+  };
+};
+
+
+//acciones adicionales para wallaclone
+
+export const loadPaymentMethodsSuccess = (paymentMethods) => {
+  return {
+    type: LOAD_PAYMENT_METHODS_SUCCESS,
+    payload: paymentMethods,
+  };
+};
+
+export const loadPaymentMethodsFailure = (error) => {
+  return {
+    type: LOAD_PAYMENT_METHODS_FAILURE,
+    error: true,
+    payload: error,
+  };
+};
+
+//TODO: este thunk recibirá:
+// un servicio de llamada al api en /components/adverts/service. js
+
+export const loadPaymentMethods = () => {
+  return async (dispatch, getState, { api }) => {
+    try {
+      const paymentMethods = await api.adverts.getPaymentMethods();
+      dispatch(loadPaymentMethodsSuccess(paymentMethods));
+    } catch (error) {
+      dispatch(loadPaymentMethodsFailure(error));
     }
   };
 };

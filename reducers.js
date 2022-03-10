@@ -13,14 +13,22 @@ import {
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_REQUEST,
   LOAD_TAGS_SUCCESS,
+  LOAD_PAYMENT_METHODS_SUCCESS,
 } from "./types";
+
+
+// Propuesta de defaultState para wallaclone
 
 export const defaultState = {
   auth: false,
   adverts: { loaded: false, data: [] },
   ui: { isLoading: false, error: null },
   tags: [],
-};
+  paymentMethods: [],
+  favorites: [],
+};//Faltarían los selectores adicionales
+
+
 
 export const auth = (authState = defaultState.auth, action) => {
   switch (action.type) {
@@ -89,5 +97,19 @@ export const tags = (tagsState = defaultState.tags, action) => {
       return action.payload;
     default:
       return [tagsState];
+  }
+};
+
+// reducer adicional para wallaclone
+
+export const paymentMethod = (
+  paymentMethodState = defaultState.paymentMethods,
+  action
+) => {
+  switch (action.type) {
+    case LOAD_PAYMENT_METHODS_SUCCESS:
+      return action.payload;
+    default:
+      return [paymentMethodState];
   }
 };
