@@ -1,6 +1,6 @@
 function FullLogo(){
     return(
-        <p class="font-sans">Wallaclone</p>
+        <p className="font-sans">Wallaclone</p>
     )
 }
 

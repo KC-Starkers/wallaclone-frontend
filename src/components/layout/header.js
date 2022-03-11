@@ -22,7 +22,7 @@ function Header () {
     const isMobile = width <= 768;
 
     return (
-        <nav class="shadow-xl grid grid-cols-6 gap-4">
+        <nav className="shadow-xl grid grid-cols-6 gap-4">
             {
                 isMobile ? <Logo /> : <FullLogo />
             }
