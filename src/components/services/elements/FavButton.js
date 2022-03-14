@@ -10,7 +10,8 @@ const FavButton = (data) => {
   //TODO Refactorizar para agrupar en un archivo las conexiones
   const userId = data.ids.user;
   const url = `${process.env.REACT_APP_API_BASE_URL}/profiles/${userId}`;
-  const token = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2NDcyNjk3NDcsImV4cCI6MTY0NzM1NjE0N30.y1od1gpXGn_5k9ImH3Z-mAx2CE8biSgvdIf8hb8QLmY`;
+  const token = "token" //TODO recibir token
+  const auth = `Bearer ${token}`;
 
   useEffect(() => {
     const connection = axios.get(url);
@@ -30,7 +31,7 @@ const FavButton = (data) => {
   const favToggle = () => {
     try {
       const putProfile = async (data) =>
-        await axios.put(url, data, { headers: { Authorization: token } });
+        await axios.put(url, data, { headers: { Authorization: auth } });
 
       if (isFav) {
         const updatedFavs = favs.filter((saved) => saved !== data.ids.service);
