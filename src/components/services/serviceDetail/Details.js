@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { TagBadge, TypeBadge, TagList } from "../elements";
+import { TagBadge, TypeBadge, TagList, FavButton } from "../elements";
 import axios from "axios";
 
 const Details = () => {
+
+  //TODO Recibir si está logueado y pasarle el id de usuario
+  const userId = 1
+
   //captura el id de la URL
   const idService = useParams().idServicio;
 
@@ -59,7 +63,8 @@ const Details = () => {
         ))}
       </TagList>
 
-      {/* Botón guardar en favoritos */}
+      {/*TODO Botón guardar en favoritos */}
+      <FavButton ids={{user: userId, service: service.id}} />
 
       <Link to={`/perfil/${service.createdBy.userId}`}>
         creado por {service.createdBy.name}
