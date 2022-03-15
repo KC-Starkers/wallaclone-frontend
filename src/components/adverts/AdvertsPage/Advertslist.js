@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useQuery from "../../../hooks/useQuery";
-import { getAdverts } from "./service";
+import { getAdverts } from "../service";
 import { useState } from "react";
 
 function AdvertsList(){
