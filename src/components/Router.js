@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App";
 import { Details } from "./services";
+import { MyServices } from "./profile";
 
 const Router = () => {
   return (
@@ -25,7 +26,7 @@ const Router = () => {
         {/* TODO Estas rutas deben ser privadas */}
         <Route path="/perfil">
           <Route index element={"Mí perfil"} />
-          <Route path="servicios" element={"Mis Servicios"} />
+          <Route path="servicios" element={<MyServices/>} />
           <Route path="favoritos" element={"Favoritos"} />
           <Route path="acordados" element={"Servicios acordados"} />
           <Route path=":idUsuario" element={"Perfil de otro usuario"} />
