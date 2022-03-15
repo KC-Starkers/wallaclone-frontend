@@ -12,4 +12,3 @@ export const uiSelector = (state) => state.ui;
 export const tagsSelector = (state) => state.tags;
 
 // Faltarían los selectores que se crearían a medida que vayamos necesitándolos
-
