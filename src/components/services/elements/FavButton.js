@@ -10,7 +10,7 @@ const FavButton = (data) => {
   //TODO Refactorizar para agrupar en un archivo las conexiones
   const userId = data.ids.user;
   const url = `${process.env.REACT_APP_API_BASE_URL}/profiles/${userId}`;
-  const token = "token" //TODO recibir token
+  const token = "" //TODO recibir token
   const auth = `Bearer ${token}`;
 
   useEffect(() => {
