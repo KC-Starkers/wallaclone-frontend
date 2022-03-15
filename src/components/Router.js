@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App";
+import { Details } from "./services";
 import { MyServices } from "./profile";
 
 const Router = () => {
@@ -13,7 +14,7 @@ const Router = () => {
           <Route index element={<App />} />
           {/* TODO Esta ruta debe se privada */}
           <Route path="crear" element={"Crear servicio"} />
-          <Route path=":idServicio" element={"Servicio"} />
+          <Route path=":idServicio" element={<Details/>} />
         </Route>
 
         <Route path="/auth">
