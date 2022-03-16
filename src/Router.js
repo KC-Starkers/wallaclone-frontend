@@ -1,13 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-<<<<<<< HEAD:src/Router.js
 import Home from "./components/Home";
-
-=======
-import App from "./App";
 import { Details } from "./services";
 import { MyServices } from "./profile";
->>>>>>> master:src/components/Router.js
 
 const Router = () => {
   return (
