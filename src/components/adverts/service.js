@@ -14,5 +14,7 @@ export const getTags = () => {
 
 export const getAdverts = async () => {
   const adverts = await client.get(`${advertsPath}`);
-  return adverts.map(mapAdvert);
+  
+  //let mapedadverts = adverts.map(mapAdvert);
+  return adverts
 };
