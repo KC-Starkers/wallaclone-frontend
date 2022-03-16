@@ -11,7 +11,7 @@ const Router = () => {
 
        {/*  <Route element={<Layout/>}>   */}      {/* Layout: Header y Footer común a todas las páginas, no usa la prop 'path' */}
         <Route path="/servicios">
-          <Route index element={<Home />} />       {/*  Home: listado de anuncios y apartado de búsquedas */}
+          <Route index element={<Home />} />       {/*  Home: contiene a Services (listado de anuncios) y Search (filtros) */}
           {/* TODO Esta ruta debe se privada */}
           <Route path="crear" element={"Crear servicio"} />
           <Route path=":idServicio" element={"Servicio"} />
