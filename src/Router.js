@@ -1,7 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+<<<<<<< HEAD:src/Router.js
 import Home from "./components/Home";
 
+=======
+import App from "./App";
+import { Details } from "./services";
+import { MyServices } from "./profile";
+>>>>>>> master:src/components/Router.js
 
 const Router = () => {
   return (
@@ -14,7 +20,7 @@ const Router = () => {
           <Route index element={<Home />} />       {/*  Home: listado de anuncios y apartado de búsquedas */}
           {/* TODO Esta ruta debe se privada */}
           <Route path="crear" element={"Crear servicio"} />
-          <Route path=":idServicio" element={"Servicio"} />
+          <Route path=":idServicio" element={<Details/>} />
         </Route>
        {/*  </Route> */}
 
@@ -30,7 +36,7 @@ const Router = () => {
         {/* TODO Estas rutas deben ser privadas */}
         <Route path="/perfil">
           <Route index element={"Mí perfil"} />
-          <Route path="servicios" element={"Mis Servicios"} />
+          <Route path="servicios" element={<MyServices/>} />
           <Route path="favoritos" element={"Favoritos"} />
           <Route path="acordados" element={"Servicios acordados"} />
           <Route path=":idUsuario" element={"Perfil de otro usuario"} />
