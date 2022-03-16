@@ -1,8 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+<<<<<<< HEAD:src/Router.js
+import Home from "./components/Home";
+
+=======
 import App from "./App";
 import { Details } from "./services";
 import { MyServices } from "./profile";
+>>>>>>> master:src/components/Router.js
 
 const Router = () => {
   return (
@@ -10,19 +15,24 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/servicios" />} />
 
+       {/*  <Route element={<Layout/>}>   */}      {/* Layout: Header y Footer común a todas las páginas, no usa la prop 'path' */}
         <Route path="/servicios">
-          <Route index element={<App />} />
+          <Route index element={<Home />} />       {/*  Home: listado de anuncios y apartado de búsquedas */}
           {/* TODO Esta ruta debe se privada */}
           <Route path="crear" element={"Crear servicio"} />
           <Route path=":idServicio" element={<Details/>} />
         </Route>
+       {/*  </Route> */}
 
+       {/*  <Route element={<Layout/>}>  */}
         <Route path="/auth">
           <Route index element={<Navigate to="login" />} />
           <Route path="login" element={"Acceso de usuario"} />
           <Route path="registro" element={"Registro de usuario"} />
         </Route>
-
+   {/*      </Route>
+ */}
+       {/*  <Route element={<Layout/>}>  */}
         {/* TODO Estas rutas deben ser privadas */}
         <Route path="/perfil">
           <Route index element={"Mí perfil"} />
@@ -35,7 +45,9 @@ const Router = () => {
             element={"Servicios de otro usuario"}
           />
         </Route>
-        
+     {/*    </Route> */}
+
+
         {/* TODO Estas rutas deben ser privadas */}
         <Route path="/mensajes">
           <Route index element={"Chat index"} />
