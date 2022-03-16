@@ -1,4 +1,5 @@
-# We're ... getting Started with Create React App
+# Getting Started with Create React App
+# This repo is powered by GitHub Action 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
