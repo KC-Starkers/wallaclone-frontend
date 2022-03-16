@@ -3,15 +3,15 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Router from "./Router";
 import { Provider } from "react-redux";
+import configureStore from "./store";
 
+const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>
- {/*    <Provider store={store}> */}
+    <Provider store={store}>
       <Router />
-  {/*   </Provider> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-

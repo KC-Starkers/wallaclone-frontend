@@ -1,8 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-// import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from "redux-devtools-extension";
 import * as reducers from "./reducers"; 
-// import thunk from "redux-thunk";
-// // import * as auth from "../components/auth/service";
+import thunk from "redux-thunk";
+// import * as auth from "../components/auth/service";
 // import * as adverts from "../components/adverts/service";
 
 // const api = { auth, adverts };
@@ -21,7 +21,7 @@ const logger = (store) => {
 };
 
 
-const configureStore = (preloadedState, { history }) => {
+const configureStore = (preloadedState) => {
   const middleware = [thunk.withExtraArgument({ /* api, history  */}), logger];
   const store = createStore(
     rootReducer,
