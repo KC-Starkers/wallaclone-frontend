@@ -17,7 +17,6 @@ function SignUpPage() {
     name: "",
     email: "",
     password: "",
-    passwordConfirm: "", //TODO: este campo no puede ir en userData (solo es para validar en el frontend)
     phone: "",
     url: "",
     image: null,
@@ -47,7 +46,6 @@ function SignUpPage() {
 
   return (
     <form encType="multipart/form" onSubmit={handleSubmit}>
-
       <label>
         Nombre de usuario
         <input
@@ -58,7 +56,6 @@ function SignUpPage() {
           onChange={handleChange}
         />
       </label>
-
       <label>
         Nombre
         <input
@@ -69,7 +66,6 @@ function SignUpPage() {
           onChange={handleChange}
         />
       </label>
-
       <label>
         Email
         <input
@@ -145,7 +141,6 @@ function SignUpPage() {
           onChange={handleChange}
         />
       </label>
-
       <label>
         URL
         <input
@@ -164,7 +159,7 @@ function SignUpPage() {
         onChange={handleChange}
       ></textarea>
       <label>
-        Sube tu foto o una imagen que te identifique 
+        Sube tu foto o una imagen que te identifique
         <input type="file" name="image" /* ref={imageRef} */ />
       </label>
       <button type="submit" disabled={disabledButton}>
