@@ -20,7 +20,7 @@ function Home() {
       {adverts.map((advert) => (
         <>
           <li key={advert._id}>
-            <Link to={`/adverts/${advert._id}`}>
+            <Link to={`/adverts/${advert._id}`}  style={{ textDecoration: 'none' }} >
               <div>
                 <p>{advert.name}</p>
                 <p>{advert.offerAdvert}</p>
