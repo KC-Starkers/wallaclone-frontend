@@ -28,6 +28,8 @@ import {
   UI_RESET_ERROR,
 } from "./types";
 
+import { Navigate } from "react-router-dom";
+
 export const authLoginRequest = () => {
   return {
     type: AUTH_LOGIN_REQUEST,
@@ -129,7 +131,7 @@ export const loadAdverts = () => {
     } catch (error) {
       dispatch(loadAdvertsFailure(error));
       if (error?.statusCode === 401) {
-        history.push("/login");
+        return <Navigate to="/login" />;
       }
     }
   };
