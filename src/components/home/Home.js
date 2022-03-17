@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
-import { loadAdvertsSelector } from "../../store/selectors";
+import { loadAdvertsSelector, uiSelector } from "../../store/selectors";
 
 function Home() {
   const dispatch = useDispatch();
@@ -12,11 +12,15 @@ function Home() {
   }, [dispatch]);
 
   const adverts = useSelector(loadAdvertsSelector);
-  console.log(adverts);
 
+  const { isLoading, error } = useSelector(uiSelector);
+
+  
   return (
     /*   TODO: refactorizar en componente ServicesList */
     <ul>
+    {/*   {isLoading && 'Loading...'} */ }  {/* TODO: verificar que esto funciona  */}
+    
       {adverts.map((advert) => (
         <>
           <li key={advert._id}>
