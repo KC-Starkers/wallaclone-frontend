@@ -6,3 +6,4 @@ export const getAdverts = () => {
   return client.get(url);
 };
 
+

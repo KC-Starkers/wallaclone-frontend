@@ -117,7 +117,7 @@ export const loadAdvertsFailure = (error) => {
 };
 
 export const loadAdverts = () => {
-  return async (dispatch, getState, { api, history }) => {
+  return async (dispatch, getState, { api }) => {
     const loaded = loadedSelector(getState());
     if (loaded) {
       return;

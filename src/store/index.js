@@ -3,9 +3,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import * as reducers from "./reducers"; 
 import thunk from "redux-thunk";
 // import * as auth from "../components/auth/service";
-// import * as adverts from "../components/adverts/service";
+import * as adverts from "../components/Home/apicalls";
 
-// const api = { auth, adverts };
+const api = { /* auth, */ adverts };
 
 const rootReducer = combineReducers(reducers);
 
