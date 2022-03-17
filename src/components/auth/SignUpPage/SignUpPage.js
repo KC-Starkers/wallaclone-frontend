@@ -1,16 +1,18 @@
 import useForm from "../../../hooks/useForm";
-import "./SignUpPage.css";
-import { signup } from "../service";
+import { signup } from "./apicalls";
 
-//TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data, backend:  subida de imagen
+
+
+//TODO: handleChange multitype
+//TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data
 //TODO: validación cruzada de contraseña y confirmación de contraseña
-//TODO: ¿usar el type 'tel'?, alguna librería para un field de teléfono internacional?
-//TODO: gestionar los errores de mongo (ej: username e email deben ser únicos)
+//TODO: BACK: subida de imagen con multer
+//TODO: BACK: gestionar los errores de mongo (ej: username e email deben ser únicos)
 
 function SignUpPage() {
   const {
-    formValue: userData,
-    setFormValue,
+    formData: userData,
+    setFormData,
     handleChange,
   } = useForm({
     userName: "",
@@ -31,7 +33,7 @@ function SignUpPage() {
       const userId = result._id;
       console.log(userId);
     } catch (error) {
-      console.log(error);
+      console.log(error); //TODO: despachar un failure action
     }
   };
 
@@ -138,7 +140,7 @@ function SignUpPage() {
       <label>
         Teléfono
         <input
-          type="string"
+          type="text"
           className="block"
           name="phone"
           value={userData.phone}
