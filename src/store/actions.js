@@ -125,7 +125,7 @@ export const loadAdverts = () => {
       return;
     }
     dispatch(loadAdvertsRequest());
-    try {
+      try {
       const adverts = await api.adverts.getAdverts();
       dispatch(loadAdvertsSuccess(adverts));
     } catch (error) {

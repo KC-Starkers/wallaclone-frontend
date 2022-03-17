@@ -1,9 +1,9 @@
 import client from "../../client";
 
-const url = `${process.env}/adverts`;
+const path = "/adverts";
 
 export const getAdverts = () => {
-  return client.get(url);
+  return client.get(path);
 };
 
 
