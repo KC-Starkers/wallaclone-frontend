@@ -19,7 +19,6 @@ function SignUpPage() {
     name: "",
     email: "",
     password: "",
-    passwordConfirm: "", //TODO: este campo no puede ir en userData (solo es para validar en el frontend)
     phone: "",
     url: "",
     image: null,
