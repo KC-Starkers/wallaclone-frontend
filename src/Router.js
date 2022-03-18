@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import { Details } from "./components/services";
 import { MyServices } from "./components/profile";
+import SignUpPage from "./components/auth/SignUpPage"
 
 const Router = () => {
   return (
@@ -23,7 +24,7 @@ const Router = () => {
         <Route path="/auth">
           <Route index element={<Navigate to="login" />} />
           <Route path="login" element={"Acceso de usuario"} />
-          <Route path="registro" element={"Registro de usuario"} />
+          <Route path="registro" element={<SignUpPage />} />
         </Route>
    {/*      </Route>
  */}

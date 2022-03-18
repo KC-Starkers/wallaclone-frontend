@@ -1,16 +1,18 @@
+import { useState, useEffect, useRef } from "react";
 import useForm from "../../../hooks/useForm";
+import { signUp } from "./apicalls";
 import "./SignUpPage.css";
-import { signup } from "../service";
 
-//TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data, backend:  subida de imagen
+
+//TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data
 //TODO: validación cruzada de contraseña y confirmación de contraseña
-//TODO: ¿usar el type 'tel'?, alguna librería para un field de teléfono internacional?
-//TODO: gestionar los errores de mongo (ej: username e email deben ser únicos)
+//TODO: BACK: subida de imagen con multer
+//TODO: BACK: gestionar los errores de mongo (ej: username e email deben ser únicos)
 
 function SignUpPage() {
   const {
-    formValue: userData,
-    setFormValue,
+    formData: userData,
+    /*  setFormData, */
     handleChange,
   } = useForm({
     userName: "",
@@ -23,16 +25,32 @@ function SignUpPage() {
     description: "",
   });
 
+  const [crossValid, setCrossValid] = useState(false);
+  const imageRef = useRef(null);
+  const passwordConfirmRef = useRef("");
+
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     try {
-      const result = await signup(userData);
+      const result = await signUp(userData);
       const userId = result._id;
-      console.log(userId);
+      // console.log(userId);
     } catch (error) {
-      console.log(error);
+      console.log(error); 
     }
   };
+
+  useEffect(() => {
+    const crossValidation = () => {
+      if (userData.password === passwordConfirmRef.current.value) {
+        setCrossValid(true); 
+      } else {
+        setCrossValid(false);
+      }
+    };
+    crossValidation();
+  }, [userData.password, passwordConfirmRef.current.value]);
+
 
   const disabledButton =
     !userData.userName ||
@@ -40,12 +58,20 @@ function SignUpPage() {
     !userData.email ||
     !userData.password ||
     !userData.passwordConfirm ||
-    !userData.phone ||
-    // !userData.url ||
+    !crossValid ||
+    // !userData.phone ||
     !userData.description;
 
   return (
+<<<<<<< HEAD
     <form encType="multipart/form" onSubmit={handleSubmit}>
+=======
+    <form
+      className="signup-form"
+      encType="multipart/form"
+      onSubmit={handleSubmit}
+    >
+>>>>>>> signup
       <label>
         Nombre de usuario
         <input
@@ -92,7 +118,7 @@ function SignUpPage() {
           type="password"
           className="block"
           name="passwordConfirm"
-          value={userData.passwordConfirm}
+          ref={passwordConfirmRef}
           onChange={handleChange}
         />
       </label>
@@ -134,7 +160,7 @@ function SignUpPage() {
       <label>
         Teléfono
         <input
-          type="string"
+          type="text"
           className="block"
           name="phone"
           value={userData.phone}
@@ -153,16 +179,20 @@ function SignUpPage() {
       </label>
       Cuéntanos algo de tí...
       <textarea
-        className="block"
+        className="block textarea"
         name="description"
         value={userData.description}
         onChange={handleChange}
       ></textarea>
       <label>
         Sube tu foto o una imagen que te identifique
+<<<<<<< HEAD
         <input type="file" name="image" /* ref={imageRef} */ />
+=======
+        <input type="file" name="image" ref={imageRef} />
+>>>>>>> signup
       </label>
-      <button type="submit" disabled={disabledButton}>
+      <button type="submit" className="button" disabled={disabledButton}>
         Darme de alta
       </button>
     </form>
