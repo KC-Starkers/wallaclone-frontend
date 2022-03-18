@@ -13,12 +13,6 @@ const useForm = (initialValues) => {
           [ev.target.name]: ev.target.value,
         }));
         break;
-      case "select":
-        setFormData((currentValue) => ({
-          ...currentValue,
-          [ev.target.name]: ev.target.value,
-        }));
-        break;
       // case "file":
       // case "radio":
       // case "select-multiple":
