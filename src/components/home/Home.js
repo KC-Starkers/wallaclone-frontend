@@ -31,8 +31,8 @@ function Home() {
                 <p>{advert.name}</p>
                 <p>{advert.offerAdvert}</p>
                 <p>{advert.description}</p>
-                <p>{advert.tags.join("")}</p>
-                <p>{advert.paymentMethod.join("")}</p>
+                <p>{advert.tags.join(" ")}</p>
+                <p>{advert.paymentMethod.join(" ")}</p>
                 <p>{advert.experience}</p>
                 <img src={advert.image} alt={advert.name} />
               </div>
