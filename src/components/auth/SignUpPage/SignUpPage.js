@@ -1,6 +1,6 @@
 import useForm from "../../../hooks/useForm";
-import { signup } from "./apicalls";
-
+import { signUp } from "./apicalls";
+import "./SignUpPage.css";
 
 
 //TODO: handleChange multitype
@@ -29,7 +29,7 @@ function SignUpPage() {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     try {
-      const result = await signup(userData);
+      const result = await signUp(userData);
       const userId = result._id;
       console.log(userId);
     } catch (error) {
@@ -48,7 +48,7 @@ function SignUpPage() {
     !userData.description;
 
   return (
-    <form encType="multipart/form" onSubmit={handleSubmit}>
+    <form className="signup-form" encType="multipart/form" onSubmit={handleSubmit}>
 
       <label>
         Nombre de usuario
@@ -160,7 +160,7 @@ function SignUpPage() {
       </label>
       Cuéntanos algo de tí...
       <textarea
-        className="block"
+        className="block textarea"
         name="description"
         value={userData.description}
         onChange={handleChange}
@@ -169,7 +169,7 @@ function SignUpPage() {
         Sube tu foto o una imagen que te identifique 
         <input type="file" name="image" /* ref={imageRef} */ />
       </label>
-      <button type="submit" disabled={disabledButton}>
+      <button type="submit" className="button" disabled={disabledButton}>
         Darme de alta
       </button>
     </form>

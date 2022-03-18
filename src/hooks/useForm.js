@@ -7,14 +7,18 @@ const useForm = (initialValues) => {
     const type = ev.target.type;
     switch (type) {
       case "text":
-        case "textarea":
+      case "textarea":
         setFormData((currentValue) => ({
           ...currentValue,
           [ev.target.name]: ev.target.value,
         }));
         break;
       case "select":
-      setFormData((currentValue)=> ({...currentValue, [ev.target.name]: }))
+        setFormData((currentValue) => ({
+          ...currentValue,
+          [ev.target.name]: ev.target.value,
+        }));
+        break;
       // case "file":
       // case "radio":
       // case "select-multiple":
