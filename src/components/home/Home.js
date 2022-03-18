@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector } from "../../store/selectors";
+import './Home.css';
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ function Home() {
   
   return (
     /*   TODO: refactorizar en componente ServicesList */
-    <ul>
+    <ul className="advertsList">
     {/*   {isLoading && 'Loading...'} */ }  {/* TODO: verificar que esto funciona  */}
     
       {adverts.map((advert) => (
