@@ -83,7 +83,7 @@ function Home() {
                 <div>
                   <p>{advert.name}</p>
                   <p>{advert.offerAdvert}</p>
-                  <p>{advert.description}</p>
+                  <p>{advert.de4scription}</p>
                   <p>{advert.tags.join("")}</p>
                   <p>{advert.paymentMethod.join("")}</p>
                   <p>{advert.experience}</p>
