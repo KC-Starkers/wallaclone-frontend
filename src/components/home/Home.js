@@ -46,6 +46,7 @@ function Home() {
   console.log(value)
 
   const handleChange = event => {
+    console.log(event)
     setValue(prevState => ({
       ...prevState,
       [event.target.name]: event.target.value,
@@ -58,6 +59,7 @@ function Home() {
 
  // const [formValue, setFormValue] = useState(initialFormValue);
   const handleSubmit = ev => {
+    debugger
     ev.preventDefault();
     setFilters(getFilters())
   };

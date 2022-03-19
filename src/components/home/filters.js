@@ -58,10 +58,8 @@ console.log(sale)}
 
 
  // export const filterAdverts = (adverts, { name, price, sale, tags } ) => 
-  export const filterAdverts = (adverts, {name} ) => 
+  export const filterAdverts = (adverts, {name, tags} ) => 
 
 adverts
     .filter(filterByName(name))
-    /*
     .filter(filterByTags(tags));
-    */
