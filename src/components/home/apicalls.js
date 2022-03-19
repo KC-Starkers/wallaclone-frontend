@@ -7,3 +7,8 @@ export const getAdverts = () => {
 };
 
 
+export const getTags = () => {
+      const url = `${path}/tags`
+      return client.get(url)
+  }
+
