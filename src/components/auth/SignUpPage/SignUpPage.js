@@ -63,15 +63,11 @@ function SignUpPage() {
     !userData.description;
 
   return (
-<<<<<<< HEAD
-    <form encType="multipart/form" onSubmit={handleSubmit}>
-=======
     <form
       className="signup-form"
       encType="multipart/form"
       onSubmit={handleSubmit}
     >
->>>>>>> signup
       <label>
         Nombre de usuario
         <input
@@ -186,11 +182,7 @@ function SignUpPage() {
       ></textarea>
       <label>
         Sube tu foto o una imagen que te identifique
-<<<<<<< HEAD
-        <input type="file" name="image" /* ref={imageRef} */ />
-=======
         <input type="file" name="image" ref={imageRef} />
->>>>>>> signup
       </label>
       <button type="submit" className="button" disabled={disabledButton}>
         Darme de alta
