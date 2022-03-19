@@ -42,6 +42,13 @@ console.log(sale)}
   ({ tags }) =>
     !filter.length || filter.every(tag => tags.includes(tag));
 
+    
+  const filterByPay =
+  filter =>
+  ({ paymentMethod }) =>
+    !filter.length || filter.every(pay => paymentMethod.includes(pay));
+
+
   export const saleFilter = {
     all: { value: 'all', label: 'All' },
     sell: { value: 'sell', label: 'Sell' },
@@ -53,13 +60,14 @@ console.log(sale)}
     price: [],
     sale: saleFilter.all.value,
     tags: [],
+    paymentMethod: [],
   };
   
 
 
  // export const filterAdverts = (adverts, { name, price, sale, tags } ) => 
-  export const filterAdverts = (adverts, {name, tags} ) => 
-
+export const filterAdverts = (adverts, {name, tags, paymentMethod} ) => 
 adverts
     .filter(filterByName(name))
-    .filter(filterByTags(tags));
+    .filter(filterByTags(tags))
+    .filter(filterByPay(paymentMethod));

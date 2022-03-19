@@ -21,7 +21,7 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 function Home() {
 
-  const [value, setValue] = React.useState ({name: '', sale: '', price: '' , tags: [], photo: null})
+  const [value, setValue] = React.useState ({name: '', sale: '', price: '' , tags: [], paymentMethod: [], photo: null})
   const [filters, setFilters] = React.useState([]);
   const [myads, setmy] = useState([]);
   const [mytags, settags] = useState([])

@@ -15,10 +15,10 @@ function CheckboxGroup({value, change, ...props }) {
       <div>
         <label>
           <input
-            name="tags"
+            name="paymentMethod"
             type="checkbox"
-            value='idiomas'
-            checked={value.includes('idiomas')}
+            value='cash'
+            checked={value.includes('cash')}
             onChange={handleChange}
           />
           idiomas
@@ -26,9 +26,9 @@ function CheckboxGroup({value, change, ...props }) {
         <label>
           <input
             type="checkbox"
-            name="tags"
-            value='motor'
-            checked={value.includes('motor')}
+            name="paymentMethod"
+            value='debit'
+            checked={value.includes('debit')}
             onChange={handleChange}
           />
           motor

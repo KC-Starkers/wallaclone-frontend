@@ -22,6 +22,7 @@ function FilterComp({submit, change, value, tag}){
       <input type="text" className="text-slate-900" placeholder="Search..." name="name" value={value.name} onChange={change} ></input>
       <br></br>
       <CheckboxGroup value={value.tags} change={change}/>
+      <CheckboxGroup value={value.paymentMethod} change={change}/>
       <br></br>
       <button className="text-white bg-gray-600 border-l " type="submit">
           Search
