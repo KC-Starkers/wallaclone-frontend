@@ -10,6 +10,8 @@ import { useState } from "react";
 import storage from "../../utils/storage";
 import Slider from 'rc-slider';
 import { loadTags } from "../../store/actions";
+import FilterComp from "./FilterComponent";
+import Button from "../common/button";
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -23,6 +25,7 @@ function Home() {
   const [filters, setFilters] = React.useState([]);
   const [myads, setmy] = useState([]);
   const [mytags, settags] = useState([])
+  const [showfilters, setfiltervisibility] = useState(false)
 
   React.useEffect(() => {
     saveFilters(filters);
@@ -49,6 +52,9 @@ function Home() {
     }));
   };
 
+  const handleFilters = (state) => {
+    setfiltervisibility(state)
+  }
 
  // const [formValue, setFormValue] = useState(initialFormValue);
   const handleSubmit = ev => {
@@ -56,31 +62,18 @@ function Home() {
     setFilters(getFilters())
   };
 
+  console.log(showfilters)
   return (
     /*   TODO: refactorizar en componente ServicesList 
     */
-   
     <>
     <Header ads={adverts}/>
       <div>
-          <form onSubmit={handleSubmit}>
-            <input type="text" className="text-slate-900" placeholder="Search..." name="name" value={value.name} onChange={handleChange} ></input>
-            <br></br>
-            {mytags.map(option => (
-              <label key={option}>
-                <input
-                  type="checkbox"
-                  value={option}
-                  onChange={handleChange}
-                />
-                {option}
-              </label>
-            ))}
-            <br></br>
-            <button className="text-white bg-gray-600 border-l " type="submit">
-                Search
-            </button>
-          </form>
+          {showfilters ? 
+            <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={mytags}/>
+             : 
+            <Button action={setfiltervisibility(true)} textbutton={"Filtrar anuncios"}/> 
+          }  
       </div>
       <ul>
         {adverts.map((advert) => (
