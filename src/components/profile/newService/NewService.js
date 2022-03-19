@@ -1,7 +1,9 @@
 import useForm from "../../../hooks/useForm";
 
-//TODO: incluir acciones del redux 'ui'
+//TODO: incluir acciones de redux 'ui'
 //TODO: ¿usar type number para numeros o vale con text?
+//TODO: ¿usar el estado auth para saber si está autenticado?
+//TODO: ¿recibe el id del user (como prop)?
 
 function NewService() {
   const {
@@ -13,7 +15,7 @@ function NewService() {
     offerAdvert: "",
     description: "",
     price: "",
-    // paymentMethod: [],
+    paymentMethod: [],
     // tags: [],
     // experience: "",
     // advertImgage: "",
@@ -68,6 +70,20 @@ function NewService() {
           value={serviceData.price}
           onChange={handleChange}
         />
+      </label>
+      <label>
+        Forma de pago
+        <select
+          type="select"
+          className="block"
+          name="paymentMethod"
+          value={serviceData.paymentMethod}
+          onChange={handleChange}
+        >
+          <option value="cash">Efectivo</option>
+          <option value="debit">Tarjeta de débito</option>
+          <option value="credit">Tarjeta de crédito</option>
+        </select>
       </label>
     </form>
   );

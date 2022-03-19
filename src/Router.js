@@ -4,6 +4,7 @@ import Home from "./components/home";
 import { Details } from "./components/services";
 import { MyServices } from "./components/profile";
 import SignUpPage from "./components/auth/SignUpPage";
+import NewService from "./components/profile/newService";
 
 const Router = () => {
   return (
