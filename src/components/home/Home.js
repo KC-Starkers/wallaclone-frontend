@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector } from "../../store/selectors";
 import './Home.css';
 
+//TODO: Falta maquetar la paginación e implementarla en el backend
 
 function Home() {
   const dispatch = useDispatch();
