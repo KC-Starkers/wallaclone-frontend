@@ -1,4 +1,4 @@
-function CheckboxGroup({value, change, ...props }) {
+function CheckboxGroup({value, change, options, name }) {
     const handleChange = ev => {
       const { name, checked, value: optionValue } = ev.target;
       change({
@@ -13,26 +13,18 @@ function CheckboxGroup({value, change, ...props }) {
   
     return (
       <div>
-        <label>
-          <input
-            name="paymentMethod"
-            type="checkbox"
-            value='cash'
-            checked={value.includes('cash')}
-            onChange={handleChange}
-          />
-          idiomas
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="paymentMethod"
-            value='debit'
-            checked={value.includes('debit')}
-            onChange={handleChange}
-          />
-          motor
-        </label>
+        {options.map(option => (
+          <label key={option}>
+            <input
+              name={name}
+              type="checkbox"
+              value={option}
+              checked={value.includes(option)}
+              onChange={handleChange}
+            />
+            {option}
+          </label>
+        ))}
       </div>
     );
   }

@@ -11,7 +11,6 @@ const filterByName =
   }
   };
 
-  
 const filterByPrice =
 filter =>
 ({ price }) => {
@@ -26,18 +25,26 @@ filter =>
   }
   return price >= min && price <= max;
 };
-/*
-const filterBySale =
+
+ 
+const filterByExperience =
 filter =>
-({ offerAdvert }) => {
-  console.log(offerAdvert)
-  debugger
-  [
-    //saleFilter.all.value,
-    offerAdvert ? saleFilter.sell.value : saleFilter.buy.value,
-  ].includes(filter);} 
-*/
-  
+({ experience }) => {
+  if (!filter.length) {
+    return true;
+  }
+  const [min, max] = filter;
+  console.log(min)
+  console.log(max)
+  if (!max) {
+    return experience >= min;
+  }
+  return experience >= min && experience <= max;
+};
+
+
+
+
   const filterBySale =
   filter =>
   ({ offerAdvert }) => 
@@ -70,16 +77,18 @@ filter =>
     sale: saleFilter.all.value,
     tags: [],
     paymentMethod: [],
-    offerAdvert: []
+    offerAdvert: [],
+    experience: []
   };
   
 
 
  // export const filterAdverts = (adverts, { name, price, sale, tags } ) => 
-export const filterAdverts = (adverts, {name, tags, paymentMethod, offerAdvert, price} ) => 
+export const filterAdverts = (adverts, {name, tags, paymentMethod, offerAdvert, price, experience} ) => 
 adverts
     .filter(filterByName(name))
     .filter(filterByTags(tags))
     .filter(filterByPay(paymentMethod))
     .filter(filterByPrice(price))
+    .filter(filterByExperience(experience))
     .filter(filterBySale(offerAdvert));

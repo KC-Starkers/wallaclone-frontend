@@ -21,7 +21,7 @@ function CheckBuySell({value, change, ...props }) {
             checked={value.includes('true')}
             onChange={handleChange}
           />
-          true
+        Se ofrece
         </label>
         <label>
           <input
@@ -31,7 +31,7 @@ function CheckBuySell({value, change, ...props }) {
             checked={value.includes('false')}
             onChange={handleChange}
           />
-          false
+          Se busca
         </label>
       </div>
     );

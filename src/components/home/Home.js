@@ -6,13 +6,14 @@ import { loadAdvertsSelector, loadTagsSelector } from "../../store/selectors";
 //imports Bea
 import Header from "../layout/header";
 import { defaultFilters, filterAdverts } from "./filters";
-import { useState } from "react";
+import CheckboxGroup from "../common/Checkbox";
 import storage from "../../utils/storage";
 import Slider from 'rc-slider';
 import { loadTags } from "../../store/actions";
 import FilterComp from "./FilterComponent";
-import Button from "../common/button";
-import MainButton from "../common/main_button";
+import '../../index.css'
+import { customtags } from "./provisional";
+import CheckboxTags from "../common/Checkbox_Tags";
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -22,7 +23,7 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 function Home() {
 
-  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethod: [], photo: null})
+  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethod: [], photo: null, experience: []})
   const [filters, setFilters] = React.useState([]);
 
   const dispatch = useDispatch();
@@ -59,32 +60,35 @@ function Home() {
     <>
     <Header change={handleChange} value={value}/>
       <br></br>
-      <div>
+      <CheckboxTags value={value.tags} change={handleChange} options={customtags} name="tags"/>
+      <div className="container">
+      <div className="filters">
         <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads}/>
         <br></br>
       </div>
-      <ul>
-        
+      <div className="adverts">
+      <ul className="wrapper"> 
         {adverts.length > 0 ? 
-        adverts.map((advert) => (
-          <>
+          adverts.map((advert) => (
             <li key={advert._id}>
               <Link to={`/adverts/${advert._id}`}>
                 <div>
-                  <p>{advert.name}</p>
-                  <p>{advert.offerAdvert + "oferta!!!!"}</p>
+                  <p><strong>NOMBRE</strong>{advert.name}</p>
+                  <p>{advert.offerAdvert}</p>
                   <p>{advert.description}</p>
                   <p>{advert.tags.join("")}</p>
                   <p>{advert.paymentMethod.join("")}</p>
-                  <p>{advert.experience}</p>
+                  <p>Experiencia: <strong>{advert.experience}</strong> años</p>
                   <img src={advert.image} alt={advert.name} />
+                  <br></br>
                 </div>
               </Link>
             </li>
-            {/*   <Search/>   */} {/* componente de búsqueda por filtros */}
-          </>
         )): <p>no hay anuncios que mostrar :(</p>}
-      </ul></>
+      </ul>
+      </div>
+      </div>
+      </>
   );
 }
 
