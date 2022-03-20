@@ -12,6 +12,7 @@ import Slider from 'rc-slider';
 import { loadTags } from "../../store/actions";
 import FilterComp from "./FilterComponent";
 import Button from "../common/button";
+import MainButton from "../common/main_button";
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -21,7 +22,7 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 function Home() {
 
-  const [value, setValue] = React.useState ({name: '', offerAdvert: false, price: '' , tags: [], paymentMethod: [], photo: null})
+  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: '' , tags: [], paymentMethod: [], photo: null})
   const [filters, setFilters] = React.useState([]);
   const [myads, setmy] = useState([]);
   const [mytags, settags] = useState([])
@@ -59,32 +60,30 @@ function Home() {
 
  // const [formValue, setFormValue] = useState(initialFormValue);
   const handleSubmit = ev => {
-    debugger
     ev.preventDefault();
     setFilters(getFilters())
   };
 
-  console.log(showfilters)
   return (
     /*   TODO: refactorizar en componente ServicesList 
     */
     <>
     <Header ads={adverts}/>
+      <br></br>
       <div>
-          {showfilters ? 
-            <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={mytags}/>
-             : 
-            <Button action={setfiltervisibility(true)} textbutton={"Filtrar anuncios"}/> 
-          }  
+        <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={mytags}/>
+        <br></br>
       </div>
       <ul>
-        {adverts.map((advert) => (
+        
+        {adverts.length > 0 ? 
+        adverts.map((advert) => (
           <>
             <li key={advert._id}>
               <Link to={`/adverts/${advert._id}`}>
                 <div>
                   <p>{advert.name}</p>
-                  <p>{advert.offerAdvert + "aqui"}</p>
+                  <p>{advert.offerAdvert + "oferta!!!!"}</p>
                   <p>{advert.description}</p>
                   <p>{advert.tags.join("")}</p>
                   <p>{advert.paymentMethod.join("")}</p>
@@ -95,7 +94,7 @@ function Home() {
             </li>
             {/*   <Search/>   */} {/* componente de búsqueda por filtros */}
           </>
-        ))}
+        )): <p>no hay anuncios que mostrar :(</p>}
       </ul></>
   );
 }

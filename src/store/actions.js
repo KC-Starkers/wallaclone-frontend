@@ -119,7 +119,6 @@ export const loadAdvertsFailure = (error) => {
 };
 
 export const loadAdverts = () => {
-  debugger
   return async (dispatch, getState, { api }) => {
     const loaded = loadedSelector(getState());
     if (loaded) {

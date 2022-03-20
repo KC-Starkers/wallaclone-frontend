@@ -15,6 +15,7 @@
 */
 
 import CheckboxGroup from "../common/Checkbox"
+import CheckBuySell from "../common/Checkbox_sell"
 
 function FilterComp({submit, change, value, tag}){
   return (
@@ -23,10 +24,9 @@ function FilterComp({submit, change, value, tag}){
       <br></br>
       <CheckboxGroup value={value.tags} change={change}/>
       <CheckboxGroup value={value.paymentMethod} change={change}/>
+      <CheckBuySell value={value.offerAdvert} change={change}/>
       <br></br>
-      <button className="text-white bg-gray-600 border-l " type="submit">
-          Search
-      </button>
+
     </form>
   )
 }

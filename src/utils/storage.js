@@ -7,16 +7,12 @@ const storage = {
       } else if (value == 'undefined'){
         return null
       } else{
-        console.log(value)
-        console.log(JSON.parse(value))
-        debugger
         return JSON.parse(value);
       }
     },
   
     set(key, value) {
       localStorage.setItem(key, JSON.stringify(value));
-      debugger
     },
   
     remove(key) {

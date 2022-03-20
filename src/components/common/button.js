@@ -1,4 +1,4 @@
-function Button({textbutton}){
+function Button({textbutton, action}){
     return (
         <button>{textbutton}</button>
     )

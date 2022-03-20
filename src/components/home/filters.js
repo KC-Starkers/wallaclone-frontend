@@ -41,7 +41,9 @@ filter =>
   const filterBySale =
   filter =>
   ({ offerAdvert }) => 
-    !filter.length || filter.every(oferta => offerAdvert.find(oferta));
+  ['', offerAdvert ? 'true' : 'false'].includes(filter);
+
+  //[offerAdvert ? 'true' : 'false'].includes(filter);
 
 
   const filterByTags =
@@ -58,7 +60,7 @@ filter =>
 
   export const saleFilter = {
     all: { value: 'all', label: 'All' },
-    sell: { value: 'sell', label: 'Sell' },
+    sell: { value: 'sell ', label: 'Sell' },
     buy: { value: 'buy', label: 'Buy' },
   };
 
