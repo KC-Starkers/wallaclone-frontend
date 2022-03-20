@@ -1,28 +1,17 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { authLogin } from "../../../store/actions";
+import { uiSelector } from "../../../store/selectors";
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({onLogin, loading, error, onErrorClose}) => {
 
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
 
-  const handleSbumit = async (event) => {
-    event.preventDefault();
-    const url = process.env.REACT_APP_API_BASE_URL + "/auth/login";
-
-    try {
-      const sendForm = await axios.post(url, loginData);
-      const accessToken = sendForm.data.accessToken;
-      localStorage.setItem("Authorization", `Bearer ${accessToken}`);
-      return navigate('/')
-    } catch (error) {
-      console.log('usuario/contraseña no válidos');
-    }
-  };
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setLoginData({
@@ -31,10 +20,15 @@ const Login = () => {
     });
   };
 
+  const handleSubmit = (event) =>{
+    event.preventDefault()
+    onLogin({loginData, navigate})
+  }
+
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={handleSbumit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="username"
@@ -53,4 +47,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = uiSelector
+const mapDispatchToProps = {onLogin: authLogin}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
