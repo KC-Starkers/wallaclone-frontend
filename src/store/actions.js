@@ -201,17 +201,19 @@ export const createAdvertFailure = (error) => {
   };
 };
 
-export const createAdvert = (input) => {
+
+
+export const createAdvert = (input) => {                      //TODO: importar el apicall en el objeto api del store
   return async (dispatch, getState, { api, history }) => {
     try {
       dispatch(createAdvertRequest());
       const advert = await api.adverts.createAdvert(input);
       dispatch(createAdvertSuccess(advert));
-      history.push(`/adverts/${advert.id}`);
+      // return <Navigate to={`/adverts/${advert.id}`}/>;         //TODO: probar esta línea
     } catch (error) {
       dispatch(createAdvertFailure(error));
       if (error.statusCode === 401) {
-        history.push("/");
+        return <Navigate to="/" />;                            //TODO: probar esta línea
       }
     }
   };

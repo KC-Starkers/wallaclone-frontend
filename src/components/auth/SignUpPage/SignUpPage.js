@@ -3,7 +3,7 @@ import useForm from "../../../hooks/useForm";
 import { signUp } from "./apicalls";
 import "./SignUpPage.css";
 
-
+//TODO: ¿crear una acción solo para la llamada al api?
 //TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data
 //TODO: validación cruzada de contraseña y confirmación de contraseña
 //TODO: BACK: subida de imagen con multer

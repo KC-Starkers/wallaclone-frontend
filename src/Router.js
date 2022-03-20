@@ -18,6 +18,7 @@ const Router = () => {
           {/*  Home: contiene a Services (listado de anuncios) y Search (filtros) */}
           {/* TODO Esta ruta debe se privada */}
           <Route path="crear" element={<NewService />} />
+          {/* <Route path="editar" element={<EditService />} /> */}
           <Route path=":idServicio" element={<Details />} />
         </Route>
         {/*  </Route> */}
