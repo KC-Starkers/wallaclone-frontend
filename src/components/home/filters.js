@@ -26,16 +26,23 @@ filter =>
   }
   return price >= min && price <= max;
 };
-
+/*
 const filterBySale =
 filter =>
-({ sale }) => {
+({ offerAdvert }) => {
+  console.log(offerAdvert)
+  debugger
   [
-    saleFilter.all.value,
-    sale ? saleFilter.sell.value : saleFilter.buy.value,
-  ].includes(filter);
-console.log(filter)
-console.log(sale)}
+    //saleFilter.all.value,
+    offerAdvert ? saleFilter.sell.value : saleFilter.buy.value,
+  ].includes(filter);} 
+*/
+  
+  const filterBySale =
+  filter =>
+  ({ offerAdvert }) => 
+    !filter.length || filter.every(oferta => offerAdvert.find(oferta));
+
 
   const filterByTags =
   filter =>
@@ -66,8 +73,9 @@ console.log(sale)}
 
 
  // export const filterAdverts = (adverts, { name, price, sale, tags } ) => 
-export const filterAdverts = (adverts, {name, tags, paymentMethod} ) => 
+export const filterAdverts = (adverts, {name, tags, paymentMethod, offerAdvert} ) => 
 adverts
     .filter(filterByName(name))
     .filter(filterByTags(tags))
-    .filter(filterByPay(paymentMethod));
+    .filter(filterByPay(paymentMethod))
+    .filter(filterBySale(offerAdvert));

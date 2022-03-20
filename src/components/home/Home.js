@@ -21,7 +21,7 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 function Home() {
 
-  const [value, setValue] = React.useState ({name: '', sale: '', price: '' , tags: [], paymentMethod: [], photo: null})
+  const [value, setValue] = React.useState ({name: '', offerAdvert: false, price: '' , tags: [], paymentMethod: [], photo: null})
   const [filters, setFilters] = React.useState([]);
   const [myads, setmy] = useState([]);
   const [mytags, settags] = useState([])
@@ -84,8 +84,8 @@ function Home() {
               <Link to={`/adverts/${advert._id}`}>
                 <div>
                   <p>{advert.name}</p>
-                  <p>{advert.offerAdvert}</p>
-                  <p>{advert.de4scription}</p>
+                  <p>{advert.offerAdvert + "aqui"}</p>
+                  <p>{advert.description}</p>
                   <p>{advert.tags.join("")}</p>
                   <p>{advert.paymentMethod.join("")}</p>
                   <p>{advert.experience}</p>
