@@ -70,14 +70,16 @@ filter =>
     sale: saleFilter.all.value,
     tags: [],
     paymentMethod: [],
+    offerAdvert: []
   };
   
 
 
  // export const filterAdverts = (adverts, { name, price, sale, tags } ) => 
-export const filterAdverts = (adverts, {name, tags, paymentMethod, offerAdvert} ) => 
+export const filterAdverts = (adverts, {name, tags, paymentMethod, offerAdvert, price} ) => 
 adverts
     .filter(filterByName(name))
     .filter(filterByTags(tags))
     .filter(filterByPay(paymentMethod))
+    .filter(filterByPrice(price))
     .filter(filterBySale(offerAdvert));

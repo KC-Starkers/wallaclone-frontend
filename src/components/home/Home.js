@@ -22,30 +22,23 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 function Home() {
 
-  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: '' , tags: [], paymentMethod: [], photo: null})
+  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethod: [], photo: null})
   const [filters, setFilters] = React.useState([]);
-  const [myads, setmy] = useState([]);
-  const [mytags, settags] = useState([])
-  const [showfilters, setfiltervisibility] = useState(false)
-
-  React.useEffect(() => {
-    saveFilters(filters);
-  }, []);
-
 
   const dispatch = useDispatch();
 
   const ads = useSelector(loadAdvertsSelector);
-  const tags = useSelector(loadTagsSelector);
+  //const tags = useSelector(loadTagsSelector);
+  const tags = 'useSelector(loadTagsSelector)';
+
   useEffect(() => {
+    saveFilters(filters);
     dispatch(loadAdverts());
     dispatch(loadTags());
-    setmy(ads)
-    settags(tags)
-  }, [mytags]);
-  var adverts = filterAdverts(myads, value)
-  console.log(value)
-
+  }, [tags]);
+ 
+  var adverts = filterAdverts(ads, value)
+  
   const handleChange = event => {
     console.log(event)
     setValue(prevState => ({
@@ -53,10 +46,6 @@ function Home() {
       [event.target.name]: event.target.value,
     }));
   };
-
-  const handleFilters = (state) => {
-    setfiltervisibility(state)
-  }
 
  // const [formValue, setFormValue] = useState(initialFormValue);
   const handleSubmit = ev => {
@@ -71,7 +60,7 @@ function Home() {
     <Header ads={adverts}/>
       <br></br>
       <div>
-        <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={mytags}/>
+        <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads}/>
         <br></br>
       </div>
       <ul>
