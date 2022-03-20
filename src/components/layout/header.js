@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import SearchBar from "../common/searchbar"
 import FullLogo from "../common/full_logo"
 
-function Header ({ads}) {
+function Header ({ads, value, change}) {
     const [width, setWidth] = useState(window.innerWidth);
 
     function handleWindowSizeChange() {
@@ -25,7 +25,7 @@ function Header ({ads}) {
             {
                 isMobile ? <Logo /> : <FullLogo />
             }
-            <SearchBar ads={ads}/>
+            <SearchBar value={value.name} change={change}/>
             <MainButton textbutton={'+ Agregar oferta'} />
             <Button textbutton={'Mi área'}/>
             <Button textbutton={'Mensajes'} />

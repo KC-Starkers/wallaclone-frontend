@@ -57,7 +57,7 @@ function Home() {
     /*   TODO: refactorizar en componente ServicesList 
     */
     <>
-    <Header ads={adverts}/>
+    <Header change={handleChange} value={value}/>
       <br></br>
       <div>
         <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads}/>

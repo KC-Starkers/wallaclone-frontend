@@ -16,13 +16,15 @@
 
 import CheckboxGroup from "../common/Checkbox"
 import CheckBuySell from "../common/Checkbox_sell"
-import SliderRange from "../common/slider";
+import SliderRange from "../common/slider"
+import SearchBar from "../common/searchbar"
 
 function FilterComp({change, value}){ 
   return (
       //<form onSubmit={submit}>
+      //<input type="text" className="text-slate-900" placeholder="Search..." name="name" value={value.name} onChange={change} ></input>
       <div>
-      <input type="text" className="text-slate-900" placeholder="Search..." name="name" value={value.name} onChange={change} ></input>
+      <SearchBar value={value.name} change={change} />
       <br></br>
       <CheckboxGroup value={value.tags} change={change}/>
       <CheckboxGroup value={value.paymentMethod} change={change}/>
