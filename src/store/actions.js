@@ -36,9 +36,10 @@ export const authLoginRequest = () => {
   };
 };
 
-export const authLoginSuccess = () => {
+export const authLoginSuccess = (token) => {
   return {
     type: AUTH_LOGIN_SUCCESS,
+    payload: token
   };
 };
 
@@ -50,14 +51,13 @@ export const authLoginFailure = (error) => {
   };
 };
 
-export const authLogin = ({ remember, ...credentials }, location) => {
-  return async (dispatch, getState, { api, history }) => {
+export const authLogin = (data) => {
+  return async (dispatch, getState, { api }) => {
     dispatch(authLoginRequest());
     try {
-      await api.auth.login(remember, credentials);
-      dispatch(authLoginSuccess());
-      const { from } = location.state || { from: { pathname: "/" } };
-      history.replace(from);
+      const token = await api.auth.login(data.loginData);
+      dispatch(authLoginSuccess(token));
+      data.navigate('/')
     } catch (error) {
       dispatch(authLoginFailure(error));
     }
@@ -125,7 +125,7 @@ export const loadAdverts = () => {
       return;
     }
     dispatch(loadAdvertsRequest());
-      try {
+    try {
       const adverts = await api.adverts.getAdverts();
       dispatch(loadAdvertsSuccess(adverts));
     } catch (error) {

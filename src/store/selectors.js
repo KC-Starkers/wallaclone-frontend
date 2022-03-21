@@ -1,4 +1,4 @@
-export const isLoggedSelector = (state) => state.auth;
+export const isLoggedSelector = (state) => state.auth.logged;
 export const loadAdvertsSelector = (state) => state.adverts.data;
 export const loadedSelector = (state) => state.adverts.loaded;
 export const loadAdvertSelector = (state, advertId) =>

@@ -4,12 +4,24 @@ import "./index.css";
 import Router from "./Router";
 import { Provider } from "react-redux";
 import configureStore from "./store";
+import { createBrowserHistory } from "history";
 
-const store = configureStore();
+const accessToken = localStorage.getItem("token");
+const history = createBrowserHistory();
+
+const store = configureStore(
+  {
+    auth: {
+      logged: !!accessToken,
+      accessToken: accessToken,
+    }
+  },
+  { history }
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={store} history={history}>
       <Router />
     </Provider>
   </React.StrictMode>,

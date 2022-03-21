@@ -63,7 +63,6 @@ const Details = () => {
         ))}
       </TagList>
 
-      {/*TODO Botón guardar en favoritos */}
       <FavButton ids={{user: userId, service: service.id}} />
 
       <Link to={`/perfil/${service.createdBy.userId}`}>
