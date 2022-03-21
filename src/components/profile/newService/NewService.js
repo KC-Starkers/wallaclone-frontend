@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import useForm from "../../../hooks/useForm";
 import { createAdvert } from "../../../store/actions";
 
-
 //TODO: El componente padre solo renderizará NewService si el estado auth = true
-//TODO: ¿recibe el id del user (como prop) para que cree el campo createdBy somehow?
 //TODO: cambiar hardcoded values por lista dinámica con llamada al api de tags
 //TODO: crear un apicall para el paymentMethod
+//TODO: advertCreator devuelve el _id del user que crea el anuncio
+//TODO: createdBy devuelve el name del user (tal vez debería devolver el username en vez del name)
 
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
 
@@ -25,7 +25,6 @@ function NewService() {
     tags: [],
     experience: "",
     advertImage: "",
-    // createdBy: "",   //TODO: research: que se cree automáticamente al crear el anuncio si el estado global tiene el id del user 
   });
 
   const dispatch = useDispatch();
@@ -45,7 +44,7 @@ function NewService() {
     !serviceData.description ||
     !serviceData.price ||
     !serviceData.paymentMethod ||
-    !serviceData.tags 
+    !serviceData.tags;
   // || !serviceData.experience
 
   return (

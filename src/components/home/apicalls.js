@@ -1,12 +1,11 @@
 import client from "../../client";
 
-const advertsPath = "/adverts";
-const tagsPath = "/tags";
+const path = "/adverts"
 
 export const getAdverts = () => {
   return client.get(advertsPath);
 };
 
 export const getTags = () => {
-  return client.get(tagsPath);
+  return client.get(`${path}/tags`);
 };
