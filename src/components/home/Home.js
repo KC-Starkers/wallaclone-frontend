@@ -22,6 +22,10 @@ const Range = createSliderWithTooltip(Slider.Range);
 const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
+
+//TODO: falta paginar aquí y hacer llamada al api con query (skip y limit)
+
+
 function Home() {
 
   const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethod: [], photo: null, experience: []})
