@@ -16,7 +16,7 @@ import {
 } from "./types";
 
 export const defaultState = {
-  auth: false,
+  auth: { logged: false, token: null},
   adverts: { loaded: false, data: [] },
   ui: { isLoading: false, error: null },
   tags: [],
