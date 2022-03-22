@@ -55,9 +55,9 @@ export const authLogin = (data) => {
   return async (dispatch, getState, { api }) => {
     dispatch(authLoginRequest());
     try {
-      const token = await api.auth.login(data.loginData);
+      const token  = await api.auth.login(data.loginData);
       dispatch(authLoginSuccess(token));
-      data.navigate('/')
+      data.navigate("/");
     } catch (error) {
       dispatch(authLoginFailure(error));
     }
@@ -201,8 +201,8 @@ export const createAdvertFailure = (error) => {
   };
 };
 
-
-export const createAdvert = (advertData) => {                      //TODO: importar el apicall en el objeto api del store
+export const createAdvert = (advertData) => {
+  //TODO: importar el apicall en el objeto api del store
   return async (dispatch, getState, { api, history }) => {
     try {
       dispatch(createAdvertRequest());
@@ -212,7 +212,7 @@ export const createAdvert = (advertData) => {                      //TODO: impor
     } catch (error) {
       dispatch(createAdvertFailure(error));
       if (error.statusCode === 401) {
-        return <Navigate to="/" />;                            //TODO: probar esta línea
+        return <Navigate to="/" />; //TODO: probar esta línea
       }
     }
   };

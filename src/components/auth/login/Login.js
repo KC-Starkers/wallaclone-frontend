@@ -7,7 +7,7 @@ import { uiSelector } from "../../../store/selectors";
 const Login = ({onLogin, loading, error, onErrorClose}) => {
 
   const [loginData, setLoginData] = useState({
-    username: "",
+    userName: "",
     password: "",
   });
 
@@ -29,12 +29,14 @@ const Login = ({onLogin, loading, error, onErrorClose}) => {
     <>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
+        Usuario
         <input
           type="text"
-          name="username"
+          name="userName"
           onChange={handleChange}
-          value={loginData.username}
+          value={loginData.userName}
         />
+        Contraseña
         <input
           type="password"
           name="password"

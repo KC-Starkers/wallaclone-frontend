@@ -13,8 +13,8 @@ const store = configureStore(
   {
     auth: {
       logged: !!accessToken,
-      accessToken: accessToken,
-    }
+      token: accessToken,
+    },
   },
   { history }
 );

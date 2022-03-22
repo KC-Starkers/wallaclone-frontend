@@ -7,11 +7,10 @@ export const getAdverts = () => {
 };
 
 export const postAdvert = (advertData) =>{
-  return client.post(path, advertData )   //TODO: ¿tal cual así o desestructurado? 
+  return client.post(path, advertData )   
 }
 
 export const getTags = () => {
       const url = `${path}/tags`
-      //const url = '/api/v1/adverts/tags'
       return client.get(url)
   }
