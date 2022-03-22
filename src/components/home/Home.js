@@ -36,7 +36,7 @@ function Home() {
     saveFilters(filters);
     dispatch(loadAdverts());
     dispatch(loadTags());
-  }, [tags]);
+  }, []);
  
   var adverts = filterAdverts(ads, value)
   
@@ -60,31 +60,7 @@ function Home() {
   
   return (
     
-    // /*   TODO: refactorizar en componente ServicesList */
-    // <ul>
-    // {/*   {isLoading && 'Loading...'} */ }  {/* TODO: verificar que esto funciona  */}
-    
-    //   {adverts.map((advert) => (
-    //     <>
-    //       <li key={advert._id}>
-    //         <Link to={`/adverts/${advert._id}`}  style={{ textDecoration: 'none' }} >
-    //           <div>
-    //             <p>{advert.name}</p>
-    //             <p>{advert.offerAdvert}</p>
-    //             <p>{advert.description}</p>
-    //             <p>{advert.tags.join("")}</p>
-    //             <p>{advert.paymentMethod.join("")}</p>
-    //             <p>{advert.experience}</p>
-    //             <img src={advert.image} alt={advert.name} />
-    //           </div>
-    //         </Link>
-    //       </li>
-    //       {/*   <Search/>   */} {/* componente de búsqueda por filtros */}
-    //     </>
-    //   ))}
-    // </ul>
-
-
+  
     <>
     <Header change={handleChange} value={value}/>
       <br></br>
@@ -103,10 +79,10 @@ function Home() {
                 <div>
                   <p><strong>NOMBRE</strong>{advert.name}</p>
                   <p>{advert.offerAdvert}</p>
-                  <p>{advert.description}</p>
-                  <p>{advert.tags.join("")}</p>
-                  <p>{advert.paymentMethod.join("")}</p>
-                  <p>Experiencia: <strong>{advert.experience}</strong> años</p>
+                  <p><strong>DESCRIPCIÓN</strong>{advert.description}</p>
+                  <p><strong>CATEGORÍAS</strong>{advert.tags.join(" ")}</p>
+                  <p><strong>FORMA DE PAGO</strong>{advert.paymentMethods.join(" ")}</p>
+                  <p><strong>EXPERIENCIA</strong> <strong>{advert.experience}</strong> años</p>
                   <img src={advert.image} alt={advert.name} />
                   <br></br>
                 </div>
