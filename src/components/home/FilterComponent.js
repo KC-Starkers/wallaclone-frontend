@@ -7,9 +7,7 @@ import { customtags, custompay } from "./provisional"
 
 function FilterComp({change, value}){ 
   return (
-      //<form onSubmit={submit}>
-      //<input type="text" className="text-slate-900" placeholder="Search..." name="name" value={value.name} onChange={change} ></input>
-    <div className="filter_menu">
+       <div className="filter_menu">
         <br></br>
         <h3>🤔 Filtrar por nombre 🤔</h3>
         <SearchBar value={value.name} change={change} />
@@ -33,6 +31,7 @@ function FilterComp({change, value}){
         <br></br>
         <h3>🤓 Filtrar por experiencia 🤓</h3>
         <SliderRange value={value.experience} change={change}/>
+        <button>Eliminar filtros</button>
     </div>
   )
 }

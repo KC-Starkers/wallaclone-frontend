@@ -14,18 +14,18 @@ function CheckboxTags({value, change, options, name }) {
     return (
       <div className="tag_container">
         {options.map(option => (
-          <>
-          <input
-            className="invisible_check"
-            name={name}
-            id={option}
-            type="checkbox"
-            value={option}
-            checked={value.includes(option)}
-            onChange={handleChange}
-          />
-          <label key={option} className="tag_label" for={option}>{option}</label>
-            </>
+          <div className="full_tag">
+            <input
+              className="invisible_check"
+              name={name}
+              id={option}
+              type="checkbox"
+              value={option}
+              checked={value.includes(option)}
+              onChange={handleChange}
+            />
+            <label key={option} className="tag_label" for={option}>{option}</label>
+          </div>
         ))}
       </div>
     );

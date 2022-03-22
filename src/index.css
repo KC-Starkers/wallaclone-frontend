@@ -64,3 +64,8 @@ code {
 .invisible_check:checked + label{
   background-color: red;
 }
+
+.full_tag{
+  background-image: url('./images/hagstag.png' ) 20%;
+  background-repeat: no-repeat;
+}

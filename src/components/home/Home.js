@@ -63,7 +63,7 @@ function Home() {
       <CheckboxTags value={value.tags} change={handleChange} options={customtags} name="tags"/>
       <div className="container">
       <div className="filters">
-        <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads}/>
+        <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads} default={defaultFilters}/>
         <br></br>
       </div>
       <div className="adverts">
