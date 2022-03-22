@@ -23,7 +23,7 @@ const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
 
-//TODO: falta paginar aquí y hacer llamada al api con query (skip y limit)
+//TODO de Ivan a mi mismo: paginar aquí y hacer llamada al api con query (skip y limit)
 
 function Home() {
 

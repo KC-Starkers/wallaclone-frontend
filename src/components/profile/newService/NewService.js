@@ -17,9 +17,10 @@ import "./newService.css"
 
 function NewService() {
   const {
-    formData: serviceData,
+    formData: advertData,
     setFormData,
     handleChange,
+
   } = useForm({
     name: "",
     offerAdvert: "",
@@ -41,29 +42,29 @@ function NewService() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(createAdvert(serviceData));
+    dispatch(createAdvert(advertData));
   };
 
   const disabledButton =
-    !serviceData.name ||
-    !serviceData.offerAdvert ||
-    !serviceData.description ||
-    !serviceData.price ||
-    !serviceData.paymentMethod ||
-    !serviceData.tags;
-  // || !serviceData.experience
+    !advertData.name ||
+    !advertData.offerAdvert ||
+    !advertData.description ||
+    !advertData.price ||
+    !advertData.paymentMethod ||
+    !advertData.tags;
+  // || !advertData.experience
 
   console.log('los tags', tags);
 
   return (
-    <form className="new-service-form" encType="multipart/form" /* onSubmit={handleSubmit} */>
+    <form className="new-advert-form" encType="multipart/form" onSubmit={handleSubmit}>
       <label>
         Nombre del servicio
         <input
           type="text"
           className="block"
           name="name"
-          value={serviceData.name}
+          value={advertData.name}
           onChange={handleChange}
         />
       </label>
@@ -71,9 +72,9 @@ function NewService() {
         Ofrezco
         <input
           type="radio"
-          className="block"
+        
           name="offerAdvert"
-          //   value={serviceData.name}
+          //   value={advertData.name}
           onChange={handleChange}
         />
       </label>
@@ -81,17 +82,17 @@ function NewService() {
         Busco
         <input
           type="radio"
-          className="block"
+          
           name="offerAdvert"
-          //   value={serviceData.name}
+          //   value={advertData.name}
           onChange={handleChange}
         />
       </label>
-      Describe el servicio que {serviceData.offerAdvert ? "ofreces" : "buscas"}
+      Describe tu servicio...
       <textarea
         className="block textarea"
         name="description"
-        value={serviceData.description}
+        value={advertData.description}
         onChange={handleChange}
       ></textarea>
       <label>
@@ -100,7 +101,7 @@ function NewService() {
           type="number"
           className="block"
           name="price"
-          value={serviceData.price}
+          value={advertData.price}
           onChange={handleChange}
         />
       </label>
@@ -108,7 +109,7 @@ function NewService() {
         Forma de pago
         <select
           multiple={true}
-          // value={serviceData.paymentMethod}
+          // value={advertData.paymentMethod}
           // value={[""]}
           className="block"
           name="paymentMethod"
@@ -130,7 +131,7 @@ function NewService() {
         Categorías
         <select
           multiple={true}
-          // value={serviceData.tags}
+          // value={advertData.tags}
           className="block"
           name="tags"
           onChange={handleChange}
@@ -156,7 +157,7 @@ function NewService() {
           type="text"
           className="block"
           name="experiencia"
-          value={serviceData.experience}
+          value={advertData.experience}
           onChange={handleChange}
         />
       </label>
@@ -164,13 +165,14 @@ function NewService() {
         Sube una imagen para ilustrar tu anuncio
         <input
           type="file"
-          className="block"
+          // className="block"
           name="advertImage"
-          value={serviceData.advertImage}
+          value={advertData.advertImage}
           onChange={handleChange}
         />
       </label>
-      <button type="submit" className="button">Crear anuncio</button>
+      
+      <button type="submit" className="button block" disabled={disabledButton}>Crear anuncio</button>
     </form>
   );
 }

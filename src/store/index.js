@@ -6,7 +6,7 @@ import * as auth from "../components/auth/service";
 import * as adverts from "../apicalls";
 
 const api = { auth, adverts };
-
+console.log(api)
 const rootReducer = combineReducers(reducers);
 
 const logger = (store) => {

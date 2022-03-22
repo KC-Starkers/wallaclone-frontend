@@ -25,9 +25,11 @@ const Router = () => {
         <Route path="/servicios">
           <Route index element={<Home />} />{" "}
           {/*  Home: contiene a Services (listado de anuncios) y Search (filtros) */}
-          <Route path="crear" element={<PrivateOutlet />}>
-            <Route index element={<NewService/>} />
+
+          <Route path="crear" /* element={<PrivateOutlet />} */>
+            <Route index element={<NewService/>} />        
           </Route>
+          
           <Route path=":idServicio" element={<Details />} />
         </Route>
         {/*  </Route> */}
