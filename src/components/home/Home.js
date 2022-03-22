@@ -23,7 +23,7 @@ const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
 
-//TODO: falta paginar aquí y hacer llamada al api con query (skip y limit)
+//TODO de Ivan para mi mismo: falta paginar aquí y hacer llamada GET con query (skip y limit)
 
 
 function Home() {
@@ -63,8 +63,7 @@ function Home() {
 
   
   return (
-    
-  
+      
     <>
     <Header change={handleChange} value={value}/>
       <br></br>
