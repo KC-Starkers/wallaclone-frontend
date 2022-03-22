@@ -16,13 +16,13 @@ function SignUpPage() {
     handleChange,
   } = useForm({
     userName: "",
-    name: "",
+    // name: "",
     email: "",
     password: "",
-    phone: "",
-    url: "",
-    image: null,
-    description: "",
+    // phone: "",   //TODO: eliminar estos campos
+    // url: "",
+    // image: null,
+    // description: "",
   });
 
   const [crossValid, setCrossValid] = useState(false);

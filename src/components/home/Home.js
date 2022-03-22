@@ -4,6 +4,9 @@ import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector } from "../../store/selectors";
 
+
+//TODO: falta pagina aquí y hacer llamada al api con query (skip y limit)
+
 function Home() {
   const dispatch = useDispatch();
 
@@ -31,8 +34,9 @@ function Home() {
                 <p>{advert.description}</p>
                 <p>{advert.tags.join("")}</p>
                 <p>{advert.paymentMethod.join("")}</p>
-                <p>{advert.experience}</p>
+                <p>{advert.experience}</p>d
                 <img src={advert.image} alt={advert.name} />
+                <p>{advert.createdBy}</p>          {/* //TODO: en back: cambiar name por username como valor de createdBy */}
               </div>
             </Link>
           </li>

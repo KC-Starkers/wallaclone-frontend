@@ -3,7 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import * as reducers from "./reducers"; 
 import thunk from "redux-thunk";
 // import * as auth from "../components/auth/service";
-import * as adverts from "../components/home/apicalls";
+import * as adverts from "../components/apicalls";
 
 const api = { /* auth, */ adverts };
 

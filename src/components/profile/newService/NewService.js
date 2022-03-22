@@ -1,11 +1,17 @@
-// import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import useForm from "../../../hooks/useForm";
 import { createAdvert } from "../../../store/actions";
+import { loadTags } from "../../../store/actions";
+import "./newService.css"
 
+//TODO: la llamada al api no la hace con post sino con get
+
+//TODO: ajustar SignUpPage al nuevo modelo de User y UserProfile
+//TODO: comprobar que el componente funciona en el servidor 
 //TODO: El componente padre solo renderizará NewService si el estado auth = true
 //TODO: cambiar hardcoded values por lista dinámica con llamada al api de tags
-//TODO: crear un apicall para el paymentMethod
+//TODO: crear un apicall para el paymentMethod - lo hará Bea
 //TODO: advertCreator devuelve el _id del user que crea el anuncio
 //TODO: createdBy devuelve el name del user (tal vez debería devolver el username en vez del name)
 
@@ -27,11 +33,13 @@ function NewService() {
     advertImage: "",
   });
 
+  const [tags, setTags] = useState([]);
+  
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getTags());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadTags());
+  }, [dispatch]);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -47,8 +55,10 @@ function NewService() {
     !serviceData.tags;
   // || !serviceData.experience
 
+  console.log('los tags', tags);
+
   return (
-    <form encType="multipart/form" /* onSubmit={handleSubmit} */>
+    <form className="new-service-form" encType="multipart/form" /* onSubmit={handleSubmit} */>
       <label>
         Nombre del servicio
         <input
@@ -162,7 +172,7 @@ function NewService() {
           onChange={handleChange}
         />
       </label>
-      <button type="submit" /* className="button" */>Crear anuncio</button>
+      <button type="submit" className="button">Crear anuncio</button>
     </form>
   );
 }
