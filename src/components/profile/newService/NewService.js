@@ -5,15 +5,13 @@ import { createAdvert } from "../../../store/actions";
 import { loadTags } from "../../../store/actions";
 import "./newService.css"
 
-//TODO: la llamada al api no la hace con post sino con get
-
 //TODO: ajustar SignUpPage al nuevo modelo de User y UserProfile
-//TODO: comprobar que el componente funciona en el servidor 
 //TODO: El componente padre solo renderizará NewService si el estado auth = true
 //TODO: cambiar hardcoded values por lista dinámica con llamada al api de tags
 //TODO: crear un apicall para el paymentMethod - lo hará Bea
 //TODO: advertCreator devuelve el _id del user que crea el anuncio
 //TODO: createdBy devuelve el name del user (tal vez debería devolver el username en vez del name)
+//TODO: subir a repo y servidor y comprobar que el componente funciona arriba
 
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
 

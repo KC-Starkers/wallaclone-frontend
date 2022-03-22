@@ -25,7 +25,10 @@ export const defaultState = {
 export const auth = (authState = defaultState.auth, action) => {
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
-      return true;
+      return {
+        logged: true,
+        token: action.payload
+      };
     case AUTH_LOGOUT_SUCCESS:
       return false;
     default:
