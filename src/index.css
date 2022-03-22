@@ -1,3 +1,8 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +15,52 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  display: grid; 
+  grid-template-columns: 60vw 40vw; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "adverts filters"; 
+}
+.adverts { grid-area: adverts;}
+
+.filters { grid-area: filters; }
+
+.wrapper{
+  display: grid;
+  position: relative;
+  width: 100%;
+  grid-gap: 1vh;
+  grid-template-columns: 50% 50%;
+}
+
+.filter_menu{
+  background-color: #f0f0f0;
+  border-radius: 34px;
+  position: relative;
+  height: 95%;
+  width: 90%;
+  padding: 6%;
+}
+
+.invisible_check{
+  display: none;
+}
+
+.tag_container{
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  height: 10vh;
+}
+
+.tag_container * {
+  vertical-align: baseline
+}
+
+.invisible_check:checked + label{
+  background-color: red;
 }
