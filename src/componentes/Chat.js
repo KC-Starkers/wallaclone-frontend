@@ -1,25 +1,51 @@
 import React, { useState, useEffect, useRef } from "react";
 import socket from "./Socket";
 import "../App.css";
+import { getChat, createMSG, getMSG } from "./apicalls";
+import { useParams } from "react-router-dom";
 
-const Chat = ({ nombre }) => {
-  const [mensaje, setMensaje] = useState("");
-  //const [mensajes, setMensajes] = useState([]);
-  const [mensajes, setMensajes] = useState([]);
+const Chat = ({ user }) => {
+  let { id } = useParams();
+  const [message, setmessage] = useState();
+  const [messages, setmessages] = useState(['']);
+  const [chatId, setchatId] = useState(id)
 
   useEffect(() => {
-    socket.emit("conectado", nombre);
-  }, [nombre]);
+    socket.emit("conectado", [user, id]);
+  }, [user]);
 
   useEffect(() => {
-    socket.on("mensajes", (mensaje) => {
-      setMensajes([...mensajes, mensaje]);
+    socket.on("messages", (message) => {
+      setmessages([...messages, message]);
     });
 
     return () => {
       socket.off();
     };
-  }, [mensajes]);
+  }, [messages]);
+
+  
+let downloadMSG = async() => {
+      try {
+        debugger
+        let m = await getMSG(chatId).then(setmessages);
+        console.log(messages)
+        return m
+      } catch (error) {
+        return error
+    };
+  }
+
+
+
+
+useEffect(() => {
+  downloadMSG()
+  console.log(messages)
+  debugger
+
+}, [])
+
 
   const divRef = useRef(null);
   useEffect(() => {
@@ -27,31 +53,34 @@ const Chat = ({ nombre }) => {
   });
 
   const submit = (e) => {
+    createMSG(user, message, chatId)
     e.preventDefault();
-    socket.emit("mensaje", nombre, mensaje);
-    setMensaje("");
+    socket.emit("message", user, message);
+    setmessage("");
   };
 
   return (
     <div>
       <div className="chat">
-        {mensajes.map((e, i) => (
+        {
+        messages.map((e, i) => (
           <div key={i}>
-            <div>{e.nombre}</div>
-            <div>{e.mensaje}</div>
+            <p><strong>{e.user}</strong> : {e.message}</p>
+            {console.log(messages.length, messages)}
           </div>
-        ))}
+        ))
+        }
         <div ref={divRef}></div>
       </div>
       <form onSubmit={submit}>
-        <label htmlFor="">Escriba su mensaje</label>
+        <label htmlFor="">Escriba su message</label>
         <textarea
           name=""
           id=""
           cols="30"
           rows="10"
-          value={mensaje}
-          onChange={(e) => setMensaje(e.target.value)}
+          value={message}
+          onChange={(e) => setmessage(e.target.value)}
         ></textarea>
         <button>Enviar</button>
       </form>

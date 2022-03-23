@@ -44,7 +44,7 @@ const Router = () => {
 
 
         {/* TODO Estas rutas deben ser privadas */}
-        <Route path="/mensajes">
+        <Route path="/messages">
           <Route index element={"Chat index"} />
           <Route path=":idChat" element={"Conversación"}/>
         </Route>
