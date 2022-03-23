@@ -2,8 +2,8 @@ import axios from "axios";
 
 //TODO: agregar '/api' a REACT_APP_PI_BASE_URL en el .env cuando cambiemos la ruta del backend a "/api/adverts"
 
-//const baseURL = 'http://localhost:3001';
-const baseURL = 'http://3.225.90.239:3001';
+const baseURL = process.env.REACT_APP_API_BASE_URL;
+
 
 const client = axios.create({ baseURL });
 
