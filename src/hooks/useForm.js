@@ -13,9 +13,18 @@ const useForm = (initialValues) => {
           [ev.target.name]: ev.target.value,
         }));
         break;
-      // case "file":
-      // case "radio":
+      case "radio":
+        setFormData((currentValue) =>
+          ev.target.checked
+            ? {
+                ...currentValue,
+                [ev.target.name]: ev.target.value === "true" ? true : false,
+              }
+            : { ...currentValue }
+        );
+
       // case "select-multiple":
+      // case "file":
       default:
         setFormData((currentValue) => ({
           ...currentValue,
@@ -29,5 +38,7 @@ const useForm = (initialValues) => {
     handleChange,
   };
 };
+
+
 
 export default useForm;

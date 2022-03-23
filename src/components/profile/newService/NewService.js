@@ -5,12 +5,14 @@ import { createAdvert } from "../../../store/actions";
 import { loadTags } from "../../../store/actions";
 import "./newService.css"
 
-//TODO: ajustar SignUpPage al nuevo modelo de User y UserProfile
+//TODO: el input radio no funciona 
+//TODO: paymentMethods no pilla mas de un valor: arreglar
+//TODO: cambiar el type de tags a select
+//TODO: implementar las llamadas a api de tags predefinidos (bajar master del back primero o subirlo al servidor) y paymentMethods
+//TODO: cambiar hardcoded values por lista dinámica con llamada al api de tags y paymentMethods
 //TODO: El componente padre solo renderizará NewService si el estado auth = true
-//TODO: cambiar hardcoded values por lista dinámica con llamada al api de tags
-//TODO: crear un apicall para el paymentMethod - lo hará Bea
-//TODO: advertCreator devuelve el _id del user que crea el anuncio
-//TODO: createdBy devuelve el name del user (tal vez debería devolver el username en vez del name)
+//TODO: crear un apicall para el paymentMethods - lo hará Bea
+//TODO: hacer algo con createdBy
 //TODO: subir a repo y servidor y comprobar que el componente funciona arriba
 
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
@@ -23,10 +25,10 @@ function NewService() {
 
   } = useForm({
     name: "",
-    offerAdvert: "",
+    offerAdvert: true,
     description: "",
     price: "",
-    paymentMethod: [""],
+    paymentMethods: [""],
     tags: [],
     experience: "",
     advertImage: "",
@@ -45,16 +47,19 @@ function NewService() {
     dispatch(createAdvert(advertData));
   };
 
+
   const disabledButton =
     !advertData.name ||
     !advertData.offerAdvert ||
     !advertData.description ||
     !advertData.price ||
-    !advertData.paymentMethod ||
+    !advertData.paymentMethods ||
     !advertData.tags;
   // || !advertData.experience
 
-  console.log('los tags', tags);
+  // console.log('los tags', tags);
+
+  console.log('advertData', advertData)
 
   return (
     <form className="new-advert-form" encType="multipart/form" onSubmit={handleSubmit}>
@@ -72,22 +77,23 @@ function NewService() {
         Ofrezco
         <input
           type="radio"
-        
           name="offerAdvert"
-          //   value={advertData.name}
+          value={advertData.offerAdvert}
           onChange={handleChange}
+          checked={advertData.offerAdvert===true}
         />
       </label>
       <label>
         Busco
         <input
           type="radio"
-          
           name="offerAdvert"
-          //   value={advertData.name}
+          value={!advertData.offerAdvert}
           onChange={handleChange}
+          checked={advertData.offerAdvert===false}
         />
       </label>
+   
       Describe tu servicio...
       <textarea
         className="block textarea"
@@ -109,13 +115,13 @@ function NewService() {
         Forma de pago
         <select
           multiple={true}
-          // value={advertData.paymentMethod}
+          // value={advertData.paymentMethods}
           // value={[""]}
           className="block"
-          name="paymentMethod"
+          name="paymentMethods"
           onChange={handleChange}
         >
-          {/* TODO: cambiar por lista de options dinámica con llamada al api de paymentMethod */}
+          {/* TODO: cambiar por lista de options dinámica con llamada al api de paymentMethods */}
           <option key="1" value="cash">
             Efectivo
           </option>
@@ -156,7 +162,7 @@ function NewService() {
         <input
           type="text"
           className="block"
-          name="experiencia"
+          name="experience"
           value={advertData.experience}
           onChange={handleChange}
         />
