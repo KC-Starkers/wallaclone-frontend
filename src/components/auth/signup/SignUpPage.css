@@ -2,10 +2,13 @@
     display:flex;
     flex-flow:column;
     gap:2rem;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .block{
     display:block;
+    border: solid 0.5px;
 }
 
 .textarea{
@@ -16,5 +19,6 @@
 
 .button{
     width:20rem;
+    border:solid 1px;
 }
 
