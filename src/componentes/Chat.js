@@ -4,6 +4,7 @@ import "../App.css";
 
 const Chat = ({ nombre }) => {
   const [mensaje, setMensaje] = useState("");
+  //const [mensajes, setMensajes] = useState([]);
   const [mensajes, setMensajes] = useState([]);
 
   useEffect(() => {
