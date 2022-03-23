@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useForm from "../../../hooks/useForm";
 import { createAdvert } from "../../../store/actions";
 import { loadTags } from "../../../store/actions";
-import "./newService.css"
+import { loadTagsSelector } from "../../../store/selectors";
+import "./newService.css";
 
-//TODO: el input radio no funciona 
+//TODO: el input radio no funciona
 //TODO: paymentMethods no pilla mas de un valor: arreglar
 //TODO: cambiar el type de tags a select
 //TODO: implementar las llamadas a api de tags predefinidos (bajar master del back primero o subirlo al servidor) y paymentMethods
@@ -22,7 +23,6 @@ function NewService() {
     formData: advertData,
     setFormData,
     handleChange,
-
   } = useForm({
     name: "",
     offerAdvert: true,
@@ -34,8 +34,6 @@ function NewService() {
     advertImage: "",
   });
 
-  const [tags, setTags] = useState([]);
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +45,6 @@ function NewService() {
     dispatch(createAdvert(advertData));
   };
 
-
   const disabledButton =
     !advertData.name ||
     !advertData.offerAdvert ||
@@ -57,12 +54,18 @@ function NewService() {
     !advertData.tags;
   // || !advertData.experience
 
+  const tags = useSelector(loadTagsSelector);
+
   // console.log('los tags', tags);
 
-  console.log('advertData', advertData)
+  console.log("advertData", advertData);
 
   return (
-    <form className="new-advert-form" encType="multipart/form" onSubmit={handleSubmit}>
+    <form
+      className="new-advert-form"
+      encType="multipart/form"
+      onSubmit={handleSubmit}
+    >
       <label>
         Nombre del servicio
         <input
@@ -78,9 +81,9 @@ function NewService() {
         <input
           type="radio"
           name="offerAdvert"
-          value={advertData.offerAdvert}
+          value="true"
           onChange={handleChange}
-          checked={advertData.offerAdvert===true}
+          checked={advertData.offerAdvert === true}
         />
       </label>
       <label>
@@ -88,12 +91,11 @@ function NewService() {
         <input
           type="radio"
           name="offerAdvert"
-          value={!advertData.offerAdvert}
+          value=""
           onChange={handleChange}
-          checked={advertData.offerAdvert===false}
+          checked={advertData.offerAdvert === false}
         />
       </label>
-   
       Describe tu servicio...
       <textarea
         className="block textarea"
@@ -136,25 +138,17 @@ function NewService() {
       <label>
         Categorías
         <select
-          multiple={true}
-          // value={advertData.tags}
+          // multiple={true}
+          value={advertData.tags}
           className="block"
           name="tags"
           onChange={handleChange}
         >
-          {/* TODO: cambiar por lista de options dinámica con llamada al api de tags */}
-          <option key="1" value="Servicios del Hogar">
-            Servicios del Hogar
-          </option>
-          <option key="2" value="Clases">
-            Clases
-          </option>
-          <option key="3" value="Diseño y marketing">
-            Diseño y marketing
-          </option>
-          <option key="4" value="Informática y otros">
-            Informática y otros
-          </option>
+          {tags.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
         </select>
       </label>
       <label>
@@ -177,14 +171,15 @@ function NewService() {
           onChange={handleChange}
         />
       </label>
-      
-      <button type="submit" className="button block" disabled={disabledButton}>Crear anuncio</button>
+      <button type="submit" className="button block" disabled={disabledButton}>
+        Crear anuncio
+      </button>
     </form>
   );
 }
 
-
-  {/* <div>
+{
+  /* <div>
         ¿Que quieres hacer en Wallaclone?
         <label>
           <span className="block">Ofrecer un servicio</span>
@@ -218,7 +213,8 @@ function NewService() {
             }
           />
         </label>
-      </div> */}
+      </div> */
+}
 
 // const [tagvalues, setTagValues] = useState([]);
 

@@ -14,14 +14,19 @@ const useForm = (initialValues) => {
         }));
         break;
       case "radio":
-        setFormData((currentValue) =>
-          ev.target.checked
-            ? {
-                ...currentValue,
-                [ev.target.name]: ev.target.value === "true" ? true : false,
-              }
-            : { ...currentValue }
-        );
+        setFormData((currentValue) => ({
+          ...currentValue,
+          [ev.target.name]: Boolean(ev.target.value),
+        }));
+        break;
+      // setFormData((currentValue) =>
+      //   ev.target.checked
+      //     ? {
+      //         ...currentValue,
+      //         [ev.target.name]: ev.target.value === "true" ? true : false,
+      //       }
+      //     : { ...currentValue }
+      // );
 
       // case "select-multiple":
       // case "file":
@@ -38,7 +43,5 @@ const useForm = (initialValues) => {
     handleChange,
   };
 };
-
-
 
 export default useForm;
