@@ -55,7 +55,7 @@ useEffect(() => {
   const submit = (e) => {
     createMSG(user, message, chatId)
     e.preventDefault();
-    socket.emit("message", user, message);
+    socket.emit("message", user, message, id);
     setmessage("");
   };
 
