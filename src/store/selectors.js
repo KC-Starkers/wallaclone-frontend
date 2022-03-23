@@ -10,4 +10,4 @@ export const deleteAdvertSelector = (state, advertId) =>
 
 export const uiSelector = (state) => state.ui;
 
-export const tagsSelector = (state) => state.tags;
+

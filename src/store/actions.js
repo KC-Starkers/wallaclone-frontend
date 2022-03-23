@@ -39,7 +39,7 @@ export const authLoginRequest = () => {
 export const authLoginSuccess = (token) => {
   return {
     type: AUTH_LOGIN_SUCCESS,
-    payload: token
+    payload: token,
   };
 };
 
@@ -55,7 +55,7 @@ export const authLogin = (data) => {
   return async (dispatch, getState, { api }) => {
     dispatch(authLoginRequest());
     try {
-      const token  = await api.auth.login(data.loginData);
+      const token = await api.auth.login(data.loginData);
       dispatch(authLoginSuccess(token));
       data.navigate("/");
     } catch (error) {
@@ -207,7 +207,7 @@ export const createAdvert = (advertData) => {
     try {
       dispatch(createAdvertRequest());
       const advert = await api.adverts.postAdvert(advertData);
-      dispatch(createAdvertSuccess(advert)); //No funciona 
+      dispatch(createAdvertSuccess(advert)); //No funciona
       // return <Navigate to={`/adverts/${advert.id}`}/>;         //TODO: probar esta línea
     } catch (error) {
       dispatch(createAdvertFailure(error));
@@ -271,7 +271,7 @@ export const loadTagsFailure = (error) => {
 export const loadTags = () => {
   return async (dispatch, getState, { api }) => {
     try {
-      const tags = await api.adverts.getTags();
+      const { tags } = await api.adverts.getTags();
       dispatch(loadTagsSuccess(tags));
     } catch (error) {
       dispatch(loadTagsFailure(error));
