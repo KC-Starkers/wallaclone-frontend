@@ -183,22 +183,42 @@ function NewService() {
   );
 }
 
-{
-  /* <select
-className="new-advert-form-field"
-name="tags"
-value={fields.tags}
-onChange={handleOnChange}
-multiple={true}
->
-{tagvalues.map((tagvalue, index) => (
-  <option key={index} value={tagvalue}>
-    {" "}
-    {tagvalue}{" "}
-  </option>
-))}
-</select> */
-}
+
+  {/* <div>
+        ¿Que quieres hacer en Wallaclone?
+        <label>
+          <span className="block">Ofrecer un servicio</span>
+          <input
+            type="radio"
+            className="block"
+            name="offer"
+            value="foo"
+            checked={userData.offer === true}
+            onChange={(ev) =>
+              setFormValue((currentState) => ({
+                ...currentState,
+                [ev.target.name]: Boolean(ev.target.value),
+              }))
+            }
+          />
+        </label>
+        <label>
+          Buscar un servicio
+          <input
+            type="radio"
+            className="block"
+            name="offer"
+            value=""
+            // checked={userData.offer === false}
+            onChange={(ev) =>
+              setFormValue((currentState) => ({
+                ...currentState,
+                [ev.target.name]: Boolean(ev.target.value),
+              }))
+            }
+          />
+        </label>
+      </div> */}
 
 // const [tagvalues, setTagValues] = useState([]);
 
