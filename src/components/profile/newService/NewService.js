@@ -10,8 +10,9 @@ import "./newService.css";
 // - el select de las tags no está bien construido, peta el renderizado tras crear el anuncio
 // - llamada al api de los paymentMethods (hay que picar el back también)
 
-//TODO: hacer algo con createdBy
+//TODO: pintar el createdBy con el GET /me
 //TODO: subir a repo y servidor y comprobar que el componente funciona arriba
+//TODO: hacer la redirección a Home en la action createAdvert
 
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
 
@@ -22,7 +23,7 @@ function NewService() {
     description: "",
     price: "",
     paymentMethods: [],
-    tags: "",
+    tags: [],
     experience: "",
     // advertImage: "",
   });
@@ -31,7 +32,7 @@ function NewService() {
 
   useEffect(() => {
     dispatch(loadTags());
-  }, [dispatch]);
+  }, []);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -125,18 +126,34 @@ function NewService() {
         Categorías
         <select
           /*  multiple={true} */
-          value={advertData.tags}
+          type="select"
+          value={advertData.paymentMethods}
           className="block"
           name="tags"
           onChange={handleChange}
         >
           {/* <option>- - Seleccionar - -</option> TODO: volver a poner una vez resuelto lío de los tags tras el POST*/}
 
-          {tags.map((tag) => (
-            <option key={tag} value={tag}>
-              {tag}
-            </option>
-          ))}
+          {/* {
+            (tagsOptions = tags.map((tag) => (
+              <option key={tag} value={tag}>
+                {tag}
+              </option>
+            )))
+          } */}
+
+          {/* <option value="informatica">Informática</option>
+          <option value="clases">Clases</option>
+          <option value="hogar">Hogar</option> */}
+
+          {tags.length
+            ? tags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))
+            : null}
+
         </select>
       </label>
       <label>

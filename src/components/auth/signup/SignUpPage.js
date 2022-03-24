@@ -3,11 +3,9 @@ import useFormUtils from "../../hooks/useFormUtils";
 import { signUp } from "./apicalls";
 import "./SignUpPage.css";
 
-//TODO: ¿crear una acción solo para la llamada al api?
-//TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data
-//TODO: validación cruzada de contraseña y confirmación de contraseña
-//TODO: probar con el nuevo backend (no sé si Oscar tocó el endpoint)
-//TODO: BACK: subida de imagen con multer
+
+//TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
+
 //TODO: BACK: gestionar los errores de mongo (ej: username e email deben ser únicos)
 
 function SignUpPage() {
@@ -66,7 +64,7 @@ function SignUpPage() {
   return (
     <form
       className="signup-form"
-      encType="multipart/form"
+      // encType="multipart/form"
       onSubmit={handleSubmit}
     >
       <label>
