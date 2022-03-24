@@ -38,7 +38,7 @@ const MyServices = () => {
           {services.map((service) => {
             return (
               <li key={service._id}>
-                <Link to={`/service/${service.id}`}>
+                <Link to={`/service/${service._id}`}>
                   <article>
                     <img
                       src={
