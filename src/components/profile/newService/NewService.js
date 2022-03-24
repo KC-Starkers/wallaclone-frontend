@@ -12,9 +12,9 @@ import "./newService.css";
 
 //TODO: pintar el createdBy con el GET /me
 //TODO: subir a repo y servidor y comprobar que el componente funciona arriba
-//TODO: hacer la redirección a Home en la action createAdvert
 
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
+
 
 function NewService() {
   const { formData: advertData, handleChange } = useFormUtils({

@@ -6,7 +6,7 @@ import "./SignUpPage.css";
 
 //TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
 
-//TODO: BACK: gestionar los errores de mongo (ej: username e email deben ser únicos)
+//TODO: gestionar en front los errores del endpoint (ej: username e email deben ser únicos)
 
 function SignUpPage() {
   const {
