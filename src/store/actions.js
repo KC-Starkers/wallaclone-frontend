@@ -201,17 +201,18 @@ export const createAdvertFailure = (error) => {
   };
 };
 
-export const createAdvert = (advertData) => {
+export const createAdvert = (advertData, navigate) => {
   return async (dispatch, getState, { api }) => {
     try {
       dispatch(createAdvertRequest());
       const { result: advert } = await api.adverts.createAdvert(advertData);
-      dispatch(createAdvertSuccess(advert)); 
-      // return <Navigate to={`/adverts/${advert.id}`}/>;         //TODO: probar esta línea
+      dispatch(createAdvertSuccess(advert));
+      console.log("redireccion");
+      return navigate(`/servicios/${advert._id}`); //TODO: probar esta línea
     } catch (error) {
       dispatch(createAdvertFailure(error));
       if (error.statusCode === 401) {
-        return <Navigate to="/" />; //TODO: probar esta línea
+        return navigate("/");
       }
     }
   };
