@@ -4,6 +4,7 @@ import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector, loadTagsSelector  } from "../../store/selectors";
 
+
 //imports Bea
 import Header from "../layout/header";
 import { defaultFilters, filterAdverts } from "./filters";
