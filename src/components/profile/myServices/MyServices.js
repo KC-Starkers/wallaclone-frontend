@@ -2,49 +2,52 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const MyServices = (userId) => {
+const MyServices = () => {
   const [services, setServices] = useState([]);
 
   //Busca y filtra los anuncios por ID
   useEffect(() => {
     async function getServiceDetail() {
-      //TODO recoger el usuario y devolverlo
-      const getUserId = () => {
-        if (!userId) {
-          return; //TODO recoger el id del usuario logueado
-        } else {
-          return userId;
-        }
-      };
+      const userId = localStorage.getItem("userId");
       //Conexión con la api
       const connection = axios.create({
-        baseURL: `${process.env.REACT_APP_API_BASE_URL}/adverts/`,
+        baseURL: `${process.env.REACT_APP_API_BASE_URL}/adverts`,
       });
+
       try {
-        const allServices = await connection.get();
-        const selectedServices = (adverts) => {
-          return adverts.createdBy.userId === getUserId;
-        };
-        const filteredServices = allServices.data.filter(selectedServices);
+        const getServices = await connection.get();
+        const allServices = getServices.data;
+        const filteredServices = allServices.filter((service) => {
+          return service.advertCreator === userId;
+        });
         setServices(filteredServices);
       } catch (error) {
         console.error(error);
       }
     }
     getServiceDetail();
-  }, [userId]);
+  }, []);
 
+  console.log(services);
   return (
     <div>
+      <Link to={"/crear"}>Crear anuncio</Link>
+
       {services.length ? (
         <div>
-          Anuncios cargados ({services.length})
           {services.map((service) => {
             return (
-              <li key={service.id}>
+              <li key={service._id}>
                 <Link to={`/service/${service.id}`}>
                   <article>
-                    <img src={service.advertImage} alt={service.name} />
+                    <img
+                      src={
+                        process.env.REACT_APP_API_BASE_URL +
+                        "/uploads/" +
+                        service.advertImage
+                      }
+                      alt={service.name}
+                    />
                     {/*TODO Cambiar por el elemento offertype badge */}
                     <div>{service.offerAdvert ? "Buscan" : "Ofrecen"}</div>
                     <div>{service.price}</div>
