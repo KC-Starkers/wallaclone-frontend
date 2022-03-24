@@ -7,6 +7,7 @@ import configureStore from "./store";
 import { createBrowserHistory } from "history";
 
 const accessToken = localStorage.getItem("token");
+const userId = localStorage.getItem("userId");
 const history = createBrowserHistory();
 
 const store = configureStore(
@@ -14,6 +15,7 @@ const store = configureStore(
     auth: {
       logged: !!accessToken,
       accessToken: accessToken,
+      userId: userId,
     }
   },
   { history }

@@ -27,7 +27,8 @@ export const auth = (authState = defaultState.auth, action) => {
     case AUTH_LOGIN_SUCCESS:
       return {
         logged: true,
-        token: action.payload
+        token: action.payload.token,
+        userId: action.payload.userId
       };
     case AUTH_LOGOUT_SUCCESS:
       return false;
