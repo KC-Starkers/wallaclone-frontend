@@ -1,37 +1,27 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useForm from "../../../hooks/useForm";
+import useFormUtils from "../../hooks/useFormUtils";
 import { createAdvert } from "../../../store/actions";
 import { loadTags } from "../../../store/actions";
 import { loadTagsSelector } from "../../../store/selectors";
 import "./newService.css";
 
 //TODO: Que el formulario funcione:
-// - el select de las tags no está bien construido
-// - el paymentMethod no está bien construido y meter llamada al api
-// - select (multiple=true): paymentMethods no pilla mas de un valor: arreglar
-
-//TODO: implementar llamada a api de paymentMethods (preguntar a Bea si ya lo hizo)
-
+// - el select de las tags no está bien construido, peta el renderizado tras crear el anuncio
+// - llamada al api de los paymentMethods (hay que picar el back también)
 
 //TODO: hacer algo con createdBy
 //TODO: subir a repo y servidor y comprobar que el componente funciona arriba
 
-
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
 
 function NewService() {
-  const {
-    formData: advertData,
-    setFormData,
-    handleChange,
-
-  } = useForm({
+  const { formData: advertData, handleChange } = useFormUtils({
     name: "",
     offerAdvert: true,
     description: "",
     price: "",
-    paymentMethods: "",
+    paymentMethods: [],
     tags: "",
     experience: "",
     // advertImage: "",
@@ -41,7 +31,7 @@ function NewService() {
 
   useEffect(() => {
     dispatch(loadTags());
-  }, [/* dispatch */]);  
+  }, [dispatch]);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -55,16 +45,15 @@ function NewService() {
     !advertData.paymentMethods ||
     !advertData.tags;
 
-
   const tags = useSelector(loadTagsSelector);
-
+  console.log("los tags", tags);
 
   console.log("advertData", advertData);
 
   return (
     <form
       className="new-advert-form"
-      encType="multipart/form"  //TODO: prueba quitando esto
+      encType="multipart/form" //TODO: prueba quitando esto
       onSubmit={handleSubmit}
     >
       <label>
@@ -114,50 +103,42 @@ function NewService() {
           onChange={handleChange}
         />
       </label>
-
       <label>
         Forma de pago
         <select
-          // multiple={true}
-          // value={advertData.paymentMethods}
+          // type="select-multiple"
+          multiple={true}
+          value={advertData.paymentMethods} //solo pilla un valor
           // value={[""]}
           className="block"
           name="paymentMethods"
           onChange={handleChange}
         >
-          TODO: cambiar por lista de options dinámica con llamada al api de paymentMethods 
-          <option key="1" value="cash">
-            Efectivo
-          </option>
-          <option key="2" value="debit">
-            Tarjeta de débito
-          </option>
-          <option key="3" value="credit">
-            Tarjeta de crédito
-          </option>
+          TODO: cambiar por lista de options dinámica con llamada al api de
+          paymentMethods
+          <option value="cash">Efectivo</option>
+          <option value="debit">Tarjeta de débito</option>
+          <option value="credit">Tarjeta de crédito</option>
         </select>
       </label>
-
-
       <label>
         Categorías
         <select
-         /*  multiple={true} */
+          /*  multiple={true} */
           value={advertData.tags}
           className="block"
           name="tags"
           onChange={handleChange}
         >
-          <option>- - Seleccionar - -</option>
-          {tags.map((tag, index) => (
+          {/* <option>- - Seleccionar - -</option> TODO: volver a poner una vez resuelto lío de los tags tras el POST*/}
+
+          {tags.map((tag) => (
             <option key={tag} value={tag}>
               {tag}
             </option>
           ))}
         </select>
       </label>
-
-
       <label>
         Experiencia
         <input
@@ -222,7 +203,5 @@ function NewService() {
         </label>
       </div> */
 }
-
-
 
 export default NewService;

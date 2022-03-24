@@ -14,6 +14,15 @@ const useForm = (initialValues) => {
           [ev.target.name]: ev.target.value,
         }));
         break;
+      case "select-multiple":
+        let selected = Array.from(ev.target.selectedOptions);
+        selected = selected.map(option=>option.value)
+        console.log(selected)
+        setFormData((currentValue) => ({
+          ...currentValue,
+          [ev.target.name]: selected,
+        }));
+        break;
       case "radio":
         setFormData((currentValue) => ({
           ...currentValue,

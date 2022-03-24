@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import useForm from "../../../hooks/useForm";
+import useFormUtils from "../../hooks/useFormUtils";
 import { signUp } from "./apicalls";
 import "./SignUpPage.css";
 
@@ -15,7 +15,7 @@ function SignUpPage() {
     formData: userData,
     /*  setFormData, */
     handleChange,
-  } = useForm({
+  } = useFormUtils({
     userName: "",
     // name: "",
     email: "",
