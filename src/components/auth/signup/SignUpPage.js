@@ -55,13 +55,13 @@ function SignUpPage() {
 
   const disabledButton =
     !userData.userName ||
-    !userData.name ||
+    // !userData.name ||
     !userData.email ||
     !userData.password ||
     !userData.passwordConfirm ||
-    !crossValid ||
+    !crossValid 
     // !userData.phone ||
-    !userData.description;
+    // !userData.description;
 
   return (
     <form

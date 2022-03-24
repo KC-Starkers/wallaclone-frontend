@@ -6,7 +6,7 @@ export const getAdverts = () => {
   return client.get(path);
 };
 
-export const postAdvert = (advertData) =>{
+export const createAdvert = (advertData) =>{
   return client.post(path, advertData )   
 }
 

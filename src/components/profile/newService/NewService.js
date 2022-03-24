@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useForm from "../../../hooks/useForm";
 import { createAdvert } from "../../../store/actions";
@@ -6,15 +6,17 @@ import { loadTags } from "../../../store/actions";
 import { loadTagsSelector } from "../../../store/selectors";
 import "./newService.css";
 
-//TODO: el input radio no funciona
-//TODO: paymentMethods no pilla mas de un valor: arreglar
-//TODO: cambiar el type de tags a select
-//TODO: implementar las llamadas a api de tags predefinidos (bajar master del back primero o subirlo al servidor) y paymentMethods
-//TODO: cambiar hardcoded values por lista dinámica con llamada al api de tags y paymentMethods
-//TODO: El componente padre solo renderizará NewService si el estado auth = true
-//TODO: crear un apicall para el paymentMethods - lo hará Bea
+//TODO: Que el formulario funcione:
+// - el select de las tags no está bien construido
+// - el paymentMethod no está bien construido y meter llamada al api
+// - select (multiple=true): paymentMethods no pilla mas de un valor: arreglar
+
+//TODO: implementar llamada a api de paymentMethods (preguntar a Bea si ya lo hizo)
+
+
 //TODO: hacer algo con createdBy
 //TODO: subir a repo y servidor y comprobar que el componente funciona arriba
+
 
 //TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
 
@@ -23,22 +25,23 @@ function NewService() {
     formData: advertData,
     setFormData,
     handleChange,
+
   } = useForm({
     name: "",
     offerAdvert: true,
     description: "",
     price: "",
-    paymentMethods: [""],
-    tags: [],
+    paymentMethods: "",
+    tags: "",
     experience: "",
-    advertImage: "",
+    // advertImage: "",
   });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadTags());
-  }, [dispatch]);
+  }, [/* dispatch */]);  
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -47,23 +50,21 @@ function NewService() {
 
   const disabledButton =
     !advertData.name ||
-    !advertData.offerAdvert ||
     !advertData.description ||
     !advertData.price ||
     !advertData.paymentMethods ||
     !advertData.tags;
-  // || !advertData.experience
+
 
   const tags = useSelector(loadTagsSelector);
 
-  // console.log('los tags', tags);
 
   console.log("advertData", advertData);
 
   return (
     <form
       className="new-advert-form"
-      encType="multipart/form"
+      encType="multipart/form"  //TODO: prueba quitando esto
       onSubmit={handleSubmit}
     >
       <label>
@@ -113,17 +114,18 @@ function NewService() {
           onChange={handleChange}
         />
       </label>
+
       <label>
         Forma de pago
         <select
-          multiple={true}
+          // multiple={true}
           // value={advertData.paymentMethods}
           // value={[""]}
           className="block"
           name="paymentMethods"
           onChange={handleChange}
         >
-          {/* TODO: cambiar por lista de options dinámica con llamada al api de paymentMethods */}
+          TODO: cambiar por lista de options dinámica con llamada al api de paymentMethods 
           <option key="1" value="cash">
             Efectivo
           </option>
@@ -135,22 +137,27 @@ function NewService() {
           </option>
         </select>
       </label>
+
+
       <label>
         Categorías
         <select
-          // multiple={true}
+         /*  multiple={true} */
           value={advertData.tags}
           className="block"
           name="tags"
           onChange={handleChange}
         >
-          {tags.map((tag) => (
+          <option>- - Seleccionar - -</option>
+          {tags.map((tag, index) => (
             <option key={tag} value={tag}>
               {tag}
             </option>
           ))}
         </select>
       </label>
+
+
       <label>
         Experiencia
         <input
@@ -216,6 +223,6 @@ function NewService() {
       </div> */
 }
 
-// const [tagvalues, setTagValues] = useState([]);
+
 
 export default NewService;

@@ -8,6 +8,7 @@ const useForm = (initialValues) => {
     switch (type) {
       case "text":
       case "textarea":
+      case "select":
         setFormData((currentValue) => ({
           ...currentValue,
           [ev.target.name]: ev.target.value,
