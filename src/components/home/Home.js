@@ -78,7 +78,7 @@ function Home() {
         {adverts.length > 0 ? 
           adverts.map((advert) => (
             <li key={advert._id}>
-              <Link to={`/adverts/${advert._id}`}>
+              <Link to={`/servicios/${advert._id}`}>
                 <div>
                   <p><strong>NOMBRE</strong>{advert.name}</p>
                   <p>{advert.offerAdvert}</p>
