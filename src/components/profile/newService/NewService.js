@@ -4,6 +4,7 @@ import useFormUtils from "../../hooks/useFormUtils";
 import { createAdvert } from "../../../store/actions";
 import { loadTags } from "../../../store/actions";
 import { loadTagsSelector } from "../../../store/selectors";
+import { useNavigate } from "react-router-dom";
 import "./newService.css";
 
 //TODO: Que el formulario funcione:
@@ -29,6 +30,7 @@ function NewService() {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadTags());
@@ -36,7 +38,7 @@ function NewService() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(createAdvert(advertData));
+    dispatch(createAdvert(advertData, navigate));
   };
 
   const disabledButton =
@@ -127,7 +129,8 @@ function NewService() {
         <select
           /*  multiple={true} */
           type="select"
-          value={advertData.paymentMethods}
+          // value={advertData.paymentMethods}
+          // defaultValue={null}
           className="block"
           name="tags"
           onChange={handleChange}
@@ -153,7 +156,6 @@ function NewService() {
                 </option>
               ))
             : null}
-
         </select>
       </label>
       <label>
