@@ -12,9 +12,9 @@ const rootReducer = combineReducers(reducers);
 const logger = (store) => {
   return (next) => {
     return (action) => {
-      console.log("***********dispatching action***********", action);
+      // console.log("***********dispatching action***********", action);
       next(action);
-      console.log("**********new state************", store.getState());
+      // console.log("**********new state************", store.getState());
     };
   };
 };
