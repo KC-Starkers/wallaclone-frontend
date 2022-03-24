@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import { Details } from "./components/services";
 import { MyServices } from "./components/profile";
+import NewService from "./components/profile/newService";
 import { Login, SignUpPage } from "./components/auth";
 import PrivateOutlet from "./components/auth/PrivateOutlet";
 
@@ -24,9 +25,11 @@ const Router = () => {
         <Route path="/servicios">
           <Route index element={<Home />} />{" "}
           {/*  Home: contiene a Services (listado de anuncios) y Search (filtros) */}
-          <Route path="crear" element={<PrivateOutlet />}>
-            <Route index element={"Crear servicio"} />
+
+          <Route path="crear" /* element={<PrivateOutlet />} */>
+            <Route index element={<NewService/>} />        
           </Route>
+          
           <Route path=":idServicio" element={<Details />} />
         </Route>
         {/*  </Route> */}

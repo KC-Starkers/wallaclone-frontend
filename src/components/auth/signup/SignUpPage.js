@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import useForm from "../../../hooks/useForm";
+import useFormUtils from "../../hooks/useFormUtils";
 import { signUp } from "./apicalls";
 import "./SignUpPage.css";
 
-//TODO: incluir imagen en formulario, adaptar llamada al api para multipart form data
-//TODO: validación cruzada de contraseña y confirmación de contraseña
+
+//TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
+
 //TODO: BACK: gestionar los errores de mongo (ej: username e email deben ser únicos)
 
 function SignUpPage() {
@@ -12,11 +13,13 @@ function SignUpPage() {
     formData: userData,
     /*  setFormData, */
     handleChange,
-  } = useForm({
+    
+  } = useFormUtils({
     userName: "",
-    name: "",
+    // name: "",
     email: "",
     password: "",
+
   });
 
   const [crossValid, setCrossValid] = useState(false);
@@ -47,7 +50,7 @@ function SignUpPage() {
 
   const disabledButton =
     !userData.userName ||
-    !userData.name ||
+    // !userData.name ||
     !userData.email ||
     !userData.password ||
     !userData.passwordConfirm ||
@@ -57,7 +60,7 @@ function SignUpPage() {
   return (
     <form
       className="signup-form"
-      encType="multipart/form"
+      // encType="multipart/form"
       onSubmit={handleSubmit}
     >
       <label>

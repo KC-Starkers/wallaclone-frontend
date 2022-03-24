@@ -1,0 +1,23 @@
+.new-service-form{
+    display:flex;
+    flex-flow:column;
+    gap:2rem;
+    align-items: center;
+}
+
+.block{
+    display:block;
+    border: solid 0.75px;
+    
+}
+
+.textarea{
+    width: 20rem;
+    height:10rem;
+}
+
+
+.button{
+    margin-top:1rem;
+    width:20rem;
+}

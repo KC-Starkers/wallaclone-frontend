@@ -22,9 +22,7 @@ const Range = createSliderWithTooltip(Slider.Range);
 const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
-
-//TODO de Ivan para mi mismo: falta paginar aquí y hacer llamada GET con query (skip y limit)
-
+//TODO de Ivan a mi mismo: paginar aquí y hacer llamada al api con query (skip y limit)
 
 function Home() {
 

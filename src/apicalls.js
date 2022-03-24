@@ -1,15 +1,16 @@
-import client from "../../client";
+import client from "./client";
 
 const path = "/adverts";
 
 export const getAdverts = () => {
-  return client.get('/adverts');
+  return client.get(path);
 };
 
+export const createAdvert = (advertData) =>{
+  return client.post(path, advertData )   
+}
 
 export const getTags = () => {
       const url = `${path}/tags`
-      //const url = '/api/v1/adverts/tags'
       return client.get(url)
   }
-
