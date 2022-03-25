@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFormUtils from "../../hooks/useFormUtils";
 import { createAdvert } from "../../../store/actions";
@@ -8,16 +8,16 @@ import { useNavigate } from "react-router-dom";
 import "./newService.css";
 
 //TODO: Que el formulario funcione:
-// - el select de las tags no está bien construido, peta el renderizado tras crear el anuncio
 // - llamada al api de los paymentMethods (hay que picar el back también)
 
 //TODO: pintar el createdBy con el GET /me
 //TODO: subir a repo y servidor y comprobar que el componente funciona arriba
 //TODO: hacer la redirección a Home en la action createAdvert
 
-//TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
 
 function NewService() {
+
+  const imageRef = useRef(null);  
   const { formData: advertData, handleChange } = useFormUtils({
     name: "",
     offerAdvert: true,
@@ -26,19 +26,42 @@ function NewService() {
     paymentMethods: [],
     tags: [],
     experience: "",
-    // advertImage: "",
+    // advertImage: imageRef.current.value,
   });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+ 
   useEffect(() => {
     dispatch(loadTags());
   }, []);
 
   const handleSubmit = (ev) => {
-    ev.preventDefault();
-    dispatch(createAdvert(advertData, navigate));
+     ev.preventDefault();
+    // const data = new FormData(advertData);  //¿puedo pasarle el parámetro en react??
+    const data = new FormData();
+    for (let key in advertData){
+      data.append(key, advertData[key])
+    }
+    // data.append("name", advertData.name);     //TODO: refactorizar en un loop que itere sobre advertData
+    // data.append("offerAdvert", advertData.offerAdvert);        
+    // data.append("description", advertData.description);
+    // data.append("price", advertData.price);
+    // data.append("paymentMethods", advertData.paymentMethods);   //tras crear separa valores con ',' y no con espacio, ¿porque?
+    // data.append("tags", advertData.tags);                                  //tras crear pilla todos los valores y no los seleccionados 
+    // data.append("experience", advertData.experience);
+    // data.append("advertImage", imageRef.current.value);   
+    
+    
+    // data.set() ---> parecido a append
+    // data.append("textData", advertData);
+    // data.append("advertImage", imageRef.current);
+    for (const pair of data.entries()){console.log(pair)};
+
+    dispatch(createAdvert(data,navigate));  //TODO: crea el anuncio con la imagen, pero no la renderiza: ajustar el BACK
+     
+    // dispatch(createAdvert(advertData, navigate));
   };
 
   const disabledButton =
@@ -111,7 +134,7 @@ function NewService() {
         <select
           // type="select-multiple"
           multiple={true}
-          value={advertData.paymentMethods} //solo pilla un valor
+          value={advertData.paymentMethods} 
           // value={[""]}
           className="block"
           name="paymentMethods"
@@ -174,7 +197,8 @@ function NewService() {
           type="file"
           // className="block"
           name="advertImage"
-          value={advertData.advertImage}
+          // value={advertData.advertImage}
+          ref={imageRef}
           onChange={handleChange}
         />
       </label>
