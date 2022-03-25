@@ -18,7 +18,7 @@ const MyServices = (userId) => {
       };
       //Conexión con la api
       const connection = axios.create({
-        baseURL: `${process.env.REACT_APP_API_BASE_URL}/services/`,
+        baseURL: `${process.env.REACT_APP_API_BASE_URL}/adverts/`,
       });
       try {
         const allServices = await connection.get();
