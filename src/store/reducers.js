@@ -16,18 +16,21 @@ import {
 } from "./types";
 
 export const defaultState = {
-  auth: false,
+  auth: {logged: false, token: false, userName: ''},
   adverts: { loaded: false, data: [] },
   ui: { isLoading: false, error: null },
   tags: [],
 };
 
 export const auth = (authState = defaultState.auth, action) => {
+  debugger
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
+      console.log(action.payload)
       return {
         logged: true,
-        token: action.payload
+        token: action.payload.accessToken,
+        userName: action.payload.userName,
       };
     case AUTH_LOGOUT_SUCCESS:
       return false;

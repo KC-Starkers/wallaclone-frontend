@@ -36,10 +36,12 @@ export const authLoginRequest = () => {
   };
 };
 
-export const authLoginSuccess = (token) => {
+export const authLoginSuccess = (tokenanduser) => {
+  console.log(tokenanduser)
+  debugger
   return {
     type: AUTH_LOGIN_SUCCESS,
-    payload: token
+    payload: tokenanduser
   };
 };
 
