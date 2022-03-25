@@ -8,14 +8,28 @@ const useForm = (initialValues) => {
     switch (type) {
       case "text":
       case "textarea":
+      case "select":
         setFormData((currentValue) => ({
           ...currentValue,
           [ev.target.name]: ev.target.value,
         }));
         break;
+      case "select-multiple":
+        let selected = Array.from(ev.target.selectedOptions);
+        selected = selected.map(option=>option.value)
+        console.log(selected)
+        setFormData((currentValue) => ({
+          ...currentValue,
+          [ev.target.name]: selected,
+        }));
+        break;
+      case "radio":
+        setFormData((currentValue) => ({
+          ...currentValue,
+          [ev.target.name]: Boolean(ev.target.value),
+        }));
+        break;
       // case "file":
-      // case "radio":
-      // case "select-multiple":
       default:
         setFormData((currentValue) => ({
           ...currentValue,

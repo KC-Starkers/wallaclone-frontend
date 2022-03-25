@@ -1,18 +1,15 @@
 import axios from "axios";
 
-//TODO: agregar '/api' a REACT_APP_PI_BASE_URL en el .env cuando cambiemos la ruta del backend a "/api/adverts"
-
-//const baseURL = 'http://localhost:3001';
-const baseURL = 'http://3.225.90.239:3001';
+const baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const client = axios.create({ baseURL });
 
-const setAuthorizationHeader = token => {
-  client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+const setAuthorizationHeader = (token) => {
+  client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
 const removeAuthorizationHeader = () => {
-  delete client.defaults.headers.common['Authorization'];
+  delete client.defaults.headers.common["Authorization"];
 };
 
 client.interceptors.response.use(
@@ -24,8 +21,8 @@ client.interceptors.response.use(
   }
 );
 
-export const configureClient = ({ accessToken }) => {
-  if (accessToken) {
+export const configureClient = (accessToken) => {
+    if (accessToken) {
     setAuthorizationHeader(accessToken);
   }
 };
@@ -34,9 +31,7 @@ export const resetClient = () => {
   removeAuthorizationHeader();
 };
 
-
 export default client;
-
 
 // client.interceptors.response.use(
 //     response => response.data,

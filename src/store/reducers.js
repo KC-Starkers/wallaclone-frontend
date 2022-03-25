@@ -16,7 +16,7 @@ import {
 } from "./types";
 
 export const defaultState = {
-  auth: false,
+  auth: { logged: false, token: undefined },
   adverts: { loaded: false, data: [] },
   ui: { isLoading: false, error: null },
   tags: [],
@@ -31,7 +31,10 @@ export const auth = (authState = defaultState.auth, action) => {
         userId: action.payload.userId
       };
     case AUTH_LOGOUT_SUCCESS:
-      return false;
+      return {
+        logged: false,
+        token: undefined,
+      };
     default:
       return authState;
   }
@@ -78,6 +81,8 @@ export const adverts = (advertsState = defaultState.adverts, action) => {
     case LOAD_ADVERTS_SUCCESS:
       return { loaded: true, data: action.payload };
     case LOAD_ADVERT_SUCCESS:
+    // case EDIT_ADVERT_SUCCESS: //TODO: incluir esta acción
+    // return {...} //
     case CREATE_ADVERT_SUCCESS:
       return { ...advertsState, data: [...advertsState.data, action.payload] };
     case DELETE_ADVERT_SUCCESS:

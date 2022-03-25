@@ -4,6 +4,7 @@ import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector, loadTagsSelector  } from "../../store/selectors";
 
+
 //imports Bea
 import Header from "../layout/header";
 import { defaultFilters, filterAdverts } from "./filters";
@@ -22,9 +23,7 @@ const Range = createSliderWithTooltip(Slider.Range);
 const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
-
-//TODO de Ivan para mi mismo: falta paginar aquí y hacer llamada GET con query (skip y limit)
-
+//TODO de Ivan a mi mismo: paginar aquí y hacer llamada al api con query (skip y limit)
 
 function Home() {
 
@@ -78,7 +77,7 @@ function Home() {
         {adverts.length > 0 ? 
           adverts.map((advert) => (
             <li key={advert._id}>
-              <Link to={`/adverts/${advert._id}`}>
+              <Link to={`/servicios/${advert._id}`}>
                 <div>
                   <p><strong>NOMBRE</strong>{advert.name}</p>
                   <p>{advert.offerAdvert}</p>

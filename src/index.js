@@ -5,10 +5,13 @@ import Router from "./Router";
 import { Provider } from "react-redux";
 import configureStore from "./store";
 import { createBrowserHistory } from "history";
+import { configureClient } from "./client/client";
 
 const accessToken = localStorage.getItem("token");
 const userId = localStorage.getItem("userId");
 const history = createBrowserHistory();
+
+configureClient(accessToken);
 
 const store = configureStore(
   {
