@@ -30,16 +30,6 @@ const useForm = (initialValues) => {
           [ev.target.name]: Boolean(ev.target.value),
         }));
         break;
-      // setformValue((currentValue) =>
-      //   ev.target.checked
-      //     ? {
-      //         ...currentValue,
-      //         [ev.target.name]: ev.target.value === "true" ? true : false,
-      //       }
-      //     : { ...currentValue }
-      // );
-
-      // case "select-multiple":
       // case "file":
       default:
         setformValue((currentValue) => ({

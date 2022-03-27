@@ -12,6 +12,7 @@ import { getPaymentMethods } from "../../../apicalls";
 //Hacer llamada al api en la action
 //Que permita crear el anuncio sin la imagen
 
+
 function NewService() {
   const imageRef = useRef(null);
   const [predefinedPaymentMethods, setPredefinedPaymentMethods] = useState([]);

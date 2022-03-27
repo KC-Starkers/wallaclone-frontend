@@ -6,22 +6,20 @@ import "./SignUpPage.css";
 
 //TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
 
-//TODO: BACK: gestionar los errores de mongo (ej: username e email deben ser únicos)
+//TODO: gestionar en front los errores del endpoint (ej: username e email deben ser únicos)
 
 function SignUpPage() {
   const {
     formData: userData,
     /*  setFormData, */
     handleChange,
+    
   } = useFormUtils({
     userName: "",
     // name: "",
     email: "",
     password: "",
-    // phone: "",   //TODO: eliminar estos campos
-    // url: "",
-    // image: null,
-    // description: "",
+
   });
 
   const [crossValid, setCrossValid] = useState(false);
@@ -35,21 +33,20 @@ function SignUpPage() {
       const userId = result._id;
       // console.log(userId);
     } catch (error) {
-      console.log(error); 
+      console.log(error);
     }
   };
 
   useEffect(() => {
     const crossValidation = () => {
       if (userData.password === passwordConfirmRef.current.value) {
-        setCrossValid(true); 
+        setCrossValid(true);
       } else {
         setCrossValid(false);
       }
     };
     crossValidation();
   }, [userData.password, passwordConfirmRef.current.value]);
-
 
   const disabledButton =
     !userData.userName ||
@@ -58,8 +55,7 @@ function SignUpPage() {
     !userData.password ||
     !userData.passwordConfirm ||
     !crossValid 
-    // !userData.phone ||
-    // !userData.description;
+
 
   return (
     <form
@@ -117,61 +113,8 @@ function SignUpPage() {
           onChange={handleChange}
         />
       </label>
-      {/* <div>
-        ¿Que quieres hacer en Wallaclone?
-        <label>
-          <span className="block">Ofrecer un servicio</span>
-          <input
-            type="radio"
-            className="block"
-            name="offer"
-            value="foo"
-            checked={userData.offer === true}
-            onChange={(ev) =>
-              setFormValue((currentState) => ({
-                ...currentState,
-                [ev.target.name]: Boolean(ev.target.value),
-              }))
-            }
-          />
-        </label>
-        <label>
-          Buscar un servicio
-          <input
-            type="radio"
-            className="block"
-            name="offer"
-            value=""
-            // checked={userData.offer === false}
-            onChange={(ev) =>
-              setFormValue((currentState) => ({
-                ...currentState,
-                [ev.target.name]: Boolean(ev.target.value),
-              }))
-            }
-          />
-        </label>
-      </div> */}
-      <label>
-        Teléfono
-        <input
-          type="text"
-          className="block"
-          name="phone"
-          value={userData.phone}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        URL
-        <input
-          type="url"
-          className="block"
-          name="url"
-          value={userData.url}
-          onChange={handleChange}
-        />
-      </label>
+   
+{/*     
       Cuéntanos algo de tí...
       <textarea
         className="block textarea"
@@ -182,7 +125,8 @@ function SignUpPage() {
       <label>
         Sube tu foto o una imagen que te identifique
         <input type="file" name="image" ref={imageRef} />
-      </label>
+      </label> */}
+
       <button type="submit" className="button" disabled={disabledButton}>
         Darme de alta
       </button>

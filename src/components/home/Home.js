@@ -4,6 +4,7 @@ import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector, loadTagsSelector  } from "../../store/selectors";
 
+
 //imports Bea
 import Header from "../layout/header";
 import { defaultFilters, filterAdverts } from "./filters";
@@ -23,7 +24,7 @@ const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
 //TODO de Ivan a mi mismo: paginar con una librería y hacer llamada al api con query (skip y limit)
-//TODO: hacer que muestre la foto en el listado por tema de la ruta del back 
+//TODO: hacer que muestre la foto en el listado (tema de la ruta de estáticos en el back) 
 
 
 function Home() {
@@ -63,8 +64,7 @@ function Home() {
 
   
   return (
-    
-  
+      
     <>
     <Header change={handleChange} value={value}/>
       <br></br>
