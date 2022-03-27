@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFormUtils from "../../hooks/useFormUtils";
 import { createAdvert } from "../../../store/actions";
@@ -6,19 +6,16 @@ import { loadTags } from "../../../store/actions";
 import { loadTagsSelector } from "../../../store/selectors";
 import { useNavigate } from "react-router-dom";
 import "./newService.css";
+import { getPaymentMethods } from "../../../apicalls";
 
-//TODO: Que el formulario funcione:
-// - llamada al api de los paymentMethods (hay que picar el back también)
-
-//TODO: pintar el createdBy con el GET /me
-//TODO: subir a repo y servidor y comprobar que el componente funciona arriba
-//TODO: hacer la redirección a Home en la action createAdvert
-
+//TODO:
+//Hacer llamada al api en la action
+//Que permita crear el anuncio sin la imagen
 
 function NewService() {
-
-  const imageRef = useRef(null);  
-  const { formData: advertData, handleChange } = useFormUtils({
+  const imageRef = useRef(null);
+  const [predefinedPaymentMethods, setPredefinedPaymentMethods] = useState([]);
+  const { formValue: advertData, handleChange } = useFormUtils({
     name: "",
     offerAdvert: true,
     description: "",
@@ -26,42 +23,38 @@ function NewService() {
     paymentMethods: [],
     tags: [],
     experience: "",
-    // advertImage: imageRef.current.value,
   });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
- 
   useEffect(() => {
     dispatch(loadTags());
+    getPaymentMethods()
+      .then((res) => setPredefinedPaymentMethods(res.result))
+      .catch((err) => console.log(err));
   }, []);
 
   const handleSubmit = (ev) => {
-     ev.preventDefault();
-    // const data = new FormData(advertData);  //¿puedo pasarle el parámetro en react??
+    ev.preventDefault();
     const data = new FormData();
-    for (let key in advertData){
-      data.append(key, advertData[key])
+    for (let key in advertData) {
+      if (key === "paymentMethods") {
+        advertData.paymentMethods.forEach((item) =>
+          data.append("paymentMethods[]", item)
+        );
+      } else {
+        data.append(key, advertData[key]);
+      }
     }
-    // data.append("name", advertData.name);     //TODO: refactorizar en un loop que itere sobre advertData
-    // data.append("offerAdvert", advertData.offerAdvert);        
-    // data.append("description", advertData.description);
-    // data.append("price", advertData.price);
-    // data.append("paymentMethods", advertData.paymentMethods);   //tras crear separa valores con ',' y no con espacio, ¿porque?
-    // data.append("tags", advertData.tags);                                  //tras crear pilla todos los valores y no los seleccionados 
-    // data.append("experience", advertData.experience);
-    // data.append("advertImage", imageRef.current.value);   
-    
-    
-    // data.set() ---> parecido a append
-    // data.append("textData", advertData);
-    // data.append("advertImage", imageRef.current);
-    for (const pair of data.entries()){console.log(pair)};
+    data.set("advertImage", imageRef.current.files[0]);
 
-    dispatch(createAdvert(data,navigate));  //TODO: crea el anuncio con la imagen, pero no la renderiza: ajustar el BACK
-     
-    // dispatch(createAdvert(advertData, navigate));
+    // console.log(imageRef.current.value);
+    // for (const pair of data.entries()) {
+    //   console.log(pair);
+    // }
+
+    dispatch(createAdvert(data, navigate));
   };
 
   const disabledButton =
@@ -72,14 +65,15 @@ function NewService() {
     !advertData.tags;
 
   const tags = useSelector(loadTagsSelector);
-  console.log("los tags", tags);
 
+  console.log("los tags", tags);
   console.log("advertData", advertData);
+  console.log("methods", predefinedPaymentMethods);
 
   return (
     <form
-      className="new-advert-form"
-      encType="multipart/form" //TODO: prueba quitando esto
+      className="new-service-form"
+      encType="multipart/form-data"
       onSubmit={handleSubmit}
     >
       <label>
@@ -132,45 +126,41 @@ function NewService() {
       <label>
         Forma de pago
         <select
-          // type="select-multiple"
+          type="select-multiple"
           multiple={true}
-          value={advertData.paymentMethods} 
+          value={advertData.paymentMethods}
           // value={[""]}
           className="block"
           name="paymentMethods"
           onChange={handleChange}
         >
-          TODO: cambiar por lista de options dinámica con llamada al api de
-          paymentMethods
-          <option value="cash">Efectivo</option>
+
+          {predefinedPaymentMethods.length
+            ? predefinedPaymentMethods.map((method) => (
+                <option key={method} value={method}>
+                  {method}
+                </option>
+              ))
+            : null}
+
+         {/* <option value="cash">Efectivo</option>
           <option value="debit">Tarjeta de débito</option>
           <option value="credit">Tarjeta de crédito</option>
+          <option value="paypal">Paypal</option> */}
         </select>
       </label>
+
+
       <label>
         Categorías
         <select
-          /*  multiple={true} */
           type="select"
           // value={advertData.paymentMethods}
-          // defaultValue={null}
           className="block"
           name="tags"
           onChange={handleChange}
         >
-          {/* <option>- - Seleccionar - -</option> TODO: volver a poner una vez resuelto lío de los tags tras el POST*/}
-
-          {/* {
-            (tagsOptions = tags.map((tag) => (
-              <option key={tag} value={tag}>
-                {tag}
-              </option>
-            )))
-          } */}
-
-          {/* <option value="informatica">Informática</option>
-          <option value="clases">Clases</option>
-          <option value="hogar">Hogar</option> */}
+          {/* <option>- - Seleccionar - -</option> */}
 
           {tags.length
             ? tags.map((tag) => (
@@ -193,58 +183,13 @@ function NewService() {
       </label>
       <label>
         Sube una imagen para ilustrar tu anuncio
-        <input
-          type="file"
-          // className="block"
-          name="advertImage"
-          // value={advertData.advertImage}
-          ref={imageRef}
-          onChange={handleChange}
-        />
+        <input type="file" name="advertImage" ref={imageRef} />
       </label>
       <button type="submit" className="button block" disabled={disabledButton}>
         Crear anuncio
       </button>
     </form>
   );
-}
-
-{
-  /* <div>
-        ¿Que quieres hacer en Wallaclone?
-        <label>
-          <span className="block">Ofrecer un servicio</span>
-          <input
-            type="radio"
-            className="block"
-            name="offer"
-            value="foo"
-            checked={userData.offer === true}
-            onChange={(ev) =>
-              setFormValue((currentState) => ({
-                ...currentState,
-                [ev.target.name]: Boolean(ev.target.value),
-              }))
-            }
-          />
-        </label>
-        <label>
-          Buscar un servicio
-          <input
-            type="radio"
-            className="block"
-            name="offer"
-            value=""
-            // checked={userData.offer === false}
-            onChange={(ev) =>
-              setFormValue((currentState) => ({
-                ...currentState,
-                [ev.target.name]: Boolean(ev.target.value),
-              }))
-            }
-          />
-        </label>
-      </div> */
 }
 
 export default NewService;
