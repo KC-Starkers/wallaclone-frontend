@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useForm = (initialValues) => {
-  const [formData, setFormData] = useState(initialValues);
+  const [formValue, setformValue] = useState(initialValues);
 
   const handleChange = (ev) => {
     const type = ev.target.type;
@@ -9,7 +9,8 @@ const useForm = (initialValues) => {
       case "text":
       case "textarea":
       case "select":
-        setFormData((currentValue) => ({
+      case "file":
+        setformValue((currentValue) => ({
           ...currentValue,
           [ev.target.name]: ev.target.value,
         }));
@@ -18,18 +19,18 @@ const useForm = (initialValues) => {
         let selected = Array.from(ev.target.selectedOptions);
         selected = selected.map(option=>option.value)
         console.log(selected)
-        setFormData((currentValue) => ({
+        setformValue((currentValue) => ({
           ...currentValue,
           [ev.target.name]: selected,
         }));
         break;
       case "radio":
-        setFormData((currentValue) => ({
+        setformValue((currentValue) => ({
           ...currentValue,
           [ev.target.name]: Boolean(ev.target.value),
         }));
         break;
-      // setFormData((currentValue) =>
+      // setformValue((currentValue) =>
       //   ev.target.checked
       //     ? {
       //         ...currentValue,
@@ -41,15 +42,15 @@ const useForm = (initialValues) => {
       // case "select-multiple":
       // case "file":
       default:
-        setFormData((currentValue) => ({
+        setformValue((currentValue) => ({
           ...currentValue,
           [ev.target.name]: ev.target.value,
         }));
     }
   };
   return {
-    formData,
-    setFormData,
+    formValue,
+    setformValue,
     handleChange,
   };
 };
