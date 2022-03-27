@@ -1,5 +1,5 @@
 import { Range } from "rc-slider";
-// import "rc-slider/assets/index.css";
+import '../../../node_modules/rc-slider/assets/index.css';
 
 function SliderRange({ change, value }) {
   const min = 0;
@@ -15,8 +15,9 @@ function SliderRange({ change, value }) {
       onChange={handleChange}
       min={min}
       max={max}
-      value={value.price}
+      //value={value.price}
       name="price"
+      pushable={false}
       style={{ width: 400, margin: 24 }}
       marks={{ [min]: min, [max]: max }}
     />
