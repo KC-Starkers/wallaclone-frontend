@@ -36,12 +36,11 @@ export const authLoginRequest = () => {
   };
 };
 
-export const authLoginSuccess = (tokenanduser) => {
-  console.log(tokenanduser)
-  debugger
+//export const authLoginSuccess = (tokenanduser) => {
+export const authLoginSuccess = (token) => {
   return {
     type: AUTH_LOGIN_SUCCESS,
-    payload: tokenanduser
+    payload: token,
   };
 };
 
@@ -59,7 +58,7 @@ export const authLogin = (data) => {
     try {
       const token = await api.auth.login(data.loginData);
       dispatch(authLoginSuccess(token));
-      data.navigate('/')
+      data.navigate("/");
     } catch (error) {
       dispatch(authLoginFailure(error));
     }
@@ -203,17 +202,17 @@ export const createAdvertFailure = (error) => {
   };
 };
 
-export const createAdvert = (input) => {
-  return async (dispatch, getState, { api, history }) => {
+export const createAdvert = (advertData, navigate) => {
+  return async (dispatch, getState, { api }) => {
     try {
       dispatch(createAdvertRequest());
-      const advert = await api.adverts.createAdvert(input);
+      const { result: advert } = await api.adverts.createAdvert(advertData);
       dispatch(createAdvertSuccess(advert));
-      history.push(`/adverts/${advert.id}`);
+      return navigate(`/servicios/${advert._id}`); 
     } catch (error) {
       dispatch(createAdvertFailure(error));
       if (error.statusCode === 401) {
-        history.push("/");
+        return navigate("/");
       }
     }
   };
@@ -272,7 +271,7 @@ export const loadTagsFailure = (error) => {
 export const loadTags = () => {
   return async (dispatch, getState, { api }) => {
     try {
-      const tags = await api.adverts.getTags();
+      const { tags } = await api.adverts.getTags();
       dispatch(loadTagsSuccess(tags));
     } catch (error) {
       dispatch(loadTagsFailure(error));

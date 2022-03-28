@@ -50,8 +50,8 @@ const FavButton = (data) => {
   };
 
   return (
-    <button onClick={favToggle} style={{fontSize: "2em", display: "flex", borderRadius: "50%", border: "none", padding: "0.5rem", margin: "0.5rem"}}>
-      {isFav ? <MdFavorite style={{color: "red"}}/> : <MdOutlineFavoriteBorder/>}
+    <button onClick={favToggle} className="text-3xl text-red-500 rounded-full">
+      {isFav ? <MdFavorite className="text-red-500"/> : <MdOutlineFavoriteBorder/>}
     </button>
   );
 };

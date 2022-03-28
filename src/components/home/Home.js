@@ -4,6 +4,7 @@ import { loadAdverts } from "../../store/actions";
 import { Link } from "react-router-dom";
 import { loadAdvertsSelector, uiSelector, loadTagsSelector, getUser  } from "../../store/selectors";
 
+
 //imports Bea
 import Header from "../layout/header";
 import { defaultFilters, filterAdverts } from "./filters";
@@ -23,8 +24,11 @@ const Range = createSliderWithTooltip(Slider.Range);
 const getFilters = () =>  storage.get('filters')  || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters) || defaultFilters;
 
+//TODO de Ivan a mi mismo: paginar con una librería y hacer llamada al api con query (skip y limit)
+//TODO: hacer que muestre la foto en el listado (¿tema de la ruta de estáticos en el back?) 
 
-//TODO de Ivan para mi mismo: falta paginar aquí y hacer llamada GET con query (skip y limit)
+
+
 
 
 function Home() {
@@ -71,7 +75,7 @@ function Home() {
     <>
     <Header change={handleChange} value={value}/>
       <br></br>
-      <CheckboxTags value={value.tags} change={handleChange} options={customtags} name="tags"/>
+      <CheckboxTags value={value.tags} change={handleChange} options={tags} name="tags" />
       <div className="container">
       <div className="filters">
         <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads}/>
@@ -83,16 +87,17 @@ function Home() {
         {adverts.length > 0 ? 
           adverts.map((advert) => (
             <li key={advert._id}>
-              <Link to={`/adverts/${advert._id}`}>
+              <Link to={`/servicios/${advert._id}`}>
                 <div>
                   <p><strong>NOMBRE</strong>{advert.name}</p>
-                  <p>{advert.offerAdvert}</p>
+                  <p>{advert.offerAdvert? "Buscan" : "Ofrecen"}</p>
                   <p><strong>DESCRIPCIÓN</strong>{advert.description}</p>
-                  <p><strong>CATEGORÍAS</strong>{advert.tags.join(" ")}</p>
+                  <p><strong>CATEGORÍAS</strong>{advert.tags}</p>
                   <p><strong>FORMA DE PAGO</strong>{advert.paymentMethods.join(" ")}</p>
                   <p><strong>EXPERIENCIA</strong> <strong>{advert.experience}</strong> años</p>
-                  <p>creado por: {advert.createdBy}</p>
-                  <img src={advert.image} alt={advert.name} />
+                  <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.advertImage}`} alt={advert.name} />
+                  <p><strong>CREADO POR: {advert.createdBy}</strong></p>
+
                   <br></br>
                 </div>
               </Link>

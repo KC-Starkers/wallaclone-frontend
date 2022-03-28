@@ -4,9 +4,8 @@ import { TagBadge, TypeBadge, TagList, FavButton } from "../elements";
 import axios from "axios";
 
 const Details = () => {
-
   //TODO Recibir si está logueado y pasarle el id de usuario
-  const userId = 1
+  const userId = localStorage.getItem("userId");
 
   //captura el id de la URL
   const idService = useParams().idServicio;
@@ -16,28 +15,35 @@ const Details = () => {
 
   //Definimos los datos que va a contener la estructura para evitar errores de "undefined"
   const [service, setService] = useState({
-    name: "",
-    offerAdvert: true,
-    description: "",
-    price: 0,
-    paymentMethod: [],
+    advertCreator: null,
+    advertImage: null,
+    createdAt: null,
+    description: null,
+    experience: null,
+    name: null,
+    offerAdvert: null,
+    paymentMethods: [],
+    price: null,
+    publishState: null,
     tags: [],
-    experience: 0,
-    advertImage: "",
-    createdBy: {},
+    updatedAt: null,
+    __v: null,
+    _id: null,
   });
+
+  console.log(service);
 
   //Actualiza service para añadir los datos del servicio cargado
   useEffect(() => {
     async function getServiceDetail(id) {
       //Conexión con la api
       const connection = axios.create({
-        baseURL: `${process.env.REACT_APP_API_BASE_URL}/services/`,
+        baseURL: `${process.env.REACT_APP_API_BASE_URL}/adverts/`,
       });
       try {
-        const serviceDetail = await connection.get(id);
-
-        setService(serviceDetail.data);
+        const getService = await connection.get(id);
+        const dataService = getService.data.result;
+        setService(dataService[0]);
       } catch (error) {
         console.error(error);
       }
@@ -63,10 +69,10 @@ const Details = () => {
         ))}
       </TagList>
 
-      <FavButton ids={{user: userId, service: service.id}} />
+      <FavButton ids={{user: userId, service: service._id}} />
 
-      <Link to={`/perfil/${service.createdBy.userId}`}>
-        creado por {service.createdBy.name}
+      <Link to={`/perfil/${service.advertCreator}`}>
+        creado por {service.createdBy}
       </Link>
 
       {service.experience ? (

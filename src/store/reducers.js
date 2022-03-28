@@ -16,7 +16,8 @@ import {
 } from "./types";
 
 export const defaultState = {
-  auth: {logged: false, token: false, userName: ''},
+  //auth: {logged: false, token: false, userName: ''},
+  auth: { logged: false, token: undefined },
   adverts: { loaded: false, data: [] },
   ui: { isLoading: false, error: null },
   tags: [],
@@ -29,11 +30,16 @@ export const auth = (authState = defaultState.auth, action) => {
       console.log(action.payload)
       return {
         logged: true,
-        token: action.payload.accessToken,
-        userName: action.payload.userName,
+        token: action.payload.token,
+        userId: action.payload.userId
+        //token: action.payload.accessToken,
+        //userName: action.payload.userName,
       };
     case AUTH_LOGOUT_SUCCESS:
-      return false;
+      return {
+        logged: false,
+        token: undefined,
+      };
     default:
       return authState;
   }
