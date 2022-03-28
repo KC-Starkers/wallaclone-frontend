@@ -30,8 +30,7 @@ const useForm = (initialValues) => {
           [ev.target.name]: Boolean(ev.target.value),
         }));
         break;
-      // case "file":
-      default:
+        default:
         setformValue((currentValue) => ({
           ...currentValue,
           [ev.target.name]: ev.target.value,

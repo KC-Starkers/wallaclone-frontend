@@ -25,6 +25,9 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 //TODO de Ivan a mi mismo: paginar con una librería y hacer llamada al api con query (skip y limit)
 //TODO: hacer que muestre la foto en el listado (tema de la ruta de estáticos en el back) 
+//TODO: arreglar el 'Creado por', que no devuelva el id sino el username (¿modificar el endpoint del login para que devuelva username?)
+
+
 
 
 function Home() {
@@ -82,12 +85,12 @@ function Home() {
               <Link to={`/servicios/${advert._id}`}>
                 <div>
                   <p><strong>NOMBRE</strong>{advert.name}</p>
-                  <p>{advert.offerAdvert}</p>
+                  <p>{advert.offerAdvert? "Buscan" : "Ofrecen"}</p>
                   <p><strong>DESCRIPCIÓN</strong>{advert.description}</p>
                   <p><strong>CATEGORÍAS</strong>{advert.tags}</p>
                   <p><strong>FORMA DE PAGO</strong>{advert.paymentMethods.join(" ")}</p>
                   <p><strong>EXPERIENCIA</strong> <strong>{advert.experience}</strong> años</p>
-                  <img src={`http://127.0.0.1:3001/public/images/${advert.advertImage}`} alt={advert.name} />
+                  <img src={`${process.env.REACT_APP_API_BASE_URL}/public/images/${advert.advertImage}`} alt={advert.name} />
                   <p><strong>CREADO POR: {advert.createdBy}</strong></p>
                   <br></br>
                 </div>
