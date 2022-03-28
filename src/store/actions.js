@@ -36,6 +36,7 @@ export const authLoginRequest = () => {
   };
 };
 
+//export const authLoginSuccess = (tokenanduser) => {
 export const authLoginSuccess = (token) => {
   return {
     type: AUTH_LOGIN_SUCCESS,

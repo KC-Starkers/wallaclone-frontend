@@ -6,6 +6,7 @@ import { MyServices } from "./components/profile";
 import NewService from "./components/profile/newService";
 import { Login, SignUpPage } from "./components/auth";
 import PrivateOutlet from "./components/auth/PrivateOutlet";
+import Chat from "./components/chat/Chat";
 import LayoutOutlet from "./components/LayoutOutlet";
 
 const Router = () => {
@@ -45,9 +46,12 @@ const Router = () => {
             />
           </Route>
         </Route>
-        <Route path="/mensajes" element={<PrivateOutlet />}>
-          <Route index element={"Chat index"} />
-          <Route path=":idChat" element={"Conversación"} />
+        {/*    </Route> */}
+        {/*<Route path="/chat" element={<PrivateOutlet />}>*/}
+        <Route path="/chat">
+          <Route index element={<p>"Chat index"</p>} />
+          <Route path=":id" element={<Chat />} />
+
         </Route>
         <Route path="*" element={"404 not found"} />
       </Routes>

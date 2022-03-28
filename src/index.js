@@ -8,6 +8,7 @@ import { createBrowserHistory } from "history";
 import { configureClient } from "./client/client";
 
 const accessToken = localStorage.getItem("token");
+const userName = localStorage.getItem("userName");
 const userId = localStorage.getItem("userId");
 const history = createBrowserHistory();
 
@@ -19,6 +20,7 @@ const store = configureStore(
       logged: !!accessToken,
       accessToken: accessToken,
       userId: userId,
+      userName: userName,
     }
   },
   { history }
