@@ -27,3 +27,5 @@ yarn-error.log*
 node.js.yml
 
 envlocal.txt
+
+/.vscode
