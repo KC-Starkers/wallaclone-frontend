@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useFormUtils from "../../hooks/useFormUtils";
 import { createAdvert } from "../../../store/actions";
@@ -6,19 +6,17 @@ import { loadTags } from "../../../store/actions";
 import { loadTagsSelector } from "../../../store/selectors";
 import { useNavigate } from "react-router-dom";
 import "./newService.css";
+import { getPaymentMethods } from "../../../apicalls";
 
-//TODO: Que el formulario funcione:
-// - el select de las tags no está bien construido, peta el renderizado tras crear el anuncio
-// - llamada al api de los paymentMethods (hay que picar el back también)
-
-//TODO: pintar el createdBy con el GET /me
-//TODO: subir a repo y servidor y comprobar que el componente funciona arriba
-
-//TODO: dejar la subida de imagen para el final: handleSubmit con un new FormData/función FormData para los datos normales y un append para el file
+//TODO:
+//Hacer llamada al api en la action
+//Que permita crear el anuncio sin la imagen
 
 
 function NewService() {
-  const { formData: advertData, handleChange } = useFormUtils({
+  const imageRef = useRef(null);
+  const [predefinedPaymentMethods, setPredefinedPaymentMethods] = useState([]);
+  const { formValue: advertData, handleChange } = useFormUtils({
     name: "",
     offerAdvert: true,
     description: "",
@@ -26,7 +24,6 @@ function NewService() {
     paymentMethods: [],
     tags: [],
     experience: "",
-    // advertImage: "",
   });
 
   const dispatch = useDispatch();
@@ -34,11 +31,31 @@ function NewService() {
 
   useEffect(() => {
     dispatch(loadTags());
+    getPaymentMethods()
+      .then((res) => setPredefinedPaymentMethods(res.result))
+      .catch((err) => console.log(err));
   }, []);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(createAdvert(advertData, navigate));
+    const data = new FormData();
+    for (let key in advertData) {
+      if (key === "paymentMethods") {
+        advertData.paymentMethods.forEach((item) =>
+          data.append("paymentMethods[]", item)
+        );
+      } else {
+        data.append(key, advertData[key]);
+      }
+    }
+    data.set("advertImage", imageRef.current.files[0]);
+
+    // console.log(imageRef.current.value);
+    // for (const pair of data.entries()) {
+    //   console.log(pair);
+    // }
+
+    dispatch(createAdvert(data, navigate));
   };
 
   const disabledButton =
@@ -49,14 +66,15 @@ function NewService() {
     !advertData.tags;
 
   const tags = useSelector(loadTagsSelector);
-  console.log("los tags", tags);
 
+  console.log("los tags", tags);
   console.log("advertData", advertData);
+  console.log("methods", predefinedPaymentMethods);
 
   return (
     <form
-      className="new-advert-form"
-      encType="multipart/form" //TODO: prueba quitando esto
+      className="new-service-form"
+      encType="multipart/form-data"
       onSubmit={handleSubmit}
     >
       <label>
@@ -109,45 +127,41 @@ function NewService() {
       <label>
         Forma de pago
         <select
-          // type="select-multiple"
+          type="select-multiple"
           multiple={true}
-          value={advertData.paymentMethods} //solo pilla un valor
+          value={advertData.paymentMethods}
           // value={[""]}
           className="block"
           name="paymentMethods"
           onChange={handleChange}
         >
-          TODO: cambiar por lista de options dinámica con llamada al api de
-          paymentMethods
-          <option value="cash">Efectivo</option>
+
+          {predefinedPaymentMethods.length
+            ? predefinedPaymentMethods.map((method) => (
+                <option key={method} value={method}>
+                  {method}
+                </option>
+              ))
+            : null}
+
+         {/* <option value="cash">Efectivo</option>
           <option value="debit">Tarjeta de débito</option>
           <option value="credit">Tarjeta de crédito</option>
+          <option value="paypal">Paypal</option> */}
         </select>
       </label>
+
+
       <label>
         Categorías
         <select
-          /*  multiple={true} */
           type="select"
           // value={advertData.paymentMethods}
-          // defaultValue={null}
           className="block"
           name="tags"
           onChange={handleChange}
         >
-          {/* <option>- - Seleccionar - -</option> TODO: volver a poner una vez resuelto lío de los tags tras el POST*/}
-
-          {/* {
-            (tagsOptions = tags.map((tag) => (
-              <option key={tag} value={tag}>
-                {tag}
-              </option>
-            )))
-          } */}
-
-          {/* <option value="informatica">Informática</option>
-          <option value="clases">Clases</option>
-          <option value="hogar">Hogar</option> */}
+          {/* <option>- - Seleccionar - -</option> */}
 
           {tags.length
             ? tags.map((tag) => (
@@ -170,57 +184,13 @@ function NewService() {
       </label>
       <label>
         Sube una imagen para ilustrar tu anuncio
-        <input
-          type="file"
-          // className="block"
-          name="advertImage"
-          value={advertData.advertImage}
-          onChange={handleChange}
-        />
+        <input type="file" name="advertImage" ref={imageRef} />
       </label>
       <button type="submit" className="button block" disabled={disabledButton}>
         Crear anuncio
       </button>
     </form>
   );
-}
-
-{
-  /* <div>
-        ¿Que quieres hacer en Wallaclone?
-        <label>
-          <span className="block">Ofrecer un servicio</span>
-          <input
-            type="radio"
-            className="block"
-            name="offer"
-            value="foo"
-            checked={userData.offer === true}
-            onChange={(ev) =>
-              setFormValue((currentState) => ({
-                ...currentState,
-                [ev.target.name]: Boolean(ev.target.value),
-              }))
-            }
-          />
-        </label>
-        <label>
-          Buscar un servicio
-          <input
-            type="radio"
-            className="block"
-            name="offer"
-            value=""
-            // checked={userData.offer === false}
-            onChange={(ev) =>
-              setFormValue((currentState) => ({
-                ...currentState,
-                [ev.target.name]: Boolean(ev.target.value),
-              }))
-            }
-          />
-        </label>
-      </div> */
 }
 
 export default NewService;
