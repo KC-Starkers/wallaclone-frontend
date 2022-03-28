@@ -207,7 +207,6 @@ export const createAdvert = (advertData, navigate) => {
       dispatch(createAdvertRequest());
       const { result: advert } = await api.adverts.createAdvert(advertData);
       dispatch(createAdvertSuccess(advert));
-      console.log("redireccion");
       return navigate(`/servicios/${advert._id}`); 
     } catch (error) {
       dispatch(createAdvertFailure(error));

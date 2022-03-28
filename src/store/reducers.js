@@ -81,8 +81,6 @@ export const adverts = (advertsState = defaultState.adverts, action) => {
     case LOAD_ADVERTS_SUCCESS:
       return { loaded: true, data: action.payload };
     case LOAD_ADVERT_SUCCESS:
-    // case EDIT_ADVERT_SUCCESS: //TODO: incluir esta acción
-    // return {...} //
     case CREATE_ADVERT_SUCCESS:
       return { ...advertsState, data: [...advertsState.data, action.payload] };
     case DELETE_ADVERT_SUCCESS:

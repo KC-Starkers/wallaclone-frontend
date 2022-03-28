@@ -25,7 +25,7 @@ const Router = () => {
             <Route index element={<Home />} />
             {/*  Home: contiene a Services (listado de anuncios) y Search (filtros) */}
 
-            <Route path="crear" /* element={<PrivateOutlet />} */>
+            <Route path="crear" element={<PrivateOutlet />}>
               <Route index element={<NewService />} />
             </Route>
 

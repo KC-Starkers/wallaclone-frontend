@@ -9,8 +9,7 @@ import "./newService.css";
 import { getPaymentMethods } from "../../../apicalls";
 
 //TODO:
-//Hacer llamada al api en la action
-//Que permita crear el anuncio sin la imagen
+//Que sea posible crear un anuncio sin imagen
 
 
 function NewService() {
@@ -67,10 +66,7 @@ function NewService() {
 
   const tags = useSelector(loadTagsSelector);
 
-  console.log("los tags", tags);
-  console.log("advertData", advertData);
-  console.log("methods", predefinedPaymentMethods);
-
+   
   return (
     <form
       className="new-service-form"
@@ -148,6 +144,7 @@ function NewService() {
           <option value="debit">Tarjeta de débito</option>
           <option value="credit">Tarjeta de crédito</option>
           <option value="paypal">Paypal</option> */}
+
         </select>
       </label>
 
@@ -161,8 +158,7 @@ function NewService() {
           name="tags"
           onChange={handleChange}
         >
-          {/* <option>- - Seleccionar - -</option> */}
-
+          <option>- - Seleccionar - -</option>
           {tags.length
             ? tags.map((tag) => (
                 <option key={tag} value={tag}>
@@ -170,6 +166,7 @@ function NewService() {
                 </option>
               ))
             : null}
+
         </select>
       </label>
       <label>

@@ -72,7 +72,7 @@ const Details = () => {
       <FavButton ids={{user: userId, service: service._id}} />
 
       <Link to={`/perfil/${service.advertCreator}`}>
-        creado por {service.advertCreator}
+        creado por {service.createdBy}
       </Link>
 
       {service.experience ? (
