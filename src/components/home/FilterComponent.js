@@ -13,7 +13,7 @@ function FilterComp({change, value}){
   useEffect(async() => {
     let pm = await getPaymentMethods()
     console.log(pm.result)
-    debugger
+  
     getpaymeth(pm.result)
   }, [])
   return (

@@ -51,7 +51,7 @@ function Home() {
     getmyuser(user)
     
   }, []);
- debugger
+ 
   var adverts = filterAdverts(ads, value)
   
   const handleChange = event => {

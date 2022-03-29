@@ -14,7 +14,7 @@ export const createMSG = (user, message, chatId) => {
 export const createChat = info => {
   let decode = info.split('.')
   console.log(info)
-  debugger
+  
   let all = btoa(info)
   let newmsg = client.post('/chat/create', {'chatId': all, 'chatSeller': decode[1], 'chatBuyer': decode[0]})
   return newmsg
@@ -48,6 +48,6 @@ export const getPart = (id) => {
   let url = `/chat/info/${id}`
   let i = client.get(url)
   console.log(i)
-  debugger
+  
   return i
 }
