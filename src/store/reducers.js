@@ -24,7 +24,6 @@ export const defaultState = {
 };
 
 export const auth = (authState = defaultState.auth, action) => {
-  debugger
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
       console.log(action.payload)
@@ -100,6 +99,6 @@ export const tags = (tagsState = defaultState.tags, action) => {
     case LOAD_TAGS_SUCCESS:
       return action.payload;
     default:
-      return [tagsState];
+      return tagsState;
   }
 };

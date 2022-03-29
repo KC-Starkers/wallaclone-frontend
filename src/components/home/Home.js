@@ -17,6 +17,7 @@ import '../../index.css'
 import { customtags } from "./provisional";
 import CheckboxTags from "../common/Checkbox_Tags";
 import StartChat from "../common/StartChat";
+import { getPaymentMethods } from "../../apicalls";
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -33,7 +34,7 @@ const saveFilters = filters => storage.set('filters', filters) || defaultFilters
 
 function Home() {
 
-  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethod: [], photo: null, experience: []})
+  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethods: [], photo: null, experience: []})
   const [filters, setFilters] = React.useState([]);
   const [myuser, getmyuser] = React.useState('')
 
@@ -48,12 +49,12 @@ function Home() {
     dispatch(loadAdverts());
     dispatch(loadTags());
     getmyuser(user)
+    
   }, []);
- 
+ debugger
   var adverts = filterAdverts(ads, value)
   
   const handleChange = event => {
-    console.log(event)
     setValue(prevState => ({
       ...prevState,
       [event.target.name]: event.target.value,
@@ -80,7 +81,6 @@ function Home() {
       <div className="filters">
         <FilterComp submit={handleSubmit} change={handleChange} value={value} tag={ads}/>
         <br></br>
-        <p>aquiiiiii {myuser}</p>
       </div>
       <div className="adverts">
       <ul className="wrapper"> 
@@ -97,11 +97,11 @@ function Home() {
                   <p><strong>EXPERIENCIA</strong> <strong>{advert.experience}</strong> años</p>
                   <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.advertImage}`} alt={advert.name} />
                   <p><strong>CREADO POR: {advert.createdBy}</strong></p>
-
                   <br></br>
+                  {console.log(advert)}
                 </div>
               </Link>
-              <StartChat chatId={[myuser, advert.createdBy, advert._id]}><strong>ABRIR CHAT</strong></StartChat>
+              <StartChat chatId={[myuser, advert.advertCreator, advert._id]}><strong>ABRIR CHAT</strong></StartChat>
             </li>
         )): <p>no hay anuncios que mostrar :(</p>}
       </ul>
