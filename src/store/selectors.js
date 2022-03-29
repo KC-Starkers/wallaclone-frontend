@@ -10,4 +10,12 @@ export const deleteAdvertSelector = (state, advertId) =>
 
 export const uiSelector = (state) => state.ui;
 
-export const getUser = (state) => state.auth.userName;
+export const getUser = (state) => state.auth.userId;
+
+//export const getUser = (state) => state.auth.userName;
+
+
+
+///
+export const mytoken = (state) => state.auth.userId;
+export const auth = (state) => state.auth;

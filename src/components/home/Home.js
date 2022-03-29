@@ -17,7 +17,11 @@ import '../../index.css'
 import { customtags } from "./provisional";
 import CheckboxTags from "../common/Checkbox_Tags";
 import StartChat from "../common/StartChat";
-import { getPaymentMethods } from "../../apicalls";
+import { getPaymentMethods, getUserName } from "../../apicalls";
+
+
+////
+import { mytoken, auth } from "../../store/selectors";
 
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
@@ -36,7 +40,8 @@ function Home() {
 
   const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethods: [], photo: null, experience: []})
   const [filters, setFilters] = React.useState([]);
-  const [myuser, getmyuser] = React.useState('')
+  //const [myuser, getmyuser] = React.useState('')
+  const [username, getusername] = React.useState([])
 
   const dispatch = useDispatch();
 
@@ -44,11 +49,18 @@ function Home() {
   const tags = useSelector(loadTagsSelector);
   const user = useSelector(getUser);
 
+  //
+  const autt = useSelector(auth);
+  const my = useSelector(mytoken);
+
   useEffect(() => {
     saveFilters(filters);
     dispatch(loadAdverts());
     dispatch(loadTags());
-    getmyuser(user)
+    //getmyuser(user)
+    getUserName(user)
+    .then((res) =>{ console.log(res[0]['userName']); getusername(res[0]['userName'])})
+    .catch((err) => console.log(err));
     
   }, []);
   var adverts = filterAdverts(ads, value)
@@ -72,7 +84,7 @@ function Home() {
   return (
       
     <>
-    <Header change={handleChange} value={value} user={myuser}/>
+    <Header change={handleChange} value={value} user={username}/>
       <br></br>
       <CheckboxTags value={value.tags} change={handleChange} options={tags} name="tags" />
       <div className="container">
@@ -95,10 +107,11 @@ function Home() {
                   <p><strong>EXPERIENCIA</strong> <strong>{advert.experience}</strong> años</p>
                   <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.advertImage}`} alt={advert.name} />
                   <p><strong>CREADO POR: {advert.createdBy}</strong></p>
+                  {console.log(username)}
                   <br></br>
                 </div>
               </Link>
-              <StartChat chatId={[myuser, advert.advertCreator, advert._id, advert.name]}><strong>ABRIR CHAT</strong></StartChat>
+              <StartChat chatId={[username, advert.createdBy, advert._id, advert.name]}><strong>ABRIR CHAT</strong></StartChat>
             </li>
         )): <p>no hay anuncios que mostrar :(</p>}
       </ul>
