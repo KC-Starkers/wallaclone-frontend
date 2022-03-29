@@ -2,10 +2,8 @@ const filterByName =
   filter =>
   ({ name }) => {
     if (filter == undefined){
-      console.log(filter)
       return null;
     } else {
-      console.log(filter)
     const cleanFilter = filter.trim();
     return !cleanFilter || new RegExp(cleanFilter, 'gi').test(name);
   }
@@ -18,8 +16,6 @@ filter =>
     return true;
   }
   const [min, max] = filter;
-  console.log(min)
-  console.log(max)
   if (!max) {
     return price >= min;
   }
@@ -34,8 +30,6 @@ filter =>
     return true;
   }
   const [min, max] = filter;
-  console.log(min)
-  console.log(max)
   if (!max) {
     return experience >= min;
   }

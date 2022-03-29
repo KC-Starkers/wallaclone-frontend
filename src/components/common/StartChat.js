@@ -16,7 +16,8 @@ function StartChat({chatId}) {
     const registrar = (e) => {
         e.preventDefault();
         // myuser, advert.createdBy, advert._id
-        let thisChatId = chatId[0]+'.'+chatId[1]+'.'+chatId[2]
+        let thisChatId = chatId[0]+'.'+chatId[1]+'.'+chatId[2]+'.'+chatId[3]
+        debugger
         let all = btoa(thisChatId)
         let findChats = chats.find(element => element.chatId === all)
         findChats ? setRegistrado(true) : createChat(thisChatId).then(setRegistrado(true))

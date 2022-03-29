@@ -4,8 +4,11 @@ import MainButton from "../common/main_button"
 import { useState, useEffect } from "react"
 import SearchBar from "../common/searchbar"
 import FullLogo from "../common/full_logo"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-function Header ({ads, value, change}) {
+function Header ({ads, value, change, myuser}) {
+    const navigate = useNavigate();
     const [width, setWidth] = useState(window.innerWidth);
 
     function handleWindowSizeChange() {
@@ -28,7 +31,7 @@ function Header ({ads, value, change}) {
             <SearchBar value={value.name} change={change}/>
             <MainButton textbutton={'+ Agregar oferta'} />
             <Button textbutton={'Mi área'}/>
-            <Button textbutton={'Mensajes'} />
+            <Link to={`/perfil/mychats`}><Button textbutton={'Mensajes'} /></Link>
             <Button textbutton={'Salir'} />
         </nav>
     )

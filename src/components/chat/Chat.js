@@ -23,8 +23,6 @@ const Chat = () => {
   }
 
   let checkAuth = () => {
-    console.log(participants)
-    console.log(user)
     for (var i = 0; i < participants.length; i++) {
       if(participants[i] == user){
         setAuth(true)
@@ -51,7 +49,6 @@ const Chat = () => {
 let downloadMSG = async() => {
       try {
         let m = await getMSG(chatId).then(setmessages);
-        console.log(messages)
         return m
       } catch (error) {
         return error

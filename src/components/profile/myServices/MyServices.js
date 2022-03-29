@@ -22,13 +22,11 @@ const MyServices = () => {
         });
         setServices(filteredServices);
       } catch (error) {
-        console.error(error);
       }
     }
     getServiceDetail();
   }, []);
 
-  console.log(services);
   return (
     <div>
       <Link to={"/crear"}>Crear anuncio</Link>

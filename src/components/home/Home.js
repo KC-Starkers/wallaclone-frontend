@@ -51,7 +51,6 @@ function Home() {
     getmyuser(user)
     
   }, []);
- debugger
   var adverts = filterAdverts(ads, value)
   
   const handleChange = event => {
@@ -69,12 +68,11 @@ function Home() {
   };
 
   const { isLoading, error } = useSelector(uiSelector);
-
   
   return (
       
     <>
-    <Header change={handleChange} value={value}/>
+    <Header change={handleChange} value={value} user={myuser}/>
       <br></br>
       <CheckboxTags value={value.tags} change={handleChange} options={tags} name="tags" />
       <div className="container">
@@ -98,10 +96,9 @@ function Home() {
                   <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.advertImage}`} alt={advert.name} />
                   <p><strong>CREADO POR: {advert.createdBy}</strong></p>
                   <br></br>
-                  {console.log(advert)}
                 </div>
               </Link>
-              <StartChat chatId={[myuser, advert.advertCreator, advert._id]}><strong>ABRIR CHAT</strong></StartChat>
+              <StartChat chatId={[myuser, advert.advertCreator, advert._id, advert.name]}><strong>ABRIR CHAT</strong></StartChat>
             </li>
         )): <p>no hay anuncios que mostrar :(</p>}
       </ul>

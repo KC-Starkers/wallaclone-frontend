@@ -1,6 +1,5 @@
 const storage = {
     get(key) {
-      console.log("!!!!!!!!!!!!!!!! " + key)
       const value = localStorage.getItem(key);
       if (!value) {
         return null;

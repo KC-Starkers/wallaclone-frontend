@@ -12,8 +12,6 @@ function FilterComp({change, value}){
   const [paymeth, getpaymeth] = useState([])
   useEffect(async() => {
     let pm = await getPaymentMethods()
-    console.log(pm.result)
-    debugger
     getpaymeth(pm.result)
   }, [])
   return (

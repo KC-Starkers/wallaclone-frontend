@@ -31,8 +31,6 @@ const Details = () => {
     _id: null,
   });
 
-  console.log(service);
-
   //Actualiza service para añadir los datos del servicio cargado
   useEffect(() => {
     async function getServiceDetail(id) {

@@ -48,12 +48,7 @@ function NewService() {
       }
     }
     data.set("advertImage", imageRef.current.files[0]);
-
-    // console.log(imageRef.current.value);
-    // for (const pair of data.entries()) {
-    //   console.log(pair);
-    // }
-
+    
     dispatch(createAdvert(data, navigate));
   };
 
