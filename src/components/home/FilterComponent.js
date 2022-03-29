@@ -4,8 +4,18 @@ import CheckBuySell from "../common/Checkbox_sell"
 import SliderRange from "../common/slider"
 import SearchBar from "../common/searchbar"
 import { customtags, custompay } from "./provisional"
+import { getPaymentMethods } from "../../apicalls"
+import { useEffect, useState } from "react"
 
 function FilterComp({change, value}){ 
+
+  const [paymeth, getpaymeth] = useState([])
+  useEffect(async() => {
+    let pm = await getPaymentMethods()
+    console.log(pm.result)
+    debugger
+    getpaymeth(pm.result)
+  }, [])
   return (
       //<form onSubmit={submit}>
       //<input type="text" className="text-slate-900" placeholder="Search..." name="name" value={value.name} onChange={change} ></input>
@@ -23,7 +33,7 @@ function FilterComp({change, value}){
         }
         <br></br>
         <h3>💸 Filtrar por método de pago 💳</h3>
-        <CheckboxGroup value={value.paymentMethod} change={change} options={custompay} name={"paymentMethod"}/>
+        <CheckboxGroup value={value.paymentMethods} change={change} options={paymeth} name={"paymentMethods"}/>
         <br></br>
         <h3>🤝 Filtrar por oferta y demanda 🤝</h3>
         <CheckBuySell value={value.offerAdvert} change={change}/>
