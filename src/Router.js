@@ -7,7 +7,7 @@ import NewService from "./components/profile/newService";
 import { Login, SignUpPage } from "./components/auth";
 import PrivateOutlet from "./components/auth/PrivateOutlet";
 import Chat from "./components/chat/Chat";
-import LayoutOutlet from "./components/LayoutOutlet";
+import LayoutOutlet from "./components/layout/LayoutOutlet";
 
 const Router = () => {
   return (

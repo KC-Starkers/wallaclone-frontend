@@ -1,10 +1,17 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import useFilter from "../hooks/useFilter";
+import Header from "./header";
 
 const LayoutOutlet = () => {
+  const loadedAdverts = useFilter().value
+  const handleChange= useFilter().handleChange
+  
   return (
     <div className="flex flex-col h-screen">
-      <div className="bg-slate-100 mb-3 border-b p-3 ">Header</div>
+      <div className="mb-3 sticky top-0 z-10">
+        <Header value={loadedAdverts} change={handleChange}/>
+      </div>
       <div className="flex-1">
         <Outlet></Outlet>
       </div>
@@ -12,5 +19,6 @@ const LayoutOutlet = () => {
     </div>
   );
 };
+
 
 export default LayoutOutlet;
