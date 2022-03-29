@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getUser } from "../../store/selectors";
 import { getChat, createMSG, getMSG, getPart} from "./apicalls";
 import { useParams } from "react-router-dom";
+import { getUserName } from "../../apicalls";
 
 const Chat = () => {
 
@@ -17,24 +18,26 @@ const Chat = () => {
   const [chatId, setchatId] = useState(id)
   const [participants, setParticipants] = useState([])
   const [auth, setAuth] = useState(false)
+  const [username, getusername] = React.useState([])
 
   let checkparticipants = async() => {
     return await getPart(id).then(setParticipants)
   }
 
   let checkAuth = () => {
-    console.log(participants)
-    console.log(user)
+    if(username == null){
+      setAuth(false)}else{
     for (var i = 0; i < participants.length; i++) {
-      if(participants[i] == user){
+      if(participants[i] == username){
+        debugger
         setAuth(true)
         break}
       }
-  
+    }
   }
 
   useEffect(() => {
-    socket.emit("conectado", [user, id]);
+    socket.emit("conectado", [username, id]);
   }, [user]);
 
   useEffect(() => {
@@ -51,7 +54,6 @@ const Chat = () => {
 let downloadMSG = async() => {
       try {
         let m = await getMSG(chatId).then(setmessages);
-        console.log(messages)
         return m
       } catch (error) {
         return error
@@ -62,17 +64,23 @@ let downloadMSG = async() => {
 useEffect(() => {
   downloadMSG()
   checkparticipants()
+  console.log(user)
+  debugger
+  getUserName(user)
+    .then((res) =>getusername(res[0]['userName']))
+    .catch((err) => console.log(err));
 }, [])
 
 useEffect(() => { 
   checkAuth()
+  console.log('check')
 })
 
 
   const submit = (e) => {
-    createMSG(user, message, chatId)
+    createMSG(username, message, chatId)
     e.preventDefault();
-    socket.emit("message", user, message, id);
+    socket.emit("message", username, message, id);
     setmessage("");
   };
 
@@ -86,6 +94,8 @@ useEffect(() => {
         messages.map((e, i) => (
           <div key={i}>
             <p><strong>{e.user}</strong> : {e.message}</p>
+            
+          {console.log(e)}
           </div>
         ))
         }

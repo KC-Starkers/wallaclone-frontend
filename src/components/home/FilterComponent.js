@@ -12,8 +12,7 @@ function FilterComp({change, value}){
   const [paymeth, getpaymeth] = useState([])
   useEffect(async() => {
     let pm = await getPaymentMethods()
-    console.log(pm.result)
-  
+
     getpaymeth(pm.result)
   }, [])
   return (
@@ -23,14 +22,6 @@ function FilterComp({change, value}){
         <br></br>
         <h3>🤔 Filtrar por nombre 🤔</h3>
         <SearchBar value={value.name} change={change} />
-        <br></br>
-        {
-        /*
-            <br></br>
-            <h3>🏷️ Filtrar por #etiquetas 🏷️</h3>
-            <CheckboxGroup value={value.tags} change={change} options={customtags} name="tags"/>
-        */
-        }
         <br></br>
         <h3>💸 Filtrar por método de pago 💳</h3>
         <CheckboxGroup value={value.paymentMethods} change={change} options={paymeth} name={"paymentMethods"}/>

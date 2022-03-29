@@ -25,3 +25,9 @@ export const getPaymentMethods= () => {
   const url = `${path}/paymentMethods`;
   return client.get(url);
 };
+
+export const getUserName = (id) => {
+  const url = `auth/${id}`
+  let user = client.get(url)
+  return user
+}

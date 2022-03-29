@@ -8,6 +8,7 @@ import { Login, SignUpPage } from "./components/auth";
 import PrivateOutlet from "./components/auth/PrivateOutlet";
 import Chat from "./components/chat/Chat";
 import LayoutOutlet from "./components/LayoutOutlet";
+import MyChats from "./components/chat/myChats";
 
 const Router = () => {
   return (
@@ -39,6 +40,7 @@ const Router = () => {
             <Route path="servicios" element={<MyServices />} />
             <Route path="favoritos" element={"Favoritos"} />
             <Route path="acordados" element={"Servicios acordados"} />
+            <Route path="mychats" element={<MyChats/>} />
             <Route path=":idUsuario" element={"Perfil de otro usuario"} />
             <Route
               path=":idUsuario/servicios"
