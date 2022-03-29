@@ -3,23 +3,19 @@ import useFormUtils from "../../hooks/useFormUtils";
 import { signUp } from "./apicalls";
 import "./SignUpPage.css";
 
-
 //TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
 
 //TODO: gestionar en front los errores del endpoint (ej: username e email deben ser únicos)
 
 function SignUpPage() {
   const {
-    formData: userData,
+    formValue,
     /*  setFormData, */
     handleChange,
-    
   } = useFormUtils({
     userName: "",
-    // name: "",
     email: "",
     password: "",
-
   });
 
   const [crossValid, setCrossValid] = useState(false);
@@ -29,9 +25,9 @@ function SignUpPage() {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     try {
-      const result = await signUp(userData);
+      const result = await signUp(formValue);
       const userId = result._id;
-      // console.log(userId);
+      console.log(userId);
     } catch (error) {
       console.log(error);
     }
@@ -39,25 +35,23 @@ function SignUpPage() {
 
   useEffect(() => {
     const crossValidation = () => {
-      if (userData.password === passwordConfirmRef.current.value) {
+      if (formValue.password === passwordConfirmRef.current.value) {
         setCrossValid(true);
       } else {
         setCrossValid(false);
       }
     };
     crossValidation();
-  }, [userData.password, passwordConfirmRef.current.value]);
+  }, [formValue.password, passwordConfirmRef.current.value]);
 
   const disabledButton =
-    !userData.userName ||
-    // !userData.name ||
-    !userData.email ||
-    !userData.password ||
-    !userData.passwordConfirm ||
-    !crossValid 
+    !formValue.userName ||
+    !formValue.email ||
+    !formValue.password ||
+    !formValue.passwordConfirm ||
+    !crossValid;
 
-
-  return (
+  return Object.entries(formValue).length ? (
     <form
       className="signup-form"
       // encType="multipart/form"
@@ -69,37 +63,29 @@ function SignUpPage() {
           type="text"
           className="block"
           name="userName"
-          value={userData.userName}
+          value={formValue.userName}
           onChange={handleChange}
         />
       </label>
-      <label>
-        Nombre
-        <input
-          type="text"
-          className="block"
-          name="name"
-          value={userData.name}
-          onChange={handleChange}
-        />
-      </label>
+
       <label>
         Email
         <input
           type="email"
           className="block"
           name="email"
-          value={userData.email}
+          value={formValue.email}
           onChange={handleChange}
         />
       </label>
+
       <label>
         Contraseña
         <input
           type="password"
           className="block"
           name="password"
-          value={userData.password}
+          value={formValue.password}
           onChange={handleChange}
         />
       </label>
@@ -113,25 +99,12 @@ function SignUpPage() {
           onChange={handleChange}
         />
       </label>
-   
-{/*     
-      Cuéntanos algo de tí...
-      <textarea
-        className="block textarea"
-        name="description"
-        value={userData.description}
-        onChange={handleChange}
-      ></textarea>
-      <label>
-        Sube tu foto o una imagen que te identifique
-        <input type="file" name="image" ref={imageRef} />
-      </label> */}
 
       <button type="submit" className="button" disabled={disabledButton}>
         Darme de alta
       </button>
     </form>
-  );
+  ) : null;
 }
 
 export default SignUpPage;

@@ -57,12 +57,12 @@ function Home() {
     saveFilters(filters);
     dispatch(loadAdverts());
     dispatch(loadTags());
-    //getmyuser(user)
     getUserName(user)
     .then((res) =>{ console.log(res[0]['userName']); getusername(res[0]['userName'])})
     .catch((err) => console.log(err));
     
   }, []);
+  
   var adverts = filterAdverts(ads, value)
   
   const handleChange = event => {
@@ -107,7 +107,6 @@ function Home() {
                   <p><strong>EXPERIENCIA</strong> <strong>{advert.experience}</strong> años</p>
                   <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.advertImage}`} alt={advert.name} />
                   <p><strong>CREADO POR: {advert.createdBy}</strong></p>
-                  {console.log(username)}
                   <br></br>
                 </div>
               </Link>

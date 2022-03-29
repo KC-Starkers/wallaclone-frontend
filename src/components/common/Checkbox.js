@@ -1,6 +1,7 @@
 function CheckboxGroup({value, change, options, name }) {
     const handleChange = ev => {
       const { name, checked, value: optionValue } = ev.target;
+
       change({
         target: {
           name,
@@ -9,6 +10,7 @@ function CheckboxGroup({value, change, options, name }) {
             : value.filter(v => v !== optionValue),
         },
       });
+
     };
     return (
       <div>
