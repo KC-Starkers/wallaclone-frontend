@@ -24,7 +24,6 @@ export const defaultState = {
 };
 
 export const auth = (authState = defaultState.auth, action) => {
-  debugger
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
       console.log(action.payload)
