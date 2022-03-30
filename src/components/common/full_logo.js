@@ -1,8 +1,6 @@
-import logo from '../../../public/logo-starker.png'
-console.log(logo)
 function FullLogo() {
   return (
-    <img src={`/logo-starker.png`} alt="starkers" />
+    <img src="https://github.com/KC-Starkers/wallaclone-frontend/blob/master/public/logo-starkers.png?raw=true" alt="starkers" />
   );
 }
 

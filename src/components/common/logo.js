@@ -1,7 +1,10 @@
-function Logo(){
-    return(
-        <p>W</p>
-    )
+function Logo() {
+  return (
+    <img
+      src="https://github.com/KC-Starkers/wallaclone-frontend/blob/master/public/logo-starkers-min.png?raw=true"
+      alt="starkers"
+    />
+  );
 }
 
-export default Logo
+export default Logo;
