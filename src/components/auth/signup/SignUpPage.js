@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import useFormUtils from "../../hooks/useFormUtils";
 import { signUp } from "./apicalls";
-import "./SignUpPage.css";
 
 //TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
 
@@ -52,58 +51,56 @@ function SignUpPage() {
     !crossValid;
 
   return Object.entries(formValue).length ? (
-    <form
-      className="signup-form"
-      // encType="multipart/form"
-      onSubmit={handleSubmit}
-    >
-      <label>
-        Nombre de usuario
+    <div className="grid max-w-2xl mx-auto bg-slate-100 rounded-lg m-3 p-3">
+      <form
+        className=""
+        // encType="multipart/form"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
-          className="block"
+          className="w-full px-3 py-2 rounded-lg border border-gray-200 mb-3"
           name="userName"
           value={formValue.userName}
           onChange={handleChange}
+          placeholder="Nombre de usuario"
         />
-      </label>
 
-      <label>
-        Email
         <input
           type="email"
-          className="block"
+          className="w-full px-3 py-2 rounded-lg border border-gray-200 mb-3"
           name="email"
           value={formValue.email}
           onChange={handleChange}
+          placeholder="Email"
         />
-      </label>
 
-      <label>
-        Contraseña
         <input
           type="password"
-          className="block"
+          className="w-full px-3 py-2 rounded-lg border border-gray-200 mb-3"
           name="password"
           value={formValue.password}
           onChange={handleChange}
+          placeholder="Contraseña"
         />
-      </label>
-      <label>
-        Confirmar contraseña
         <input
           type="password"
-          className="block"
+          className="w-full px-3 py-2 rounded-lg border border-gray-200 mb-3"
           name="passwordConfirm"
           ref={passwordConfirmRef}
           onChange={handleChange}
+          placeholder="Confirmar contraseña"
         />
-      </label>
 
-      <button type="submit" className="button" disabled={disabledButton}>
-        Darme de alta
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg mt-3 w-full cursor-pointer"
+          disabled={disabledButton}
+        >
+          Darme de alta
+        </button>
+      </form>
+    </div>
   ) : null;
 }
 
