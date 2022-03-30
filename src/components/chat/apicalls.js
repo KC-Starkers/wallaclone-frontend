@@ -44,6 +44,7 @@ export const getMail = info => {
 export const getPart = (id) => {
   let url = `/chat/info/${id}`
   let i = client.get(url)
+
   return i
 }
 
