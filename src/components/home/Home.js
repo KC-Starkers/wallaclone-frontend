@@ -52,7 +52,9 @@ function Home() {
   });
   const [filters, setFilters] = React.useState([]);
   //const [myuser, getmyuser] = React.useState('')
-  const [username, getusername] = React.useState([]);
+  const [username, getusername] = React.useState('');
+  localStorage.setItem("userName", username);
+
 
   const dispatch = useDispatch();
 
@@ -71,7 +73,6 @@ function Home() {
 
     getUserName(user)
       .then((res) => {
-        console.log(res[0]["userName"]);
         getusername(res[0]["userName"]);
       })
       .catch((err) => console.log(err));
