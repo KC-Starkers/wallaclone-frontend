@@ -1,6 +1,6 @@
-function SearchBar({change, value}){
+function SearchBar({change, value, className}){
     return(
-        <input type="text" name="name" value={value} onChange={change} className="text-slate-900" placeholder="Search..." ></input>
+        <input type="text" name="name" value={value} onChange={change} className={className} placeholder="Search..." ></input>
     )
 }
 
