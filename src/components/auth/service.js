@@ -26,5 +26,5 @@ export const login = async (credentials) => {
 };
 
 export const logout = () => {
-  return localStorage.removeItem("Authorization");
+  return Promise.resolve().then(localStorage.removeItem("token")).then(localStorage.removeItem("userId"));
 };

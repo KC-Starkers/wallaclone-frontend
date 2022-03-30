@@ -14,11 +14,14 @@ import {
 } from "react-icons/bi";
 import { IoMdAdd } from "react-icons/io";
 import { isLoggedSelector } from "../../store/selectors";
-import { connect } from "react-redux";
+import { useDispatch, connect } from "react-redux";
+import { logout } from '../auth/service';
+import { authLogout } from '../../store/actions';
 
 function Header({ ads, value, change, myuser, isLogged }) {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
+  const dispatch = useDispatch();
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
@@ -29,6 +32,13 @@ function Header({ ads, value, change, myuser, isLogged }) {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
+
+  const handleLogout = async () => {
+    await logout().then(() => {
+      console.log('Logout OK');
+      dispatch(authLogout())
+    });
+  };
 
   const isMobile = width <= 768;
 
@@ -71,7 +81,7 @@ function Header({ ads, value, change, myuser, isLogged }) {
               <BiMessageAltDetail />
             </Link>
             <button className="ml-3 items-center">
-              <BiPowerOff />
+              <BiPowerOff onClick={handleLogout} />
             </button>
           </div>
         ) : (
