@@ -15,7 +15,7 @@ const AdvertCard = ({ advert }) => {
 
   return (
     <Link
-      to={`./${advert._id}`}
+      to={`/servicios/${advert._id}`}
       className="rounded-lg bg-slate-100 inline-block w-full opacity-90 hover:opacity-100 ease-in duration-200"
     >
       <article>

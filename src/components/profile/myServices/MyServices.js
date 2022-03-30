@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import AdvertCard from "../../common/AdvertCard";
+import { IoMdAdd } from "react-icons/io";
+import ButtonBack from "../../common/ButtonBack";
 
 const MyServices = () => {
   const [services, setServices] = useState([]);
@@ -21,49 +24,38 @@ const MyServices = () => {
           return service.advertCreator === userId;
         });
         setServices(filteredServices);
-      } catch (error) {
-      }
+      } catch (error) {}
     }
     getServiceDetail();
   }, []);
 
   return (
     <div>
-      <Link to={"/crear"}>Crear anuncio</Link>
-
-      {services.length ? (
-        <div>
-          {services.map((service) => {
-            return (
-              <li key={service._id}>
-                <Link to={`/servicios/${service._id}`}>
-                  <article>
-                    <img
-                      src={
-                        process.env.REACT_APP_API_BASE_URL +
-                        "/uploads/" +
-                        service.advertImage
-                      }
-                      alt={service.name}
-                    />
-                    {/*TODO Cambiar por el elemento offertype badge */}
-                    <div>{service.offerAdvert ? "Buscan" : "Ofrecen"}</div>
-                    <div>{service.price}</div>
-                    <h1>{service.name}</h1>
-                  </article>
-                </Link>
-                <hr />
+      <header className="p-3 flex">
+        <ButtonBack />
+        <h1 className="font-medium text-3xl text-center flex-auto">Mis anuncios</h1>
+      </header>
+      <ul className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 p-3">
+        <li className="col-span-full sm:col-span-1 w-full h-full rounded-lg border border-dashed text-slate-500">
+          <Link
+            to={"/servicios/crear"}
+            className="flex justify-center items-center content-center flex-col w-full h-full p-5 opacity-80 hover:opacity-100 transition-all ease-in-out delay-100"
+          >
+            <IoMdAdd className="text-5xl" />
+            Crear anuncio
+          </Link>
+        </li>
+        {services.length > 0
+          ? services.map((advert) => (
+              <li
+                key={advert._id}
+                className="col-span-full sm:col-span-1 w-full inline-block"
+              >
+                <AdvertCard advert={advert} />
               </li>
-            );
-          })}
-        </div>
-      ) : (
-        <div>
-          No hay anuncios
-          <br />
-          <Link to={"/crear"}>Crear anuncio</Link>
-        </div>
-      )}
+            ))
+          : ""}
+      </ul>
     </div>
   );
 };
