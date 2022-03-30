@@ -75,6 +75,13 @@ useEffect(() => {
 })
 
 
+const onenter = (e) => {
+  if(e.key == 'Enter'){
+    submit(e)
+  }
+}
+
+
   const submit = (e) => {
     createMSG(username, message, chatId)
     e.preventDefault();
@@ -97,16 +104,17 @@ useEffect(() => {
         }
       </div>
       <form onSubmit={submit}>
-        <label htmlFor="">Escriba su message</label>
+        <label htmlFor="">Escriba su mensaje</label>
         <textarea
           name=""
           id=""
           cols="30"
           rows="10"
           value={message}
+          onKeyDown={onenter}
           onChange={(e) => setmessage(e.target.value)}
         ></textarea>
-        <button>Enviar</button>
+        <button >Enviar</button>
       </form>
       </>
     : <p>No tienes autorización para ver el chat</p>}
