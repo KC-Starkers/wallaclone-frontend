@@ -7,7 +7,7 @@ const baseURL = process.env.REACT_APP_API_BASE_URL;
 const client = axios.create({ baseURL });
 
 const setAuthorizationHeader = (token) => {
-  client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  client.defaults.headers.common["Authorization"] = `${token}`;
 };
 
 const removeAuthorizationHeader = () => {
