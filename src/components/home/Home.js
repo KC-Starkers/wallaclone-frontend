@@ -17,7 +17,6 @@ import storage from "../../utils/storage";
 import Slider from "rc-slider";
 import { loadTags } from "../../store/actions";
 import FilterComp from "./FilterComponent";
-import "../../index.css";
 import { customtags } from "./provisional";
 import CheckboxTags from "../common/Checkbox_Tags";
 import StartChat from "../common/StartChat";
@@ -26,7 +25,6 @@ import ReactPaginate from "react-paginate";
 import PaginationAdverts from "./PaginationAdverts";
 
 import { getPaymentMethods, getUserName } from "../../apicalls";
-
 
 ////
 import { mytoken, auth } from "../../store/selectors";
@@ -42,10 +40,18 @@ const saveFilters = (filters) =>
 //TODO: hacer que muestre la foto en el listado (¿tema de la ruta de estáticos en el back?)
 
 function Home() {
-  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethods: [], photo: null, experience: []})
+  const [value, setValue] = React.useState({
+    name: "",
+    offerAdvert: "",
+    price: [],
+    tags: [],
+    paymentMethods: [],
+    photo: null,
+    experience: [],
+  });
   const [filters, setFilters] = React.useState([]);
   //const [myuser, getmyuser] = React.useState('')
-  const [username, getusername] = React.useState([])
+  const [username, getusername] = React.useState([]);
 
   const dispatch = useDispatch();
 
@@ -63,15 +69,17 @@ function Home() {
     dispatch(loadTags());
 
     getUserName(user)
-    .then((res) =>{ console.log(res[0]['userName']); getusername(res[0]['userName'])})
-    .catch((err) => console.log(err));
-    
+      .then((res) => {
+        console.log(res[0]["userName"]);
+        getusername(res[0]["userName"]);
+      })
+      .catch((err) => console.log(err));
   }, []);
-  
-  var adverts = filterAdverts(ads, value)
-  
-  const handleChange = event => {
-    setValue(prevState => ({
+
+  var adverts = filterAdverts(ads, value);
+
+  const handleChange = (event) => {
+    setValue((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value,
     }));
@@ -86,42 +94,26 @@ function Home() {
   const { isLoading, error } = useSelector(uiSelector);
 
   return (
-    <div className="grid grid-cols-6 gap-3 p-3">
-      <div className="grid grid-cols-6 lg:col-span-4 md:col-span-3 gap-3 col-span-full">
-        <PaginationAdverts itemsPerPage={9} adverts={adverts} />
+    <>
+      <div className="sticky top-0 z-10">
+        <Header change={handleChange} value={value}/>
       </div>
-      <div className="lg:col-span-2 md:col-span-3 col-span-full">
-        <div className="sticky top-0">
-          <FilterComp
-            submit={handleSubmit}
-            change={handleChange}
-            value={value}
-            tag={ads}
-          />
+      <div className="grid grid-cols-6 gap-3 p-3">
+        <div className="grid grid-cols-6 lg:col-span-4 md:col-span-3 gap-3 col-span-full">
+          <PaginationAdverts itemsPerPage={9} adverts={adverts} />
+        </div>
+        <div className="lg:col-span-2 md:col-span-3 col-span-full">
+          <div className="md:sticky top-20">
+            <FilterComp
+              submit={handleSubmit}
+              change={handleChange}
+              value={value}
+              tag={ads}
+            />
+          </div>
         </div>
       </div>
-
-      {/* <Header change={handleChange} value={value} />
-      <br></br>
-      <CheckboxTags
-        value={value.tags}
-        change={handleChange}
-        options={tags}
-        name="tags"
-      />
-      <div className="container">
-        <div className="filters">
-          <FilterComp
-            submit={handleSubmit}
-            change={handleChange}
-            value={value}
-            tag={ads}
-          />
-          <br></br>
-          <p>aquiiiiii {myuser}</p>
-        </div>
-      </div> */}
-    </div>
+    </>
   );
 }
 
