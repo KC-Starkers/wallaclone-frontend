@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { TagBadge, TypeBadge, TagList, FavButton } from "../elements";
 import axios from "axios";
+import ButtonBack from "../../common/ButtonBack";
+import AdvertCard from "../../common/AdvertCard";
+import { BsChatLeftDotsFill } from "react-icons/bs";
 
 const Details = () => {
   //TODO Recibir si está logueado y pasarle el id de usuario
@@ -50,38 +53,56 @@ const Details = () => {
   }, [idService]);
 
   return (
-    <div>
-      <button onClick={() => navigate(-1)}> Volver</button>
-      <br />
-      <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${service.advertImage}`} alt={service.name} />
-      <br />
-      <TypeBadge offerAdvert={service.offerAdvert} />
-      <br />
-      <span>{service.price}</span>
+    <>
+      <header className="p-3 flex mb-3">
+        <ButtonBack />
+        <h1 className="font-medium text-3xl text-center flex-auto">
+          {service.name}
+        </h1>
+      </header>
 
-      <h1>{service.name}</h1>
+      <div className="max-w-5xl mx-auto bg-slate-100 p-3 rounded-lg">
+        <div className="grid md:grid-cols-2 gap-3 mx-auto">
+          <div className="col-span-1">
+            <AdvertCard advert={service} serviceView={true} />
+          </div>
+          <div className="col-span-1">
+            <div className="mb-2">
+              <Link
+                to={`/perfil/${service.advertCreator}`}
+                className="text-orange-300 hover:text-orange-500"
+              >
+                creado por {service.advertCreator}
+              </Link>
+            </div>
+            <TagList>
+              {service.tags.map((tag) => (
+                <TagBadge key={tag}>{tag}</TagBadge>
+              ))}
+            </TagList>
 
-      <TagList>
-        {service.tags.map((tag) => (
-          <TagBadge key={tag}>{tag}</TagBadge>
-        ))}
-      </TagList>
+            {/* <FavButton ids={{ user: userId, service: service._id }} /> */}
+            <br />
+            {service.experience ? (
+              <span>
+                Experiencia{!service.offerAdvert ? " requerida" : null}:{" "}
+                {service.experience} años
+              </span>
+            ) : (
+              ""
+            )}
+            <Link
+              to=""
+              className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
+            >
+              <BsChatLeftDotsFill className="mx-2" /> Abrir conversación
+            </Link>
+          </div>
 
-      <FavButton ids={{user: userId, service: service._id}} />
-
-      <Link to={`/perfil/${service.advertCreator}`}>
-        creado por {service.createdBy}
-      </Link>
-
-      {service.experience ? (
-        <span>
-          Experiencia{!service.offerAdvert ? " requerida" : null}:{" "}
-          {service.experience} años
-        </span>
-      ) : ('')}
-
-      <p>{service.description}</p>
-    </div>
+          <p className="col-span-full">{service.description}</p>
+        </div>
+      </div>
+    </>
   );
 };
 

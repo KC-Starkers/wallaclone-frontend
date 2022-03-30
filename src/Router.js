@@ -41,7 +41,7 @@ const Router = () => {
             <Route path="favoritos" element={"Favoritos"} />
             <Route path="acordados" element={"Servicios acordados"} />
             <Route path="mychats" element={<MyChats/>} />
-            <Route path=":idUsuario" element={"Perfil de otro usuario"} />
+            <Route path=":idUsuario" element={<MyServices />} />
             <Route
               path=":idUsuario/servicios"
               element={"Servicios de otro usuario"}
