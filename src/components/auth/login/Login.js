@@ -40,6 +40,7 @@ const Login = ({ onLogin, error, onErrorClose }) => {
           <input
             type="email"
             name="email"
+            placeholder="Email"
             onChange={handleChange}
             value={loginData.username}
             className="rounded-full p-2 px-3 mt-0 mb-3 shadow-sm bg-white bg-opacity-0"
@@ -47,6 +48,7 @@ const Login = ({ onLogin, error, onErrorClose }) => {
           <input
             type="password"
             name="password"
+            placeholder="Contraseña"
             onChange={handleChange}
             value={loginData.password}
             className="rounded-full p-2 px-3 mt-0 mb-3 shadow-sm bg-white bg-opacity-0 transition-all"
