@@ -9,7 +9,6 @@ const MyServices = () => {
   const [services, setServices] = useState([]);
 
   const userId = useParams().idUsuario;
-  console.log(userId);
 
   //Busca y filtra los anuncios por ID
   useEffect(() => {

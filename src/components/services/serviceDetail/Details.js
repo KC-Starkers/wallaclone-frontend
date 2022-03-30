@@ -72,7 +72,7 @@ const Details = () => {
                 to={`/perfil/${service.advertCreator}`}
                 className="text-orange-300 hover:text-orange-500"
               >
-                creado por {service.advertCreator}
+                creado por {service.createdBy}
               </Link>
             </div>
             <TagList>
@@ -95,7 +95,7 @@ const Details = () => {
               to=""
               className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
             >
-              <BsChatLeftDotsFill className="mx-2" /> Abrir conversación
+            <BsChatLeftDotsFill className="mx-2" /> Abrir conversación
             </Link>
           </div>
 

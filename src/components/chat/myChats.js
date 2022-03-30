@@ -13,7 +13,6 @@ const MyChats = () => {
     useEffect(() => {
         getMychats(user).then(getchats);
     }, [])
-    console.log(mychats)
 
     return (
         <div>
