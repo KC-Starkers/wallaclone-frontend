@@ -26,7 +26,6 @@ export const defaultState = {
 export const auth = (authState = defaultState.auth, action) => {
   switch (action.type) {
     case AUTH_LOGIN_SUCCESS:
-      console.log(action.payload)
       return {
         logged: true,
         token: action.payload.token,
@@ -99,6 +98,6 @@ export const tags = (tagsState = defaultState.tags, action) => {
     case LOAD_TAGS_SUCCESS:
       return action.payload;
     default:
-      return [tagsState];
+      return tagsState;
   }
 };

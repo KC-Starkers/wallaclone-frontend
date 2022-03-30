@@ -13,9 +13,8 @@ export const createMSG = (user, message, chatId) => {
 
 export const createChat = info => {
   let decode = info.split('.')
-  console.log(info)
   let all = btoa(info)
-  let newmsg = client.post('/chat/create', {'chatId': all, 'chatSeller': decode[1], 'chatBuyer': decode[0]})
+  let newmsg = client.post('/chat/create', {'chatId': all, 'chatSeller': decode[1], 'chatBuyer': decode[0], 'product': decode[3] })
   return newmsg
 };
 
@@ -29,7 +28,6 @@ export const checkChat = info => {
   
   let decode = atob(info)
   let sep = decode.split('.')
-  console.log(sep)
   
 }
 
@@ -46,6 +44,13 @@ export const getMail = info => {
 export const getPart = (id) => {
   let url = `/chat/info/${id}`
   let i = client.get(url)
-  console.log(i)
+
+  return i
+}
+
+
+export const getMychats = (id) => {
+  let url = `/chat/allchats/${id}`
+  let i = client.get(url)
   return i
 }

@@ -2,10 +2,8 @@ const filterByName =
   filter =>
   ({ name }) => {
     if (filter == undefined){
-      console.log(filter)
       return null;
     } else {
-      console.log(filter)
     const cleanFilter = filter.trim();
     return !cleanFilter || new RegExp(cleanFilter, 'gi').test(name);
   }
@@ -18,8 +16,6 @@ filter =>
     return true;
   }
   const [min, max] = filter;
-  console.log(min)
-  console.log(max)
   if (!max) {
     return price >= min;
   }
@@ -34,8 +30,6 @@ filter =>
     return true;
   }
   const [min, max] = filter;
-  console.log(min)
-  console.log(max)
   if (!max) {
     return experience >= min;
   }
@@ -61,8 +55,9 @@ filter =>
     
   const filterByPay =
   filter =>
-  ({ paymentMethod }) =>
-    !filter.length || filter.every(pay => paymentMethod.includes(pay));
+  ({ paymentMethods }) =>
+    !filter.length || filter.every(pay => paymentMethods.includes(pay))
+    
 
 
   export const saleFilter = {
@@ -76,7 +71,7 @@ filter =>
     price: [],
     sale: saleFilter.all.value,
     tags: [],
-    paymentMethod: [],
+    paymentMethods: [],
     offerAdvert: [],
     experience: []
   };
@@ -84,11 +79,11 @@ filter =>
 
 
  // export const filterAdverts = (adverts, { name, price, sale, tags } ) => 
-export const filterAdverts = (adverts, {name, tags, paymentMethod, offerAdvert, price, experience} ) => 
+export const filterAdverts = (adverts, {name, offerAdvert, price, tags, paymentMethods, experience} ) => 
 adverts
     .filter(filterByName(name))
     .filter(filterByTags(tags))
-    .filter(filterByPay(paymentMethod))
+    .filter(filterByPay(paymentMethods))
     .filter(filterByPrice(price))
     .filter(filterByExperience(experience))
     .filter(filterBySale(offerAdvert));

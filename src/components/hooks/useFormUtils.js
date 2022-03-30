@@ -18,7 +18,6 @@ const useForm = (initialValues) => {
       case "select-multiple":
         let selected = Array.from(ev.target.selectedOptions);
         selected = selected.map(option=>option.value)
-        // console.log(selected)
         setformValue((currentValue) => ({
           ...currentValue,
           [ev.target.name]: selected,

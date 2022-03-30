@@ -25,6 +25,12 @@ import AdvertCard from "../common/AdvertCard";
 import ReactPaginate from "react-paginate";
 import PaginationAdverts from "./PaginationAdverts";
 
+import { getPaymentMethods, getUserName } from "../../apicalls";
+
+
+////
+import { mytoken, auth } from "../../store/selectors";
+
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
@@ -36,17 +42,10 @@ const saveFilters = (filters) =>
 //TODO: hacer que muestre la foto en el listado (¿tema de la ruta de estáticos en el back?)
 
 function Home() {
-  const [value, setValue] = React.useState({
-    name: "",
-    offerAdvert: "",
-    price: [],
-    tags: [],
-    paymentMethod: [],
-    photo: null,
-    experience: [],
-  });
+  const [value, setValue] = React.useState ({name: '', offerAdvert: '', price: [] , tags: [], paymentMethods: [], photo: null, experience: []})
   const [filters, setFilters] = React.useState([]);
-  const [myuser, getmyuser] = React.useState("");
+  //const [myuser, getmyuser] = React.useState('')
+  const [username, getusername] = React.useState([])
 
   const dispatch = useDispatch();
 
@@ -54,18 +53,25 @@ function Home() {
   const tags = useSelector(loadTagsSelector);
   const user = useSelector(getUser);
 
+  //
+  const autt = useSelector(auth);
+  const my = useSelector(mytoken);
+
   useEffect(() => {
     saveFilters(filters);
     dispatch(loadAdverts());
     dispatch(loadTags());
-    getmyuser(user);
-  }, [dispatch, filters, user]);
 
-  var adverts = filterAdverts(ads, value);
-
-  const handleChange = (event) => {
-    console.log(event);
-    setValue((prevState) => ({
+    getUserName(user)
+    .then((res) =>{ console.log(res[0]['userName']); getusername(res[0]['userName'])})
+    .catch((err) => console.log(err));
+    
+  }, []);
+  
+  var adverts = filterAdverts(ads, value)
+  
+  const handleChange = event => {
+    setValue(prevState => ({
       ...prevState,
       [event.target.name]: event.target.value,
     }));
