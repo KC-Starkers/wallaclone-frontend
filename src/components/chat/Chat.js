@@ -3,7 +3,7 @@ import '../../index.css'
 import socket from "./Socket";
 import { useSelector } from "react-redux";
 import { getUser } from "../../store/selectors";
-import { getChat, createMSG, getMSG, getPart} from "./apicalls";
+import { createMSG, getMSG, getPart} from "./apicalls";
 import { useParams } from "react-router-dom";
 import { getUserName } from "../../apicalls";
 
@@ -42,7 +42,8 @@ const Chat = () => {
   useEffect(() => {
     socket.on("messages", (msg) => {
       setmessages([...messages, msg]);
-    });
+      downloadMSG()
+    }, []);
 
     return () => {
       socket.off();
@@ -81,14 +82,13 @@ const onenter = (e) => {
   }
 }
 
-
   const submit = (e) => {
-  
-    createMSG(username, message, chatId)
-    downloadMSG()
+
     e.preventDefault();
     socket.emit("message", username, message, id);
+    createMSG(username, message, chatId)
     setmessage("");
+    downloadMSG()
   };
 
   return (
