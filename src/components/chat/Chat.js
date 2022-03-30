@@ -83,7 +83,9 @@ const onenter = (e) => {
 
 
   const submit = (e) => {
+  
     createMSG(username, message, chatId)
+    downloadMSG()
     e.preventDefault();
     socket.emit("message", username, message, id);
     setmessage("");
