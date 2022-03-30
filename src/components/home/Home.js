@@ -37,7 +37,6 @@ const getFilters = () => storage.get("filters") || defaultFilters;
 const saveFilters = (filters) =>
   storage.set("filters", filters) || defaultFilters;
 
-//TODO de Ivan a mi mismo: paginar con una librería y hacer llamada al api con query (skip y limit)
 //TODO: hacer que muestre la foto en el listado (¿tema de la ruta de estáticos en el back?)
 
 function Home() {

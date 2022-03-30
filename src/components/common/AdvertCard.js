@@ -6,7 +6,7 @@ const AdvertCard = ({ advert, serviceView }) => {
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
   const bgImg = {
-    backgroundImage: `url('${process.env.REACT_APP_API_BASE_URL}/uploads/${advert.advertImage}'), linear-gradient(305deg,#333 0%, #${randomColor} 100%)`,
+    backgroundImage: `url('${process.env.REACT_APP_API_BASE_URL}/public/${advert.advertImage}'), linear-gradient(305deg,#333 0%, #${randomColor} 100%)`,
     height: "150px",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",

@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import useFormUtils from "../../hooks/useFormUtils";
 import { signUp } from "./apicalls";
+import { useNavigate } from 'react-router-dom';
 
 //TODO: crear una acción de SignUp para que pinte los errores de validación que arroja el back y el isLoading
 
 //TODO: gestionar en front los errores del endpoint (ej: username e email deben ser únicos)
 
 function SignUpPage() {
+  const navigate = useNavigate();
   const {
     formValue,
     /*  setFormData, */
@@ -16,7 +18,7 @@ function SignUpPage() {
     email: "",
     password: "",
   });
-
+  
   const [crossValid, setCrossValid] = useState(false);
   const imageRef = useRef(null);
   const passwordConfirmRef = useRef("");
@@ -25,7 +27,7 @@ function SignUpPage() {
     ev.preventDefault();
     try {
       const result = await signUp(formValue);
-      const userId = result._id;
+      navigate("../login");
     } catch (error) {
       console.log(error);
     }
