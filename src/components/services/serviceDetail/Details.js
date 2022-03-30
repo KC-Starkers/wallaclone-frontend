@@ -53,7 +53,7 @@ const Details = () => {
     <div>
       <button onClick={() => navigate(-1)}> Volver</button>
       <br />
-      <img src={service.advertImage} alt={service.name} />
+      <img src={`${process.env.REACT_APP_API_BASE_URL}/uploads/${service.advertImage}`} alt={service.name} />
       <br />
       <TypeBadge offerAdvert={service.offerAdvert} />
       <br />
