@@ -11,7 +11,7 @@ const FavButton = (data) => {
   const userId = data.ids.user;
   const url = `${process.env.REACT_APP_API_BASE_URL}/profiles/${userId}`;
   const token = "" //TODO recibir token
-  const auth = `Bearer ${token}`;
+  const auth = `${token}`;
 
   useEffect(() => {
     const connection = axios.get(url);

@@ -5,12 +5,11 @@ import { createAdvert } from "../../../store/actions";
 import { loadTags } from "../../../store/actions";
 import { loadTagsSelector } from "../../../store/selectors";
 import { useNavigate } from "react-router-dom";
-import "./newService.css";
 import { getPaymentMethods } from "../../../apicalls";
+import ButtonBack from "../../common/ButtonBack";
 
 //TODO:
 //Que sea posible crear un anuncio sin imagen
-
 
 function NewService() {
   const imageRef = useRef(null);
@@ -48,7 +47,7 @@ function NewService() {
       }
     }
     data.set("advertImage", imageRef.current.files[0]);
-    
+
     dispatch(createAdvert(data, navigate));
   };
 
@@ -61,127 +60,139 @@ function NewService() {
 
   const tags = useSelector(loadTagsSelector);
 
-   
   return (
-    <form
-      className="new-service-form"
-      encType="multipart/form-data"
-      onSubmit={handleSubmit}
-    >
-      <label>
-        Nombre del servicio
-        <input
-          type="text"
-          className="block"
-          name="name"
-          value={advertData.name}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Ofrezco
-        <input
-          type="radio"
-          name="offerAdvert"
-          value="true"
-          onChange={handleChange}
-          checked={advertData.offerAdvert === true}
-        />
-      </label>
-      <label>
-        Busco
-        <input
-          type="radio"
-          name="offerAdvert"
-          value=""
-          onChange={handleChange}
-          checked={advertData.offerAdvert === false}
-        />
-      </label>
-      Describe tu servicio...
-      <textarea
-        className="block textarea"
-        name="description"
-        value={advertData.description}
-        onChange={handleChange}
-      ></textarea>
-      <label>
-        Precio
-        <input
-          type="number"
-          className="block"
-          name="price"
-          value={advertData.price}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Forma de pago
-        <select
-          type="select-multiple"
-          multiple={true}
-          value={advertData.paymentMethods}
-          // value={[""]}
-          className="block"
-          name="paymentMethods"
-          onChange={handleChange}
+    <>
+      <header className="p-3 flex mb-3">
+        <ButtonBack />
+        <h1 className="font-medium text-3xl text-center flex-auto">
+          Crear anuncio
+        </h1>
+      </header>
+
+      <div className="grid max-w-2xl mx-auto bg-slate-100 rounded-lg m-3 p-3">
+        <form
+          className="new-service-form"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
         >
+          <input
+            type="text"
+            className="w-full px-3 py-2 rounded-lg border border-gray-200"
+            name="name"
+            value={advertData.name}
+            onChange={handleChange}
+            placeholder="Nombre del servicio"
+          />
+          <div className="text-center my-5">
+            <label className="mx-2">
+              <input
+                type="radio"
+                name="offerAdvert"
+                value="true"
+                onChange={handleChange}
+                checked={advertData.offerAdvert === true}
+              />{" "}
+              Ofrezco
+            </label>
+            <label className="mx-2">
+              <input
+                type="radio"
+                name="offerAdvert"
+                value=""
+                onChange={handleChange}
+                checked={advertData.offerAdvert === false}
+              />{" "}
+              Busco
+            </label>
+          </div>
+          <textarea
+            className="min-w-full max-w-full px-3 py-2 rounded-lg border border-gray-200 mb-3"
+            name="description"
+            value={advertData.description}
+            onChange={handleChange}
+            placeholder="Describe tu servicio..."
+          />
+          <input
+            type="number"
+            className="px-3 py-2 w-full rounded-lg border border-gray-200 mb-3"
+            name="price"
+            value={advertData.price}
+            onChange={handleChange}
+            placeholder="precio"
+            min={0}
+          />
+          <label className="w-full text-center">
+            <div className="text-xl mb-2">Forma de pago</div>
+            <select
+              type="select-multiple"
+              multiple={true}
+              value={advertData.paymentMethods}
+              className="w-full rounded-lg border border-gray-200 mb-3 p-3"
+              name="paymentMethods"
+              onChange={handleChange}
+            >
+              {predefinedPaymentMethods.length
+                ? predefinedPaymentMethods.map((method) => (
+                    <option key={method} value={method}>
+                      {method}
+                    </option>
+                  ))
+                : null}
 
-          {predefinedPaymentMethods.length
-            ? predefinedPaymentMethods.map((method) => (
-                <option key={method} value={method}>
-                  {method}
-                </option>
-              ))
-            : null}
-
-         {/* <option value="cash">Efectivo</option>
+              {/* <option value="cash">Efectivo</option>
           <option value="debit">Tarjeta de débito</option>
           <option value="credit">Tarjeta de crédito</option>
-          <option value="paypal">Paypal</option> */}
-
-        </select>
-      </label>
-
-
-      <label>
-        Categorías
-        <select
-          type="select"
-          // value={advertData.paymentMethods}
-          className="block"
-          name="tags"
-          onChange={handleChange}
-        >
-          <option>- - Seleccionar - -</option>
-          {tags.length
-            ? tags.map((tag) => (
-                <option key={tag} value={tag}>
-                  {tag}
-                </option>
-              ))
-            : null}
-
-        </select>
-      </label>
-      <label>
-        Experiencia
-        <input
-          type="text"
-          className="block"
-          name="experience"
-          value={advertData.experience}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Sube una imagen para ilustrar tu anuncio
-        <input type="file" name="advertImage" ref={imageRef} />
-      </label>
-      <button type="submit" className="button block" disabled={disabledButton}>
-        Crear anuncio
-      </button>
-    </form>
+        <option value="paypal">Paypal</option> */}
+            </select>
+          </label>
+          <label className="w-full text-center">
+            <div className="text-xl mb-2">Categorías</div>
+            <select
+              type="select"
+              // value={advertData.paymentMethods}
+              className="w-full rounded-lg border border-gray-200 mb-3 p-3"
+              name="tags"
+              onChange={handleChange}
+            >
+              <option>- - Seleccionar - -</option>
+              {tags.length
+                ? tags.map((tag) => (
+                    <option key={tag} value={tag}>
+                      {tag}
+                    </option>
+                  ))
+                : null}
+            </select>
+          </label>
+          <input
+            type="text"
+            className="w-full rounded-lg border border-gray-200 mb-3 p-3"
+            name="experience"
+            value={advertData.experience}
+            onChange={handleChange}
+            placeholder="Experiencia"
+          />
+          <label className="text-center">
+            <div className="text-xl mb-2">
+              Sube una imagen para ilustrar tu anuncio
+            </div>
+            <input
+              type="file"
+              name="advertImage"
+              ref={imageRef}
+              className="w-full rounded-lg border border-gray-200 mb-3 p-3"
+            />
+          </label>
+          <button
+            type="submit"
+            className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg mt-3 w-full cursor-pointer"
+            disabled={disabledButton}
+          >
+            Crear anuncio
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
 
