@@ -26,7 +26,6 @@ function SignUpPage() {
     try {
       const result = await signUp(formValue);
       const userId = result._id;
-      console.log(userId);
     } catch (error) {
       console.log(error);
     }

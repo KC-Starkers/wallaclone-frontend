@@ -49,11 +49,9 @@ const Router = () => {
           </Route>
         </Route>
         {/*    </Route> */}
-        {/*<Route path="/chat" element={<PrivateOutlet />}>*/}
-        <Route path="/chat">
+        <Route path="/chat" element={<PrivateOutlet />}>
           <Route index element={<p>"Chat index"</p>} />
           <Route path=":id" element={<Chat />} />
-
         </Route>
         <Route path="*" element={"404 not found"} />
       </Routes>

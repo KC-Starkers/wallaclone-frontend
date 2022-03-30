@@ -29,7 +29,6 @@ const Chat = () => {
       setAuth(false)}else{
     for (var i = 0; i < participants.length; i++) {
       if(participants[i] == username){
-        debugger
         setAuth(true)
         break}
       }
@@ -41,8 +40,8 @@ const Chat = () => {
   }, [user]);
 
   useEffect(() => {
-    socket.on("messages", (message) => {
-      setmessages([...messages, message]);
+    socket.on("messages", (msg) => {
+      setmessages([...messages, msg]);
     });
 
     return () => {
@@ -60,20 +59,19 @@ let downloadMSG = async() => {
     };
   }
 
-
-useEffect(() => {
+async function NewMSG(user){
   downloadMSG()
   checkparticipants()
-  console.log(user)
-  debugger
-  getUserName(user)
-    .then((res) =>getusername(res[0]['userName']))
-    .catch((err) => console.log(err));
+  let i = await getUserName(user)
+  getusername(i[0].userName)
+}
+
+useEffect(() => {
+  NewMSG(user)
 }, [])
 
 useEffect(() => { 
   checkAuth()
-  console.log('check')
 })
 
 
@@ -94,8 +92,6 @@ useEffect(() => {
         messages.map((e, i) => (
           <div key={i}>
             <p><strong>{e.user}</strong> : {e.message}</p>
-            
-          {console.log(e)}
           </div>
         ))
         }

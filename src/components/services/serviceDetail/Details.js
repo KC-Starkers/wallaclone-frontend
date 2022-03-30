@@ -5,10 +5,13 @@ import axios from "axios";
 import ButtonBack from "../../common/ButtonBack";
 import AdvertCard from "../../common/AdvertCard";
 import { BsChatLeftDotsFill } from "react-icons/bs";
+import StartChat from "../../common/StartChat";
+import storage from "../../../utils/storage";
 
 const Details = () => {
   //TODO Recibir si está logueado y pasarle el id de usuario
   const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
 
   //captura el id de la URL
   const idService = useParams().idServicio;
@@ -72,7 +75,7 @@ const Details = () => {
                 to={`/perfil/${service.advertCreator}`}
                 className="text-orange-300 hover:text-orange-500"
               >
-                creado por {service.advertCreator}
+                creado por {service.createdBy}
               </Link>
             </div>
             <TagList>
@@ -95,7 +98,10 @@ const Details = () => {
               to=""
               className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
             >
-              <BsChatLeftDotsFill className="mx-2" /> Abrir conversación
+            {/*<BsChatLeftDotsFill className="mx-2" /> Abrir conversación
+            [username, advert.createdBy, advert._id, advert.name]
+            */}
+            <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/>
             </Link>
           </div>
 
