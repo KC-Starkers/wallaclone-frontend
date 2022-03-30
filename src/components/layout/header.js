@@ -6,10 +6,17 @@ import SearchBar from "../common/searchbar";
 import FullLogo from "../common/full_logo";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { BiUser, BiMessageAltDetail, BiPowerOff } from "react-icons/bi";
+import {
+  BiUser,
+  BiMessageAltDetail,
+  BiPowerOff,
+  BiLogIn,
+} from "react-icons/bi";
 import { IoMdAdd } from "react-icons/io";
+import { isLoggedSelector } from "../../store/selectors";
+import { connect } from "react-redux";
 
-function Header({ ads, value, change, myuser }) {
+function Header({ ads, value, change, myuser, isLogged }) {
   const navigate = useNavigate();
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -34,27 +41,49 @@ function Header({ ads, value, change, myuser }) {
         className="w-full col-span-5 xl:col-span-4 border border-slate-100 rounded-full px-3"
       />
       <div className="col-span-full xl:col-span-1 flex xl:justify-between">
-        <Link
-          to="/servicios/crear"
-          className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full flex justify-center items-center flex-auto"
-        >
-          <IoMdAdd className="text-xl"/> Crear
-        </Link>
-        <div className="text-2xl flex justify-end xl:flex-">
-          <Link to="/perfil" className="flex content-center items-center ml-3">
-            <Button textbutton={<BiUser />} />
+        {isLogged ? (
+          <Link
+            to="/servicios/crear"
+            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full flex justify-center items-center flex-auto"
+          >
+            <IoMdAdd className="text-xl" /> Crear
           </Link>
-          <Link to={`/perfil/mychats`} className="flex content-center items-center ml-3">
-            <BiMessageAltDetail />
+        ) : (
+          <Link
+            to="/auth/login"
+            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full flex justify-center items-center flex-auto"
+          >
+            <BiLogIn className="text-xl" /> Acceder
           </Link>
-          
-          <button className="ml-3 items-center">
-            <BiPowerOff />
-          </button>
-        </div>
+        )}
+        {isLogged ? (
+          <div className="text-2xl flex justify-end xl:flex-">
+            <Link
+              to="/perfil/servicios"
+              className="flex content-center items-center ml-3"
+            >
+              <Button textbutton={<BiUser />} />
+            </Link>
+            <Link
+              to={`/perfil/mychats`}
+              className="flex content-center items-center ml-3"
+            >
+              <BiMessageAltDetail />
+            </Link>
+            <button className="ml-3 items-center">
+              <BiPowerOff />
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </nav>
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+  isLogged: isLoggedSelector(state),
+});
+
+export default connect(mapStateToProps)(Header);

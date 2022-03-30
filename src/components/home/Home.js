@@ -7,6 +7,7 @@ import {
   uiSelector,
   loadTagsSelector,
   getUser,
+  isLoggedSelector,
 } from "../../store/selectors";
 
 //imports Bea
