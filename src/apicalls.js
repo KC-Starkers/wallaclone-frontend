@@ -34,6 +34,6 @@ export const getUserName = (id) => {
 
 export const removeAd = (id) => {
   const url = `${path}/delete/${id}`
-  let user = client.delete(url)
+  let user = client.put(url)
   return user
 }
