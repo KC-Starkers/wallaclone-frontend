@@ -7,26 +7,27 @@ import AdvertCard from "../../common/AdvertCard";
 import { BsChatLeftDotsFill } from "react-icons/bs";
 import StartChat from "../../common/StartChat";
 import storage from "../../../utils/storage";
-import { getUserName, removeAd } from "../../../apicalls";
-import { useSelector } from "react-redux";
+import { getUserName } from "../../../apicalls";
+import { connect, useSelector } from "react-redux";
+import { getUser, isLoggedSelector } from "../../../store/selectors";
 import { deleteAdvert } from "../../../store/actions";
 import { getUser, deleteAdvertSelector } from "../../../store/selectors";
-const Details = () => {
+
+const Details = ({ isLogged }) => {
   //TODO Recibir si está logueado y pasarle el id de usuario
 
   const user = useSelector(getUser);
-    const [userName, getusername] = useState('');
-    
-    useEffect(() => {
-        //}, [])
-        console.log(user)
-        getUserName(user)
-            .then((res) => {
-            getusername(res[0]["userName"]);
-            })
-            .catch((err) => console.log(err));
-        
-    }, []);
+  const [userName, getusername] = useState("");
+
+  useEffect(() => {
+    //}, [])
+    console.log(user);
+    getUserName(user)
+      .then((res) => {
+        getusername(res[0]["userName"]);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   //captura el id de la URL
   const idService = useParams().idServicio;
@@ -51,6 +52,12 @@ const Details = () => {
     __v: null,
     _id: null,
   });
+
+  const userId = localStorage.getItem("userId");
+
+  console.log(service);
+
+  const urlContact = `/contacto/?from=${userId}&to=${service.advertCreator}&advert=${service.name}`;
 
   //Actualiza service para añadir los datos del servicio cargado
   useEffect(() => {
@@ -77,7 +84,6 @@ const Details = () => {
 
   return (
     <>
-    <p>hola {userName}</p>
       <header className="p-3 flex mb-3">
         <ButtonBack />
         <h1 className="font-medium text-3xl text-center flex-auto">
@@ -115,6 +121,15 @@ const Details = () => {
             ) : (
               ""
             )}
+            
+            <Link
+              to={urlContact}
+              className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
+            >
+              <BsChatLeftDotsFill className="mx-2" /> {isLogged ? 'Contactar' : 'Accede para contactar'}
+              {/* <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/> */}
+            </Link>
+            
              <Link
               to=""
               className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
@@ -135,4 +150,8 @@ const Details = () => {
   );
 };
 
-export default Details;
+const mapStateToProps = (state) => ({
+  isLogged: isLoggedSelector(state),
+});
+
+export default connect(mapStateToProps)(Details);
