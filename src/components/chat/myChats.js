@@ -24,12 +24,12 @@ const MyChats = () => {
 
     
     let i = ''
-
     useEffect(() => {
         getMychats(username).then((res) => {
             console.log(res)
+            let number = res.length - 1
             let final = []
-            for(var i = 0 ;i <= res.length; i++){
+            for(var i = 0 ;i <= number; i++){
                 if(res[i].chatSeller = username){
                     console.log(res[i])
                     console.log(res[i].chatSeller)
@@ -43,6 +43,8 @@ const MyChats = () => {
                 }
                 
             }
+            console.log(final)
+            console.log(mychats)
             getchats(final)
             /*
             if(res.length > 1){
