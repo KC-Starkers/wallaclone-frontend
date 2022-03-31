@@ -24,7 +24,6 @@ const MyChats = () => {
 
     
     let i = ''
-
     useEffect(() => {
         getMychats(username).then((res) => {
             console.log(res)
@@ -48,6 +47,8 @@ const MyChats = () => {
                 }
             }
             console.log(final)
+          
+            console.log(mychats)
             getchats(final)
             console.log(mychats)
             /*
