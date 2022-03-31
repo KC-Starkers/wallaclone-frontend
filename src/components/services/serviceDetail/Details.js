@@ -7,11 +7,25 @@ import AdvertCard from "../../common/AdvertCard";
 import { BsChatLeftDotsFill } from "react-icons/bs";
 import StartChat from "../../common/StartChat";
 import storage from "../../../utils/storage";
-
+import { getUserName } from "../../../apicalls";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../store/selectors";
 const Details = () => {
   //TODO Recibir si está logueado y pasarle el id de usuario
-  const userId = localStorage.getItem("userId");
-  const userName = localStorage.getItem("userName");
+
+  const user = useSelector(getUser);
+    const [userName, getusername] = useState('');
+    
+    useEffect(() => {
+        //}, [])
+        console.log(user)
+        getUserName(user)
+            .then((res) => {
+            getusername(res[0]["userName"]);
+            })
+            .catch((err) => console.log(err));
+        
+    }, []);
 
   //captura el id de la URL
   const idService = useParams().idServicio;
@@ -57,6 +71,7 @@ const Details = () => {
 
   return (
     <>
+    <p>hola {userName}</p>
       <header className="p-3 flex mb-3">
         <ButtonBack />
         <h1 className="font-medium text-3xl text-center flex-auto">

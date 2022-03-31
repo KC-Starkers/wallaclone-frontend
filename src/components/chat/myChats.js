@@ -26,15 +26,17 @@ const MyChats = () => {
     let i = ''
 
     useEffect(() => {
-        getMychats(username).then((res) => getchats(res))
-            /*if(res.length > 1){
-                let i = res[0].concat(res[1])
+        getMychats(username).then((res) => {
+            console.log(res)
+            getchats(res)
+            /*
+            if(res.length > 1){
+                for(let d = 0; d < res.length; d++)
+                let i = res[].concat(res[1])
                 getchats(i)
             }else{
-                getchats(res)
-            }});
-        getchats(i)
-        */
+                getchats(res)*/
+            });
     }, [username])
 
     useEffect(() => {}, [mychats])

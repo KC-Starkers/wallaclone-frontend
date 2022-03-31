@@ -49,17 +49,30 @@ function Home() {
     photo: null,
     experience: [],
   });
+
+  
   const [filters, setFilters] = React.useState([]);
   //const [myuser, getmyuser] = React.useState('')
-  const [username, getusername] = React.useState('');
-  localStorage.setItem("userName", username);
+  const user = useSelector(getUser);
+    const [username, getusername] = useState('');
+    
+    useEffect(() => {
+        //}, [])
+        console.log(user)
+        getUserName(user)
+            .then((res) => {
+            getusername(res[0]["userName"]);
+            })
+            .catch((err) => console.log(err));
+        
+    }, []);
+
 
 
   const dispatch = useDispatch();
 
   const ads = useSelector(loadAdvertsSelector);
   const tags = useSelector(loadTagsSelector);
-  const user = useSelector(getUser);
 
   //
   const autt = useSelector(auth);
@@ -69,12 +82,12 @@ function Home() {
     saveFilters(filters);
     dispatch(loadAdverts());
     dispatch(loadTags());
-
+/*
     getUserName(user)
       .then((res) => {
         getusername(res[0]["userName"]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err));*/
   }, []);
 
   var adverts = filterAdverts(ads, value);
@@ -96,6 +109,7 @@ function Home() {
 
   return (
     <>
+    <p>bienvenido{username}</p>
       <div className="sticky top-0 z-10">
         <Header change={handleChange} value={value}/>
       </div>
