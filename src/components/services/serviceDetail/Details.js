@@ -7,11 +7,10 @@ import AdvertCard from "../../common/AdvertCard";
 import { BsChatLeftDotsFill } from "react-icons/bs";
 import StartChat from "../../common/StartChat";
 import storage from "../../../utils/storage";
-import { getUserName } from "../../../apicalls";
+import { getUserName, removeAd } from "../../../apicalls";
 import { connect, useSelector } from "react-redux";
 import { getUser, isLoggedSelector } from "../../../store/selectors";
 import { deleteAdvert } from "../../../store/actions";
-import { getUser, deleteAdvertSelector } from "../../../store/selectors";
 
 const Details = ({ isLogged }) => {
   //TODO Recibir si está logueado y pasarle el id de usuario
