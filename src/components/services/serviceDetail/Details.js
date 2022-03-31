@@ -77,9 +77,9 @@ const Details = ({ isLogged }) => {
   }, [idService]);
 
   const removeAdvert = (id) => {
-    console.log(id)
-    removeAd(id).then(res => console.log(res))
-  }
+    console.log(id);
+    removeAd(id).then((res) => console.log(res));
+  };
 
   return (
     <>
@@ -120,26 +120,24 @@ const Details = ({ isLogged }) => {
             ) : (
               ""
             )}
-            
-            <Link
-              to={urlContact}
-              className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
-            >
-              <BsChatLeftDotsFill className="mx-2" /> {isLogged ? 'Contactar' : 'Accede para contactar'}
-              {/* <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/> */}
-            </Link>
-            
-             <Link
-              to=""
-              className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
-            >
-              {userName == service.createdBy ? <button onClick={() => removeAdvert(service._id)}>Eliminar anuncio</button> : <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/>}
-              
-            </Link>
-            {/*<BsChatLeftDotsFill className="mx-2" /> Abrir conversación
-            [username, advert.createdBy, advert._id, advert.name]
-            */}
-            
+
+            {userName == service.createdBy ? (
+              <button
+                onClick={() => removeAdvert(service._id)}
+                className="flex p-3 bg-red-500 hover:bg-red-400 w-full transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
+              >
+                Eliminar anuncio
+              </button>
+            ) : (
+              <Link
+                to={urlContact}
+                className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
+              >
+                <BsChatLeftDotsFill className="mx-2" />{" "}
+                {isLogged ? "Contactar" : "Accede para contactar"}
+                {/* <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/> */}
+              </Link>
+            )}
           </div>
 
           <p className="col-span-full">{service.description}</p>
