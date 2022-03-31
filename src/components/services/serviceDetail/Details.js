@@ -77,7 +77,6 @@ const Details = ({ isLogged }) => {
 
   return (
     <>
-      <p>hola {userName}</p>
       <header className="p-3 flex mb-3">
         <ButtonBack />
         <h1 className="font-medium text-3xl text-center flex-auto">

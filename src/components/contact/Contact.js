@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const Contact = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [messaje, setMessaje] = useState("");
+
+  const navigate = useNavigate()
 
   const advert = searchParams.get("advert");
   const fromId = searchParams.get("from");
@@ -66,6 +68,7 @@ const Contact = () => {
         (result) => {
           console.log(result.text);
           alert("Mensaje Enviado");
+          navigate('/')
         },
         (error) => {
           console.log(error.text);
