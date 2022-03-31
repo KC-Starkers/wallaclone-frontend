@@ -59,7 +59,7 @@ const MyServices = () => {
                 key={advert._id}
                 className="col-span-full sm:col-span-1 w-full inline-block"
               >
-                <AdvertCard advert={advert} />
+                <AdvertCard advert={advert}/>
               </li>
             ))
           : ""}

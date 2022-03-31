@@ -9,7 +9,7 @@ import { getUserName } from "../../apicalls";
 const MyChats = () => {
         
     const user = useSelector(getUser);
-    const [mychats, getchats] = useState([])
+    const [mychats, getchats] = useState('')
     const [username, getusername] = useState('');
     
     useEffect(() => {
@@ -24,11 +24,33 @@ const MyChats = () => {
 
     
     let i = ''
-
     useEffect(() => {
         getMychats(username).then((res) => {
             console.log(res)
-            getchats(res)
+            let number = res.length - 1
+            let final = []
+            for(var i = 0 ;i <= number; i++){
+                if('chatSeller' in res){
+                    if(res[i].chatSeller = username){
+                        console.log(res[i])
+                        console.log(res[i].chatSeller)
+                        final.push(res[i])
+                    } else{
+                        if('chatBuyer' in res){
+                            if(res[i].chatBuyer = username){
+                                console.log(res[i])
+                                console.log(res[i].chatBuyer)
+                                final.push(res[i])
+                            }
+                        }
+                    }
+                }
+            }
+            console.log(final)
+          
+            console.log(mychats)
+            getchats(final)
+            console.log(mychats)
             /*
             if(res.length > 1){
                 for(let d = 0; d < res.length; d++)
