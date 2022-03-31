@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TypeBadge from "../services/elements/TypeBadge";
 
-const AdvertCard = ({ advert, serviceView }) => {
+const AdvertCard = ({ advert, serviceView}) => {
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
   const bgImg = {
