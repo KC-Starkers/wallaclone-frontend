@@ -9,6 +9,7 @@ import PrivateOutlet from "./components/auth/PrivateOutlet";
 import Chat from "./components/chat/Chat";
 import LayoutOutlet from "./components/LayoutOutlet";
 import MyChats from "./components/chat/myChats";
+import Contact from "./components/contact/Contact";
 
 const Router = () => {
   return (
@@ -49,6 +50,9 @@ const Router = () => {
           </Route>
         </Route>
         {/*    </Route> */}
+        <Route path="/contacto" element={<PrivateOutlet />}>
+          <Route index element={<Contact/>} />
+        </Route>
         <Route path="/chat" element={<PrivateOutlet />}>
           <Route index element={<p>"Chat index"</p>} />
           <Route path=":id" element={<Chat />} />
