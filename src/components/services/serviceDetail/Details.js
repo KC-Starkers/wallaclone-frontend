@@ -7,9 +7,10 @@ import AdvertCard from "../../common/AdvertCard";
 import { BsChatLeftDotsFill } from "react-icons/bs";
 import StartChat from "../../common/StartChat";
 import storage from "../../../utils/storage";
-import { getUserName } from "../../../apicalls";
+import { getUserName, removeAd } from "../../../apicalls";
 import { useSelector } from "react-redux";
-import { getUser } from "../../../store/selectors";
+import { deleteAdvert } from "../../../store/actions";
+import { getUser, deleteAdvertSelector } from "../../../store/selectors";
 const Details = () => {
   //TODO Recibir si está logueado y pasarle el id de usuario
 
@@ -69,6 +70,11 @@ const Details = () => {
     getServiceDetail(idService);
   }, [idService]);
 
+  const removeAdvert = (id) => {
+    console.log(id)
+    removeAd(id).then(res => console.log(res))
+  }
+
   return (
     <>
     <p>hola {userName}</p>
@@ -109,15 +115,17 @@ const Details = () => {
             ) : (
               ""
             )}
-            <Link
+             <Link
               to=""
               className="flex p-3 bg-orange-500 hover:bg-orange-400 transition-all ease-in-out delay-100' text-white justify-center content-center items-center rounded-lg"
             >
+              {userName == service.createdBy ? <button onClick={() => removeAdvert(service._id)}>Eliminar anuncio</button> : <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/>}
+              
+            </Link>
             {/*<BsChatLeftDotsFill className="mx-2" /> Abrir conversación
             [username, advert.createdBy, advert._id, advert.name]
             */}
-            <StartChat chatId={[userName, service.createdBy, service._id, service.name]}/>
-            </Link>
+            
           </div>
 
           <p className="col-span-full">{service.description}</p>

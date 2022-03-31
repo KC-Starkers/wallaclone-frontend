@@ -30,22 +30,27 @@ const MyChats = () => {
             let number = res.length - 1
             let final = []
             for(var i = 0 ;i <= number; i++){
-                if(res[i].chatSeller = username){
-                    console.log(res[i])
-                    console.log(res[i].chatSeller)
-                    final.push(res[i])
-                } else{
-                    if(res[i].chatBuyer = username){
+                if('chatSeller' in res){
+                    if(res[i].chatSeller = username){
                         console.log(res[i])
-                        console.log(res[i].chatBuyer)
+                        console.log(res[i].chatSeller)
                         final.push(res[i])
+                    } else{
+                        if('chatBuyer' in res){
+                            if(res[i].chatBuyer = username){
+                                console.log(res[i])
+                                console.log(res[i].chatBuyer)
+                                final.push(res[i])
+                            }
+                        }
                     }
                 }
-                
             }
             console.log(final)
+          
             console.log(mychats)
             getchats(final)
+            console.log(mychats)
             /*
             if(res.length > 1){
                 for(let d = 0; d < res.length; d++)
