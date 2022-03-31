@@ -26,13 +26,14 @@ const MyChats = () => {
     let i = ''
 
     useEffect(() => {
-        getMychats(username).then((res) => {
-            if(res.length > 1){
+        getMychats(username).then((res) => getchats(res)
+            /*if(res.length > 1){
                 let i = res[0].concat(res[1])
                 getchats(i)
             }else{
                 getchats(res)
-            }});
+            }}
+            */);
         getchats(i)
     }, [username])
 
